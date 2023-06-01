@@ -23,7 +23,7 @@ body,main {
     color: #2563EB;
 }
 .text-warning{
-    color: #f87b07;
+    color: #f65b07;
 }
 .navbar-toggler-light {
     color:white;
@@ -67,6 +67,15 @@ title {
 .red{
     background-color: #ef0e0e;
 }
+.blue{
+    background-color: #2563EB;
+}
+.orange{
+    background-color: #f65b07;
+}
+.imgteam{
+    width: 40%;
+}
+/* HOME PAGE END*/
 
-
-
+/*  WATCH ALL MATCHES PAGE START*/

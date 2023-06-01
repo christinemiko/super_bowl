@@ -14,7 +14,7 @@
             <h4 class="text-center mt-3"><i>"Cet évènement planétaire s'est fait une place de choix en France,</i></h4>
             <h4 class="text-center  mb-5"><i> Suivez l'intégralité des matchs, retransmis en Live depuis les USA, au State Farm Center de Glendale." </i></h4>
         <!--BUTTON MATCH START -->
-        <div class="text-center mb-5"><a href="" class="btn btn-primary btn-ml active">Visualiser tous les Matchs</a></div>
+        <div class="text-center mb-5"><a href="{{ path('allmatcheswatch') }}" class="btn btn-primary btn-ml active">Visualiser tous les Matchs</a></div>
         </div>
         <!-- BUTTON MATCH END -->
             <div class="row justify-content-center">
@@ -54,20 +54,32 @@
             </div>
 
         <!--MATCH TODAY START -->
-        <div class="mt-2 red"><h2 class="text-center"> Les Match du jour</h2></div>
+        <div class="mb-5 red"><h2 class="text-center"> Les Matchs du jour</h2></div>
 
         <!--CARD MATCH TODAY  START -->
         <div class="container d-flex justify-content-center">
             <div class="row">
-               <div class="card" style="width: 18rem;">
-                   <div class="card-body">
-                        <h5 class="card-title">Date: erbef</h5>
-                        <h6 class="card-subtitle mb-2 text-muted text-dark">NLF</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                         <a href="#" class="card-link">Another link</a>
-                   </div>
-               </div>
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg> 01/06/2023
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                                <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                                <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                            </svg> 14:00
+                        </li>
+                        <li class="list-group-item">
+                            <img src="{{ asset('img/teams/bearsdechigaco.png') }}" class="imgteam" alt="logo">
+                            Bears de chicago </li>
+                        <li class="list-group-item">
+                            <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
+                            Bills de Buffalo</li>
+                        <a href="#" class="card-link text-center">Visualiser le Match</a>
+                    </ul>
+                </div>
             </div>
         </div>
 
