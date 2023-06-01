@@ -1,0 +1,70 @@
+<!-- NAV BAR START -->
+<header class="transparent-header">
+
+    <nav class="navbar navbar-expand-lg navbar-lig ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('accueil') }}"><img src="{{ asset('img/logo4.png') }}" alt="Logo super_bowl2024" width="70" height="70"></a>
+            <button class="navbar-toggler light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link active text-light" aria-current="page" href="{{ path('accueil') }}">Accueil</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" href= >
+                           Visualiser Les Matchs</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href= >
+                         Parier</a>
+                    </li>
+                    {% if app.user %}
+                    {% if is_granted("ROLE_ADMIN") %}
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href= >
+                         Administration</a>
+                    </li>
+
+                    {% else %}
+
+                {% endif %}
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href= >
+                          Mon Espace</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href= >
+                          Déconnexion</a>
+                    </li>
+                </ul>
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href= >
+                           Se Connecter</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link colortypo" href= >
+                           S'Inscrire</a>
+                    </li>
+
+                {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- NAV BAR END -->
