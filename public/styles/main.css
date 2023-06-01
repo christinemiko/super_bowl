@@ -13,16 +13,18 @@ body,main {
 .transparent-header {
     background-color: transparent;
 }
-.colortypo{
+.text-warning{
     color: #f87b07;
 }
-
-title {
-    font-family: 'Open Sans', sans-serif;
+.navbar-toggler-light {
     color:white;
 }
 
 /* HOME PAGE START*/
+title {
+    font-family: 'Open Sans', sans-serif;
+    color:white;
+}
 
 .full-screen-carousel {
     position: relative;
