@@ -9,9 +9,18 @@ body,main {
     height: 100%;
     color: white;
 }
+
+.no-padding-margin {
+    margin: 0;
+    padding: 0;
+}
+
 /* NAV BAR */
 .transparent-header {
     background-color: transparent;
+}
+.text-primary{
+    color: #2563EB;
 }
 .text-warning{
     color: #f87b07;
@@ -54,6 +63,9 @@ title {
     padding: 20px;
     color: #fff;
     text-align: center;
+}
+.red{
+    background-color: #ef0e0e;
 }
 
 
