@@ -74,8 +74,12 @@ title {
     background-color: #f65b07;
 }
 .imgteam{
-    width: 40%;
+    width: 20%;
 }
 /* HOME PAGE END*/
 
 /*  WATCH ALL MATCHES PAGE START*/
+
+.imgNLF{
+    width: 40%;
+}

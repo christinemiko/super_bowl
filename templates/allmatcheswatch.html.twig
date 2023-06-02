@@ -3,9 +3,17 @@
 {% block body %}
 
 <!--  WATCH ALL MATCHES PAGE START -->
+    <main>
 
-    <div class="mb-5  red"><h2 class="text-center"> Les Matchs En cours </h2></div>
-    <!--CARD MATCH TODAY  START -->
+        <!-- INTRODUCTION  START   -->
+      <div class="text-center"><img src="{{ asset('img/logo3NLF.png') }}" class="img-fluid imgNLF" alt="NLF logo"></div>
+    <h1 class="text-center">Les Matchs</h1>
+    <div class=" text-center"><img src="{{ asset('img/img28.png') }}" class=" img-fluid d-block w-100" alt="image joueur"></div>
+        <!-- INTRODUCTION  END   -->
+
+        <!--CARD MATCH TODAY  START -->
+
+    <div class="mb-5 orange"><h2 class="text-center"> Les Matchs En cours </h2></div>
     <div class="container d-flex justify-content-center">
         <div class="row">
             <div class="card" style="width: 18rem;">
@@ -26,6 +34,8 @@
                     <li class="list-group-item">
                         <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
                         Bills de Buffalo</li>
+                    <li class="list-group-item text-center">
+                        Score : 27-20 </li>
                     <a href="#" class="card-link text-center">Visualiser le Match</a>
                 </ul>
             </div>
@@ -64,7 +74,7 @@
 
     <!--CARD MATCH COMING END-->
 
-    <div class=" mt-5 mb-5 orange "><h2 class="text-center"> Les Matchs Terminés </h2></div>
+    <div class=" mt-5 mb-5 red "><h2 class="text-center"> Les Matchs Terminés </h2></div>
     <!--CARD MATCH FINISHED  START -->
     <div class="container d-flex justify-content-center">
         <div class="row">
@@ -86,11 +96,13 @@
                     <li class="list-group-item">
                         <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
                         Bills de Buffalo</li>
+                    <li class="list-group-item text-center">
+                        Score : 36-12 </li>
                     <a href="#" class="card-link text-center">Visualiser le Match</a>
                 </ul>
             </div>
         </div>
     </div>
-
+    </main>
     <!--CARD MATCH FINISHED  END-->
 {% endblock %}
