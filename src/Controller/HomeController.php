@@ -16,7 +16,7 @@ class HomeController extends AbstractController
 
     }
 
-    #[Route('allmatcheswatch', name:'allmatcheswatch')]
+    #[Route('allmatcheswatch', name:'visualiserlesmatchs')]
     public function Allmatcheswatch(): Response
     {
 
@@ -24,7 +24,7 @@ class HomeController extends AbstractController
 
     }
 
-    #[Route('onematchwatch', name:'onematchwatch')]
+    #[Route('onematchwatch', name:'visualiserunmatch')]
     public function Onematchwatch(): Response
     {
 
@@ -32,11 +32,19 @@ class HomeController extends AbstractController
 
     }
 
-    #[Route('betmatch', name:'betmatch')]
+    #[Route('betmatch', name:'miser')]
     public function BetMatch(): Response
     {
 
-        return $this->render('betMatch.html.twig');
+        return $this->render('betmatch.html.twig');
+
+    }
+
+    #[Route('betallmatches', name:'parier')]
+    public function BetAllMatches(): Response
+    {
+
+        return $this->render('betallmatches.html.twig');
 
     }
 }

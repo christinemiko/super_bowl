@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<!--  BET ALL MATCHES PAGE START -->
+ <main>
+     <!-- INTRODUCTION  START   -->
+     <div class="text-center"><img src="{{ asset('img/logo3NLF.png') }}" class="img-fluid imgNLF" alt="NLF logo"></div>
+     <h1 class="text-center">Parier</h1>
+     <div class="d-flex justify-content-center"><img src="{{ asset('img/img29.png') }}" class=" img-fluid d-block w-90" alt="image joueurs"></div>
+     <!-- INTRODUCTION  END   -->
+
+     <!--CARD MATCH COMING  START -->
+     <div class="mb-5 red"><h2 class="text-center rectangle1"> Les Matchs </h2></div>
+     <div class="container d-flex justify-content-center">
+         <div class="row">
+             <div class="card" style="width: 18rem;">
+                 <ul class="list-group list-group-flush">
+
+                     <li class="list-group-item">
+                         <input type="checkbox" id="match">
+                         <label for="match">
+                             Sélectionner Le Match
+                         </label>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill" viewBox="0 0 16 16">
+                             <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
+                         </svg>
+                     </li>
+
+                     <li class="list-group-item">
+
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                             <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                             <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                         </svg> 01/06/2023
+
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                             <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                             <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                         </svg> 14:00
+
+                     </li>
+
+                     <li class="list-group-item">
+                         <img src="{{ asset('img/teams/bearsdechigaco.png') }}" class="imgteam" alt="logo">
+                         Bears de chicago
+                     </li>
+
+                     <li class="list-group-item">
+                         <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
+                         Bills de Buffalo
+                     </li>
+
+                     <a href="{{ path('miser') }}" class="card-link text-center btn btn-danger mt-2 mb-2">Miser sur la sélection</a>
+                 </ul>
+             </div>
+         </div>
+     </div>
+
+     <!--CARD MATCH COMING END-->
+
+ </main>
+    <!--  BET ALL MATCHES PAGE END -->
+
+{% endblock %}
