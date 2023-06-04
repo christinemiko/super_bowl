@@ -31,4 +31,12 @@ class HomeController extends AbstractController
         return $this->render('onematchwatch.html.twig');
 
     }
+
+    #[Route('betmatch', name:'betmatch')]
+    public function BetMatch(): Response
+    {
+
+        return $this->render('betMatch.html.twig');
+
+    }
 }

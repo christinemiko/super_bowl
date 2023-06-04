@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+   <!--  BET MATCH PAGE START -->
+  <main>
+    <!-- INTRODUCTION  START   -->
+    <div class="text-center"><img src="{{ asset('img/logo3NLF.png') }}" class="img-fluid imgNLF" alt="NLF logo"></div>
+    <h1 class="text-center">Miser</h1>
+    <div class="d-flex justify-content-center"><img src="{{ asset('img/img31.png') }}" class=" img-fluid d-block w-90" alt="image miser"></div>
+    <!-- INTRODUCTION  END   -->
+
+    <div class="mb-2 red"><h2 class="text-center rectangle1"> Les équipes</h2></div>
+    <div class="container">
+
+    <!--TEAMS INFORMATIONS START -->
+      <!-- BLOCK TEAM 1 DESCRIPTION  START-->
+      <div class="row justify-content-center">
+        <div class="rectangle2 white text-center text-dark mt-2">
+          <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam mb-2 text-center " alt="logo">
+          <h4 class="mt-2 mb-3"> Equipe: </h4>
+          <p> Cote de l'équipe:</p>
+        </div>
+      </div>
+      <!-- BLOCK TEAM 1 DESCRIPTION  END-->
+
+      <!-- BLOCK TEAM 2 DESCRIPTION  START-->
+      <div class="row justify-content-center">
+        <div class="rectangle2 white text-center text-dark mt-2">
+          <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam mb-2 text-center " alt="logo">
+          <h4 class="mt-2 mb-3"> Equipe: </h4>
+          <p> Cote de l'équipe:</p>
+        </div>
+      </div>
+      <!-- BLOCK TEAM 2 DESCRIPTION  END-->
+      <!--TEAMS INFORMATIONS END -->
+
+      <!-- MONEY BET START -->
+     <div class="row justify-content-center">
+       <div class=" rectangle2 blue text-left col-sm mt-2">
+         <h4 class="text-center">Mise</h4>
+         <p class="text-center"> Sélectionner l'équipe sur laquelle vous souhaitez miser:</p>
+         <p class="text-center"> Veuillez indiquer le montant de la mise:</p>
+       </div>
+     </div>
+      <!-- MONEY BET END -->
+
+      <!-- BUTTON CONFIRM START-->
+      <div class="text-center mt-3">
+      <button type="button" class="btn btn-lg btn-danger">Validation</button>
+      </div>
+      <!-- BUTTON CONFIRM END-->
+
+
+    </div>
+  </main>
+    <!--  BET MATCH PAGE END -->
+{% endblock %}
