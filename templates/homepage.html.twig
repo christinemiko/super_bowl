@@ -14,7 +14,7 @@
             <h4 class="text-center mt-3"><i>"Cet évènement planétaire s'est fait une place de choix en France,</i></h4>
             <h4 class="text-center  mb-5"><i> Suivez l'intégralité des matchs, retransmis en Live depuis les USA, au State Farm Center de Glendale." </i></h4>
         <!--BUTTON MATCH START -->
-        <div class="text-center mb-5"><a href="{{ path('allmatcheswatch') }}" class="btn btn-primary btn-ml active">Visualiser tous les Matchs</a></div>
+        <div class="text-center mb-5"><a href="{{ path('allmatcheswatch') }}" class="btn btn-primary btn-ml">Visualiser tous les Matchs</a></div>
         </div>
         <!-- BUTTON MATCH END -->
             <div class="row justify-content-center">
@@ -77,7 +77,7 @@
                         <li class="list-group-item">
                             <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
                             Bills de Buffalo</li>
-                        <a href="#" class="card-link text-center">Visualiser le Match</a>
+                        <a href="{{ path('onematchwatch') }}" class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
                     </ul>
                 </div>
             </div>

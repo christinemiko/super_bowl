@@ -73,6 +73,9 @@ title {
 .orange{
     background-color: #f65b07;
 }
+.white{
+    background-color: white;
+}
 .imgteam{
     width: 20%;
 }
@@ -83,3 +86,39 @@ title {
 .imgNLF{
     width: 40%;
 }
+/*  WATCH ALL MATCHES PAGE END*/
+
+/*  WATCH ONE MATCH PAGE START*/
+
+.rectangle1{
+    padding-bottom: 42px;
+    padding-top: 42px;
+    gap: 10px 10px ;
+}
+
+.rectangle2{
+    padding-bottom: 22px;
+    padding-top: 22px;
+    gap: 10px 10px ;
+}
+
+.rectangle3{
+    height: 80%;
+    width: 100%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    gap: 10px 10px ;
+
+}
+
+.btn-danger{
+    background-color: #ef0e0e;
+}
+.btn-warning{
+    background-color: #f65b07;
+}
+.btn-primary{
+    background-color: #2563EB;
+}
+/*  WATCH ONE MATCH PAGE END*/
+

@@ -24,4 +24,11 @@ class HomeController extends AbstractController
 
     }
 
+    #[Route('onematchwatch', name:'onematchwatch')]
+    public function Onematchwatch(): Response
+    {
+
+        return $this->render('onematchwatch.html.twig');
+
+    }
 }
