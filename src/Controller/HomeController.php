@@ -47,4 +47,11 @@ class HomeController extends AbstractController
         return $this->render('betallmatches.html.twig');
 
     }
+    #[Route('inscription', name:'inscription')]
+    public function Inscription(): Response
+    {
+
+        return $this->render('register.html.twig');
+
+    }
 }
