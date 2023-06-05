@@ -3,6 +3,7 @@
 {% block body %}
     <!-- USER INFORMATIONS START -->
     <main>
+        <div class="container"></div>
         <!-- LOGO  START -->
         <div class=" text-center">
             <img src="{{ asset('img/logo4.png') }}" class="img-fluid" alt="logo superBowl">
@@ -10,6 +11,68 @@
         <!-- LOGO  END -->
         <h1 class="h3 mb-3 mt-5 text-center">Informations Personnelles</h1>
 
-    </main>
     <!--  USER INFORMATIONS  END -->
+    {% if app.user %}
+        <div class=" text-center block">
+            <!-- LASTNAME  START -->
+            <div class="row justify-content-center mb-4 mt-5">
+                <div class="col col-md-6 text-light">
+                    <label for="lastName">Nom: {{ app.user.lastName }}</label>
+                </div>
+            </div>
+            <!-- LASTNAME  END -->
+
+            <!-- FIRSTNAME  START -->
+            <div class="row justify-content-center mb-4">
+                <div class="col col-md-6 text-light">
+                    <label for="firstName">Prénom: {{ app.user.firstName }}</label>
+                </div>
+            </div>
+            <!-- FIRSTNAME  END -->
+
+            <!-- EMAIL  START -->
+            <div class="row justify-content-center mb-4">
+                <div class="col col-md-6 text-light">
+                    <label for="email">Email: {{ app.user.userIdentifier }}</label>
+                </div>
+            </div>
+            <!-- EMAIL  END -->
+        </div>
+        {% endif %}
+
+        <!-- BUTTON UPDATE  START -->
+        <div class=" mb-3 mt-5 text-center">
+            <a  class=" col btn btn-ml btn-primary mt-2 text-light" href=>
+                Modifier
+            </a>
+            <!-- BUTTON UPDATE  END -->
+
+            <!-- BUTTON TRIGGER MODAL DELETE START -->
+            <button type="button" class="btn btn-ml btn-danger mt-2 text-light" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Supprimer
+            </button>
+            <!-- BUTTON DELETE  END -->
+
+            <!-- MODAL START -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 text-dark" id="deleteModalLabel">Suppression Espace Compte</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-dark">
+                            Êtes vous sûr de vouloir supprimer votre compte ?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('myaccount') }}" class="btn btn-primary" data-bs-dismiss="modal">Conserver Compte</a>
+                            <a href="{{ path('deletemoncompte', { 'id': app.user.id }) }}" class="btn btn-danger">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL END -->
+
+        </div>
+    </main>
 {% endblock %}
