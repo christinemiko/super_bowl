@@ -1,8 +1,8 @@
 security:
     role_hierarchy:
         ROLE_CLIENT: ROLE_USER
-        ROLE_SPORTCASTER: ROLE_CLIENT
-        ROLE_ADMIN: ROLE_SPORTCASTER
+        ROLE_SPORTSCASTER: ROLE_CLIENT
+        ROLE_ADMIN: ROLE_SPORTSCASTER
 
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
@@ -39,7 +39,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_USER }
         - { path: ^/client, roles: ROLE_CLIENT }
-        - { path: ^/sportcaster, roles: ROLE_SPORTCASTER }
+        - { path: ^/sportscaster, roles: ROLE_SPORTSCASTER }
 
 when@test:
     security:
