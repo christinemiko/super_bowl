@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,11 +23,14 @@ class RegistrationFormType extends AbstractType
             ->add('last_name',TextType::class, [ 'attr' => [ 'class' => 'form-control'], 'label' => 'Nom'])
             ->add('first_name',TextType::class, [ 'attr' => [ 'class' => 'form-control'], 'label' => 'Prénom'])
             ->add('email',EmailType::class, [ 'attr' => [ 'class' => 'form-control'], 'label' => 'Email'])
-            ->add('password',PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password', 'class' => 'form-control'],
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
+                'options' => ['attr' => ['class' => 'form-control']],
+                'required' => true,
+                'first_options' => ['label' => 'Mot de Passe'],
+                'second_options' => ['label' => 'Confirmez le Mot de Passe'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez insérer votre Mot de Passe',
@@ -37,8 +41,9 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
-                ], 'label' => 'Mot de Passe'
+                ],
             ])
+
             ->add('RGPDConsent', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
