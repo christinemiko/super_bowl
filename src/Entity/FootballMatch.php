@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FootballMatchRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,13 +17,13 @@ class FootballMatch
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $match_date = null;
+    private ?\DateTimeInterface $matchDate = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $hour_start = null;
+    private ?\DateTimeInterface $hourStart = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $hour_finish = null;
+    private ?\DateTimeInterface $hourFinish = null;
 
     #[ORM\Column(length: 50)]
     private ?string $statut = null;
@@ -30,16 +32,19 @@ class FootballMatch
     private ?string $weather = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $score_game = null;
+    private ?string $scoreGame = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $comments = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $team1 = null;
+    #[ORM\ManyToOne(inversedBy: 'team1')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Team $team1 = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $team2 = null;
+    #[ORM\ManyToOne(inversedBy: 'team2')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Team $team2 = null;
+
 
     public function getId(): ?int
     {
@@ -48,36 +53,36 @@ class FootballMatch
 
     public function getMatchDate(): ?\DateTimeInterface
     {
-        return $this->match_date;
+        return $this->matchDate;
     }
 
-    public function setMatchDate(\DateTimeInterface $match_date): self
+    public function setMatchDate(\DateTimeInterface $matchDate): self
     {
-        $this->match_date = $match_date;
+        $this->matchDate = $matchDate;
 
         return $this;
     }
 
     public function getHourStart(): ?\DateTimeInterface
     {
-        return $this->hour_start;
+        return $this->hourStart;
     }
 
-    public function setHourStart(\DateTimeInterface $hour_start): self
+    public function setHourStart(\DateTimeInterface $hourStart): self
     {
-        $this->hour_start = $hour_start;
+        $this->hourStart = $hourStart;
 
         return $this;
     }
 
     public function getHourFinish(): ?\DateTimeInterface
     {
-        return $this->hour_finish;
+        return $this->hourFinish;
     }
 
-    public function setHourFinish(\DateTimeInterface $hour_finish): self
+    public function setHourFinish(\DateTimeInterface $hourFinish): self
     {
-        $this->hour_finish = $hour_finish;
+        $this->hourFinish = $hourFinish;
 
         return $this;
     }
@@ -108,12 +113,12 @@ class FootballMatch
 
     public function getScoreGame(): ?string
     {
-        return $this->score_game;
+        return $this->scoreGame;
     }
 
-    public function setScoreGame(?string $score_game): self
+    public function setScoreGame(?string $scoreGame): self
     {
-        $this->score_game = $score_game;
+        $this->scoreGame = $scoreGame;
 
         return $this;
     }
@@ -130,27 +135,28 @@ class FootballMatch
         return $this;
     }
 
-    public function getTeam1(): ?int
+    public function getTeam1(): ?Team
     {
         return $this->team1;
     }
 
-    public function setTeam1(?int $team1): self
+    public function setTeam1(?Team $team1): self
     {
         $this->team1 = $team1;
 
         return $this;
     }
 
-    public function getTeam2(): ?int
+    public function getTeam2(): ?Team
     {
         return $this->team2;
     }
 
-    public function setTeam2(?int $team2): self
+    public function setTeam2(?Team $team2): self
     {
         $this->team2 = $team2;
 
         return $this;
     }
+
 }
