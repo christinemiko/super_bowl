@@ -23,6 +23,18 @@ class Sportbet
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $moneyGain = null;
 
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'team_bet')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Team $team = null;
+
+    #[ORM\ManyToOne(inversedBy: 'FootballMatch')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?FootballMatch $footballMatch = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +72,42 @@ class Sportbet
     public function setMoneyGain(?string $moneyGain): self
     {
         $this->moneyGain = $moneyGain;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    public function getFootballMatch(): ?FootballMatch
+    {
+        return $this->footballMatch;
+    }
+
+    public function setFootballMatch(?FootballMatch $footballMatch): self
+    {
+        $this->footballMatch = $footballMatch;
 
         return $this;
     }
