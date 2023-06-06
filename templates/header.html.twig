@@ -35,15 +35,14 @@
 
                 {% endif %}
 
-                <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mon Espace
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ path('myaccount') }}">Mon Espace</a></li>
-                            <li><a class="dropdown-item" href="{{ path('history') }}">Historique des Mises</a></li>
-                            <li><a class="dropdown-item" href="{{ path('information') }}">Informations personnelles</a></li>
+                            <li><a class="dropdown-item text-warning" href="{{ path('myaccount') }}">Mon Espace</a></li>
+                            <li><a class="dropdown-item text-danger" href="{{ path('history') }}">Historique des Mises</a></li>
+                            <li><a class="dropdown-item text-primary" href="{{ path('information') }}">Informations personnelles</a></li>
                         </ul>
                     </li>
 
@@ -51,7 +50,7 @@
                         <a class="nav-link text-warning" href="{{ path('app_logout') }}" >
                           Déconnexion</a>
                     </li>
-                </ul>
+
 
                 {% else %}
 

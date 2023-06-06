@@ -11,14 +11,17 @@
             <img src="{{ asset('img/logo4.png') }}" class="img-fluid" alt="logo superBowl">
         </div>
         <!-- LOGO  END -->
-        <h1 class="h3 mb-3 mt-5 text-center">Informations Personnelles</h1>
+
+        <!-- TITTLE START -->
+        <div class="blue mt-5"><h2 class="text-center text-light rectangle2">Informations Personnelles</h2></div>
+        <!-- TITTLE END -->
 
     <!--  USER INFORMATIONS  END -->
     {% if app.user %}
-        <div class=" text-center block">
+        <div class=" text-center block white">
             <!-- LASTNAME  START -->
-            <div class="row justify-content-center mb-4 mt-5">
-                <div class="col col-md-6 text-light">
+            <div class="row justify-content-center mb-4">
+                <div class="col col-md-6 text-dark mt-4">
                     <label for="lastName">Nom: {{ app.user.lastName }}</label>
                 </div>
             </div>
@@ -26,7 +29,7 @@
 
             <!-- FIRSTNAME  START -->
             <div class="row justify-content-center mb-4">
-                <div class="col col-md-6 text-light">
+                <div class="col col-md-6 text-dark">
                     <label for="firstName">Prénom: {{ app.user.firstName }}</label>
                 </div>
             </div>
@@ -34,7 +37,7 @@
 
             <!-- EMAIL  START -->
             <div class="row justify-content-center mb-4">
-                <div class="col col-md-6 text-light">
+                <div class="col col-md-6 text-dark mb-4">
                     <label for="email">Email: {{ app.user.userIdentifier }}</label>
                 </div>
             </div>
