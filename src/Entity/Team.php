@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
@@ -21,11 +22,8 @@ class Team
     #[ORM\Column]
     private ?int $numberPlayer = null;
 
-    #[ORM\Column]
-    private ?float $oddsteam = null;
-
     #[ORM\Column(length: 50)]
-    private ?string $countryOrigin = null;
+    private ?string $regionOrigin = null;
 
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: FootballPlayer::class)]
     private Collection $team;
@@ -38,6 +36,12 @@ class Team
 
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Sportbet::class)]
     private Collection $team_bet;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $link = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2)]
+    private ?string $oddsteam = null;
 
     public function __construct()
     {
@@ -76,26 +80,15 @@ class Team
         return $this;
     }
 
-    public function getOddsteam(): ?float
+
+    public function getRegionOrigin(): ?string
     {
-        return $this->oddsteam;
+        return $this->regionOrigin;
     }
 
-    public function setOddsteam(float $oddsteam): self
+    public function setRegionOrigin(string $regionOrigin): self
     {
-        $this->oddsteam = $oddsteam;
-
-        return $this;
-    }
-
-    public function getCountryOrigin(): ?string
-    {
-        return $this->countryOrigin;
-    }
-
-    public function setCountryOrigin(string $countryOrigin): self
-    {
-        $this->countryOrigin = $countryOrigin;
+        $this->regionOrigin = $regionOrigin;
 
         return $this;
     }
@@ -219,5 +212,30 @@ class Team
 
         return $this;
     }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    public function getOddsteam(): ?string
+    {
+        return $this->oddsteam;
+    }
+
+    public function setOddsteam(string $oddsteam): self
+    {
+        $this->oddsteam = $oddsteam;
+
+        return $this;
+    }
+
 
 }
