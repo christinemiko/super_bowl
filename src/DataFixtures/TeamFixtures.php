@@ -71,7 +71,7 @@ class TeamFixtures extends Fixture
 
         $team = new Team();
         $team->setTeamName("Cardinals de l'Arizona");
-        $team->setNumberPlayer("44");
+        $team->setNumberPlayer("37");
         $team->setOddsteam("2.75");
         $team->setRegionOrigin("Arizona");
         $team->setLink("cardinalsdelarizona.png");
@@ -79,7 +79,7 @@ class TeamFixtures extends Fixture
 
         $team = new Team();
         $team->setTeamName("Chargers de Los Angeles");
-        $team->setNumberPlayer("42");
+        $team->setNumberPlayer("28");
         $team->setOddsteam("1.62");
         $team->setRegionOrigin("Los Angeles");
         $team->setLink("chargersdelosangeles.png");

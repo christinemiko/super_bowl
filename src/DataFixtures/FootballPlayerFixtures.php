@@ -1894,9 +1894,217 @@ class FootballPlayerFixtures extends Fixture
         $footballPlayer->setTeam(7);
         $manager->persist( $footballPlayer);
 
-
-
         /*Player TEAM BUCCANEERS DE TAMPABAY END****************************************************************************/
+
+        /*Player TEAM CHARGERS DE LOS ANGELES START****************************************************************************/
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("JOHNSON");
+        $footballPlayer-> setFirstName("Zion");
+        $footballPlayer-> setPlayerNumber(77);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("WEAVER");
+        $footballPlayer-> setFirstName("Isaac");
+        $footballPlayer-> setPlayerNumber(60);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("WILLIAM");
+        $footballPlayer-> setFirstName("Mike");
+        $footballPlayer-> setPlayerNumber(81);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("ROUNTREE");
+        $footballPlayer-> setFirstName("Larry");
+        $footballPlayer-> setPlayerNumber(34);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("MCKITTY");
+        $footballPlayer-> setFirstName("Tre");
+        $footballPlayer-> setPlayerNumber(88);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("PIPKINS");
+        $footballPlayer-> setFirstName("Trey");
+        $footballPlayer-> setPlayerNumber(79);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("CLAPP");
+        $footballPlayer-> setFirstName("Will");
+        $footballPlayer-> setPlayerNumber(76);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("HIGHTOWER");
+        $footballPlayer-> setFirstName("John");
+        $footballPlayer-> setPlayerNumber(84);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("KEENAN");
+        $footballPlayer-> setFirstName("Allen");
+        $footballPlayer-> setPlayerNumber(13);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("KELLEY");
+        $footballPlayer-> setFirstName("Joshua");
+        $footballPlayer-> setPlayerNumber(25);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("SMARTT");
+        $footballPlayer-> setFirstName("Stone");
+        $footballPlayer-> setPlayerNumber(48);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("RASHAWN");
+        $footballPlayer-> setFirstName("Slater");
+        $footballPlayer-> setPlayerNumber(70);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("HORVATH");
+        $footballPlayer-> setFirstName("Zander");
+        $footballPlayer-> setPlayerNumber(40);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("PALMER");
+        $footballPlayer-> setFirstName("Josh");
+        $footballPlayer-> setPlayerNumber(5);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("LINSLEY");
+        $footballPlayer-> setFirstName("Corey");
+        $footballPlayer-> setPlayerNumber(63);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("SALYER");
+        $footballPlayer-> setFirstName("Jamaree");
+        $footballPlayer-> setPlayerNumber(68);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("GUYTON");
+        $footballPlayer-> setFirstName("Jalen");
+        $footballPlayer-> setPlayerNumber(15);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("STICK");
+        $footballPlayer-> setFirstName("Easton");
+        $footballPlayer-> setPlayerNumber(2);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("JAIMES");
+        $footballPlayer-> setFirstName("Brenden");
+        $footballPlayer-> setPlayerNumber(64);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("SPILLER");
+        $footballPlayer-> setFirstName("Isaiah");
+        $footballPlayer-> setPlayerNumber(28);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("SARELL");
+        $footballPlayer-> setFirstName("Foster");
+        $footballPlayer-> setPlayerNumber(73);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("PLEASANTS");
+        $footballPlayer-> setFirstName("Austen");
+        $footballPlayer-> setPlayerNumber(75);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("KAMPMOYER");
+        $footballPlayer-> setFirstName("Hunter");
+        $footballPlayer-> setPlayerNumber(87);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("BAILEY");
+        $footballPlayer-> setFirstName("Zack");
+        $footballPlayer-> setPlayerNumber(78);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("EKELER");
+        $footballPlayer-> setFirstName("Austin");
+        $footballPlayer-> setPlayerNumber(30);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("EVERETT");
+        $footballPlayer-> setFirstName("Gerald");
+        $footballPlayer-> setPlayerNumber(7);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("HERBERT");
+        $footballPlayer-> setFirstName("Justin");
+        $footballPlayer-> setPlayerNumber(10);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("DOSS");
+        $footballPlayer-> setFirstName("Keelan");
+        $footballPlayer-> setPlayerNumber(86);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        $footballPlayer = new FootballPlayer();
+        $footballPlayer-> setLastName("TRAINER");
+        $footballPlayer-> setFirstName("Andrew");
+        $footballPlayer-> setPlayerNumber(62);
+        $footballPlayer->setTeam(9);
+        $manager->persist( $footballPlayer);
+
+        /*Player TEAM CARDINAL DE LARIZONA END****************************************************************************/
+
         $manager->flush();
     }
 }
