@@ -21,6 +21,8 @@ final class Version20230607110455 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE team ADD oddsteam NUMERIC(3, 2) NOT NULL');
+
+        
     }
 
     public function down(Schema $schema): void
