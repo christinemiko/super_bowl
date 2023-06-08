@@ -19,9 +19,6 @@ class Team
     #[ORM\Column(length: 50)]
     private ?string $teamName = null;
 
-    #[ORM\Column]
-    private ?int $numberPlayer = null;
-
     #[ORM\Column(length: 50)]
     private ?string $regionOrigin = null;
 
@@ -67,19 +64,6 @@ class Team
 
         return $this;
     }
-
-    public function getNumberPlayer(): ?int
-    {
-        return $this->numberPlayer;
-    }
-
-    public function setNumberPlayer(int $numberPlayer): self
-    {
-        $this->numberPlayer = $numberPlayer;
-
-        return $this;
-    }
-
 
     public function getRegionOrigin(): ?string
     {
