@@ -31,7 +31,7 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
     {
         /* FIXTURE MATCHES IN PROGRESS START */
 
-        for ($i =0; $i < 5; $i++) {
+        for ($i =0; $i < 6; $i++) {
 
             $footballMatch = new FootballMatch();
 
@@ -77,7 +77,7 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
         /* FIXTURE MATCHES IN PROGRESS END*/
 
         /* FIXTURES MATCHES FINISHED START*/
-        for ($i =0; $i < 5; $i++) {
+        for ($i =0; $i < 6; $i++) {
 
             $footballMatch = new FootballMatch();
 
@@ -124,7 +124,7 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
         /* FIXTURES MATCHES FINISHED END*/
 
         /* FIXTURES MATCHES COMING START*/
-        for ($i =0; $i < 5; $i++) {
+        for ($i =0; $i < 6; $i++) {
 
             $footballMatch = new FootballMatch();
 

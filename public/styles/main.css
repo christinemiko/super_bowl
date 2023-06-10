@@ -77,7 +77,8 @@ title {
     background-color: white;
 }
 .imgteam{
-    width: 20%;
+    width: 120px; /* Définissez la largeur souhaitée */
+    object-fit: cover;
 }
 /* HOME PAGE END*/
 
@@ -121,4 +122,6 @@ title {
     background-color: #2563EB;
 }
 /*  WATCH ONE MATCH PAGE END*/
+
+
 
