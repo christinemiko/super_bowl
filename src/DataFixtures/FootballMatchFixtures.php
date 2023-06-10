@@ -68,6 +68,10 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $footballMatch-> setScoreGame($this->faker->numberBetween(0, 40) . '_' . $this->faker->numberBetween(0, 40));
 
             $footballMatch->setComments('Le match est surprenant avec ces deux équipes et la fin du match se prononce très serré.');
+
+            $this->addReference('football_match1_' . $i, $footballMatch);
+            $manager->persist($footballMatch);
+
             $manager->persist($footballMatch);
         }
         /* FIXTURE MATCHES IN PROGRESS END*/
@@ -111,6 +115,10 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $footballMatch-> setScoreGame($this->faker->numberBetween(0, 40) . '_' . $this->faker->numberBetween(0, 40));
 
             $footballMatch->setComments('Ce fut un très beau Match, pleins de rebondissements, avec les grands favoris de la NLF.' );
+
+            $this->addReference('football_match2_' . $i, $footballMatch);
+            $manager->persist($footballMatch);
+
             $manager->persist($footballMatch);
         }
         /* FIXTURES MATCHES FINISHED END*/
@@ -154,6 +162,10 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $footballMatch-> setScoreGame($this->faker->numberBetween(0, 40) . '_' . $this->faker->numberBetween(0, 40));
 
             $footballMatch->setComments('C/est un match attendu pour cette saison avec des équipes, prêtes pour la victoire.');
+
+            $this->addReference('football_match3_' . $i, $footballMatch);
+            $manager->persist($footballMatch);
+
             $manager->persist($footballMatch);
         }
 

@@ -8,8 +8,10 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 
+
 class UserFixtures extends Fixture
 {
+
     /**
      * @var Generator
      */
@@ -29,7 +31,7 @@ class UserFixtures extends Fixture
           $user->setEmail($this->faker->email());
           $user->setPassword($this->faker->password());
           $user->setRoles(['ROLE_USER']);
-          $manager->persist($user);
+            $manager->persist($user);
 
         }
 
@@ -39,6 +41,7 @@ class UserFixtures extends Fixture
         $user->setEmail('christinechau@gmail.com');
         $user->setPassword('$2y$10$wpNfCugEUnogBioPlbtbveYPVmhsx5hm8REUXfAY/MC516/DpvEf2');
         $user->setRoles(['ROLE_ADMIN']);
+
         $manager->persist($user);
 
         $user = new User();
@@ -47,6 +50,8 @@ class UserFixtures extends Fixture
         $user->setEmail('martin@gmail.com');
         $user->setPassword('$2y$10$ZtZQWRK2xNC0eV0qbBxwV.PcAJPREurnS36BfFHf51dpF5rRdiDwy');
         $user->setRoles(['ROLE_SPORTSCASTER']);
+
+
         $manager->persist($user);
 
         $manager->flush();
