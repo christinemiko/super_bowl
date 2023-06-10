@@ -87,6 +87,11 @@ title {
 .imgNLF{
     width: 40%;
 }
+.team-name {
+    word-wrap: break-word;
+    text-align: center;
+}
+
 /*  WATCH ALL MATCHES PAGE END*/
 
 /*  WATCH ONE MATCH PAGE START*/

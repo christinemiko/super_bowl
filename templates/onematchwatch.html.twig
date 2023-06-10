@@ -20,14 +20,15 @@
 
                 <div class=" rectangle1 red text-center col-sm mt-2">
                     <h1> Match</h1>
-                    <h5>Statut: A venir</h5>
+                    <h5>Statut: {{footballMatch.statut }}</h5>
+                    <h5>Score: {{footballMatch.scoreGame }}</h5>
                 </div>
 
                 <div class=" rectangle2 blue text-left col-sm mt-2">
-                    <h5 class="text-center"> Date: 14/12/2023 </h5>
-                    <p class="text-center mt-3"> Heure début: 14:00</p>
-                    <p class="text-center"> Heure fin: 15:00</p>
-                    <p class="text-center"> Météo: beau temps 35C°</p>
+                    <h5 class="text-center"> Date:{{footballMatch.matchDate|date('d/m/Y')}}</h5>
+                    <p class="text-center mt-3"> Heure début:{{footballMatch.hourStart|date('H:i')}}_</p>
+                    <p class="text-center"> Heure fin:{{footballMatch.hourFinish|date('H:i')}}</p>
+                    <p class="text-center"> Météo:{{footballMatch.weather}}</p>
                 </div>
 
             </div>
@@ -36,9 +37,9 @@
             <!-- BLOCK TEAM 1 DESCRIPTION  START-->
             <div class="row justify-content-center">
                 <div class="rectangle3 white text-center text-dark mt-2">
-                    <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam mb-2 text-center " alt="logo">
-                    <h4 class="mt-2 mb-3"> Equipe: </h4>
-                    <p> Cote de l'équipe:</p>
+                    <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam mb-2 text-center " alt="logo">
+                    <h4 class="mt-2 mb-3"> Equipe:{{ footballMatch.team1.teamName }} </h4>
+                    <p> Cote de l'équipe:{{ footballMatch.team1.oddsteam }}</p>
                     <p> Nombre de joueurs:</p>
                     <p> Nom des joueurs:</p>
                 </div>
@@ -49,9 +50,9 @@
             <!-- BLOCK TEAM 2 DESCRIPTION  START-->
             <div class="row justify-content-center">
                 <div class="rectangle3 white text-center text-dark mt-2">
-                    <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam mb-2 text-center" alt="logo">
-                    <h4 class="mt-2 mb-3"> Equipe: </h4>
-                    <p> Cote de l'équipe:</p>
+                    <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 text-center" alt="logo">
+                    <h4 class="mt-2 mb-3"> Equipe:{{ footballMatch.team2.teamName }} </h4>
+                    <p> Cote de l'équipe:{{ footballMatch.team2.oddsteam }}</p>
                     <p> Nombre de joueurs:</p>
                     <p> Nom des joueurs:</p>
                 </div>
@@ -63,7 +64,7 @@
             <div class="row justify-content-center">
             <div class=" rectangle1 orange text-center col-sm mt-2">
                 <h4> Commentaires:</h4>
-                <p>C'est un match très serré, les deux équipes sont motivés à gagner et le flux est tendu sur ce match. </p>
+                <p>{{footballMatch.comments}} </p>
             </div>
         </div>
             <!-- COMMENTS  END-->

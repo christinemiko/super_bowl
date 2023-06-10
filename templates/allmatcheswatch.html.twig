@@ -16,31 +16,46 @@
         <!--CARD MATCH TODAY  START -->
 
     <div class="mb-5 red"><h2 class="text-center rectangle1"> Les Matchs En cours </h2></div>
-    <div class="container d-flex justify-content-center">
-        <div class="row">
-            <div class="card" style="width: 18rem;">
+    <div class="container">
+        <div class="row justify-content-around align-items-center">
+
+            {% for footballMatch in footballMatches %}
+
+            <div class="card mt-5" style="width: 25rem;">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
+
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
                             <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
                             <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                        </svg> 01/06/2023
+                        </svg> {{footballMatch.matchDate|date('d/m/Y')}}
+
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
                             <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
                             <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                        </svg> 14:00
+                        </svg>Début:{{footballMatch.hourStart|date('H:i')}}_
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                        </svg>Fin:{{footballMatch.hourFinish|date('H:i')}}
                     </li>
-                    <li class="list-group-item">
-                        <img src="{{ asset('img/teams/bearsdechigaco.png') }}" class="imgteam" alt="logo">
-                        Bears de chicago </li>
-                    <li class="list-group-item">
-                        <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
-                        Bills de Buffalo</li>
+
+                    <li class="list-group-item team-name">
+                        <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam" alt="logo">
+                        {{ footballMatch.team1.teamName }}
+
+                    <li class="list-group-item team-name">
+                        <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam" alt="logo">
+                        {{ footballMatch.team2.teamName }}
+
                     <li class="list-group-item text-center">
-                        Score : 27-20 </li>
-                    <a href="{{ path('visualiserunmatch') }}" class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
+                        Score : {{ footballMatch.scoreGame }}</li>
+                    <a href="{{ path('visualiserunmatch', { 'id': footballMatch.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
                 </ul>
+
             </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -48,63 +63,95 @@
 
     <div class="mt-5 mb-5 blue"><h2 class="text-center rectangle1"> Les Matchs A venir </h2></div>
     <!--CARD MATCH COMING  START -->
-    <div class="container d-flex justify-content-center">
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                        </svg> 01/06/2023
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                        </svg> 14:00
-                    </li>
-                    <li class="list-group-item">
-                        <img src="{{ asset('img/teams/bearsdechigaco.png') }}" class="imgteam" alt="logo">
-                        Bears de chicago </li>
-                    <li class="list-group-item">
-                        <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
-                        Bills de Buffalo</li>
-                    <a href="{{ path('visualiserunmatch') }}" class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
-                </ul>
+        <div class="container">
+            <div class="row justify-content-around align-items-center">
+
+                {% for footballMatch2 in footballMatches2 %}
+
+                    <div class="card mt-5" style="width: 25rem;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg> {{footballMatch2.matchDate|date('d/m/Y')}}
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                                </svg>Début:{{footballMatch2.hourStart|date('H:i')}}_
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                                </svg>Fin:{{footballMatch2.hourFinish|date('H:i')}}
+                            </li>
+
+                            <li class="list-group-item team-name">
+                                <img src="{{ asset('img/teams/' ~ footballMatch2.team1.link) }}" class="imgteam" alt="logo">
+                                {{ footballMatch2.team1.teamName }}
+
+                            <li class="list-group-item team-name">
+                                <img src="{{ asset('img/teams/' ~ footballMatch2.team2.link) }}" class="imgteam" alt="logo">
+                                {{ footballMatch2.team2.teamName }}
+
+                            <li class="list-group-item text-center">
+                                Score : {{ footballMatch2.scoreGame }}</li>
+                            <a href="{{ path('visualiserunmatch', { 'id': footballMatch2.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
+                        </ul>
+
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
 
     <!--CARD MATCH COMING END-->
 
     <div class=" mt-5 mb-5 orange "><h2 class="text-center rectangle1"> Les Matchs Terminés </h2></div>
     <!--CARD MATCH FINISHED  START -->
-    <div class="container d-flex justify-content-center">
-        <div class="row">
-            <div class="card" style="width: 18rem;">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                        </svg> 01/06/2023
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                        </svg> 14:00
-                    </li>
-                    <li class="list-group-item">
-                        <img src="{{ asset('img/teams/bearsdechigaco.png') }}" class="imgteam" alt="logo">
-                        Bears de chicago </li>
-                    <li class="list-group-item">
-                        <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam" alt="logo">
-                        Bills de Buffalo</li>
-                    <li class="list-group-item text-center">
-                        Score : 36-12 </li>
-                    <a href="{{ path('visualiserunmatch') }}" class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
-                </ul>
+        <div class="container">
+            <div class="row justify-content-around align-items-center">
+
+                {% for footballMatch3 in footballMatches3 %}
+
+                    <div class="card mt-5" style="width: 25rem;">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg> {{footballMatch3.matchDate|date('d/m/Y')}}
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                                </svg>Début:{{footballMatch3.hourStart|date('H:i')}}_
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
+                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
+                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
+                                </svg>Fin:{{footballMatch3.hourFinish|date('H:i')}}
+                            </li>
+
+                            <li class="list-group-item team-name">
+                                <img src="{{ asset('img/teams/' ~ footballMatch3.team1.link) }}" class="imgteam" alt="logo">
+                                {{ footballMatch3.team1.teamName }}
+
+                            <li class="list-group-item team-name">
+                                <img src="{{ asset('img/teams/' ~ footballMatch3.team2.link) }}" class="imgteam" alt="logo">
+                                {{ footballMatch3.team2.teamName }}
+
+                            <li class="list-group-item text-center">
+                                Score : {{ footballMatch3.scoreGame }}</li>
+                            <a href="{{ path('visualiserunmatch', { 'id': footballMatch3.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
+                        </ul>
+
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
     </main>
     <!--CARD MATCH FINISHED  END-->
 {% endblock %}
