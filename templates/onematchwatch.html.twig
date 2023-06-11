@@ -39,9 +39,11 @@
                 <div class="rectangle3 white text-center text-dark mt-2">
                     <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam mb-2 text-center " alt="logo">
                     <h4 class="mt-2 mb-3"> Equipe:{{ footballMatch.team1.teamName }} </h4>
-                    <p> Cote de l'équipe:{{ footballMatch.team1.oddsteam }}</p>
-                    <p> Nombre de joueurs:</p>
-                    <p> Nom des joueurs:</p>
+                    <p> Cote de l'équipe: {{ footballMatch.team1.oddsteam }}</p>
+                    <p> Nombre de joueurs: {{ footballPlayers1|length }} </p>
+                    {% for player in footballPlayers1 %}
+                    <p> Nom du joueur: {{ player.lastName }} {{ player.firstName }} _ </p>
+                    {% endfor %}
                 </div>
 
             </div>
@@ -52,9 +54,11 @@
                 <div class="rectangle3 white text-center text-dark mt-2">
                     <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 text-center" alt="logo">
                     <h4 class="mt-2 mb-3"> Equipe:{{ footballMatch.team2.teamName }} </h4>
-                    <p> Cote de l'équipe:{{ footballMatch.team2.oddsteam }}</p>
-                    <p> Nombre de joueurs:</p>
-                    <p> Nom des joueurs:</p>
+                    <p> Cote de l'équipe: {{ footballMatch.team2.oddsteam }}</p>
+                    <p> Nombre de joueurs: {{ footballPlayers2|length }}</p>
+                    {% for player in footballPlayers2 %}
+                    <p> Nom du Joueur: {{ player.lastName }} {{ player.firstName }} _ </p>
+                    {% endfor %}
                 </div>
 
             </div>
@@ -70,7 +74,9 @@
             <!-- COMMENTS  END-->
 
             <!-- BUTTON BET START-->
-            <div class="text-center mb-5"><a href="{{ path('miser') }}"  class="btn btn-danger btn-lg mt-5">Miser sur le Match</a></div>
+            {% if footballMatch.statut == 'Prochainement' %}
+            <div class="text-center mb-5"><a href="{{ path('miser', { 'id': footballMatch.id }) }}"  class="btn btn-danger btn-lg mt-5">Miser sur le Match</a></div>
+            {% endif %}
             <!-- BUTTON BET END-->
 
 

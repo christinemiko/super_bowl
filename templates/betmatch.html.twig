@@ -19,9 +19,9 @@
       <!-- BLOCK TEAM 1 DESCRIPTION  START-->
       <div class="row justify-content-center">
         <div class="rectangle2 white text-center text-dark mt-2">
-          <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam mb-2 text-center " alt="logo">
-          <h4 class="mt-2 mb-3"> Equipe: </h4>
-          <p> Cote de l'équipe:</p>
+          <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam mb-2 text-center " alt="logo">
+          <h4 class="mt-2 mb-3"> Equipe: {{ footballMatch.team1.teamName }} </h4>
+          <p> Cote de l'équipe: {{ footballMatch.team1.oddsteam }}</p>
         </div>
       </div>
       <!-- BLOCK TEAM 1 DESCRIPTION  END-->
@@ -29,9 +29,9 @@
       <!-- BLOCK TEAM 2 DESCRIPTION  START-->
       <div class="row justify-content-center">
         <div class="rectangle2 white text-center text-dark mt-2">
-          <img src="{{ asset('img/teams/billsdebuffalo.png') }}" class="imgteam mb-2 text-center " alt="logo">
-          <h4 class="mt-2 mb-3"> Equipe: </h4>
-          <p> Cote de l'équipe:</p>
+          <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 text-center " alt="logo">
+          <h4 class="mt-2 mb-3"> Equipe: {{ footballMatch.team2.teamName }} </h4>
+          <p> Cote de l'équipe: {{ footballMatch.team2.oddsteam }}</p>
         </div>
       </div>
       <!-- BLOCK TEAM 2 DESCRIPTION  END-->
