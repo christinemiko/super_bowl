@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
 class FootballMatchController extends AbstractController
@@ -57,6 +58,7 @@ class FootballMatchController extends AbstractController
     }
 
     #[Route('betmatch/{id}', name:'miser', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function BetMatch(FootballMatchRepository $footballMatchRepository, int $id): Response
     {
         $footballMatch = $footballMatchRepository->findOneBy(["id" =>$id]);
