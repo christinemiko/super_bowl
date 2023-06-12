@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\FootballMatch;
+use App\Entity\Sportbet;
+use App\Form\BetMatchFormType;
+use App\Form\ReservationFormType;
 use App\Repository\FootballMatchRepository;
 use App\Repository\FootballPlayerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,24 +61,59 @@ class FootballMatchController extends AbstractController
 
     }
 
-    #[Route('betmatch/{id}', name:'miser', methods: ['GET'])]
+    #[Route('betmatch/{id}', name:'miser', methods:['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function BetMatch(FootballMatchRepository $footballMatchRepository, int $id): Response
+    public function BetMatch(Request $request ,EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository, int $id): Response
     {
         $footballMatch = $footballMatchRepository->findOneBy(["id" =>$id]);
 
+        $sportbet = new Sportbet();
+
+        /* SET USER START*/
+        $user = $this->getUser();
+        $sportbet->setUser($this->getUser($user));
+        /* SET USER END*/
+
+        /* SET FOOTBALL MATCH START*/
+        $sportbet->setFootballMatch($footballMatch);
+        /* SET FOOTBALL MATCH END*/
+
+        /* SET DATE START*/
+        $currentDate = new \DateTime();
+        $sportbet->setDatewagerMade($currentDate);
+        /* SET DATE END*/
+
+        $form = $this->createForm(BetMatchFormType::class, $sportbet);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $sportbet = $form->getData();
+            $entityManager->persist($sportbet);
+            $entityManager->flush();
+            return $this->redirectToRoute('parier');
+        }
+
+
         return $this->render('betmatch.html.twig', [
 
+            'form' => $form->createView(),
             'footballMatch' => $footballMatch,
         ]);
 
     }
 
     #[Route('betallmatches', name:'parier')]
-    public function BetAllMatches(): Response
+    #[IsGranted('ROLE_USER')]
+    public function BetAllMatches(FootballMatchRepository $footballMatchRepository): Response
     {
+        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Prochainement']);
 
-        return $this->render('betallmatches.html.twig');
+        return $this->render('betallmatches.html.twig', [
+
+            'footballMatches' => $footballMatch,
+        ]);
 
     }
 }

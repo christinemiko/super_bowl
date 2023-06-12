@@ -37,25 +37,61 @@
       <!-- BLOCK TEAM 2 DESCRIPTION  END-->
       <!--TEAMS INFORMATIONS END -->
 
+      {{ form_start(form) }}
       <!-- MONEY BET START -->
      <div class="row justify-content-center">
-       <div class=" rectangle2 blue text-left col-sm mt-2">
+       <div class=" rectangle2 blue text-center col-sm mt-2">
          <h4 class="text-center">Mise</h4>
-         <p class="text-center"> Sélectionner l'équipe sur laquelle vous souhaitez miser:</p>
-         <p class="text-center"> Veuillez indiquer le montant de la mise:</p>
+
+         <p class="text-center mt-5 mb-5"> Sélectionner l'équipe sur laquelle vous souhaitez miser :</p>
+         <div class="text-center mb-2">{{ form_row(form.team) }}</div>
+
+         <div class="text-center col-6 mx-auto mt-5 mb-5" >{{ form_row(form.wagerMade) }}</div>
+
+         <div class="text-center col-6 mx-auto mb-2 mb-5">{{ form_row(form.datewagerMade) }}</div>
+
        </div>
      </div>
       <!-- MONEY BET END -->
 
       <!-- BUTTON CONFIRM START-->
       <div class="text-center mt-3">
-      <button type="button" class="btn btn-lg btn-danger">Validation</button>
-        <button type="button" class="btn btn-lg btn-danger">Actualisation</button>
+      <button type="submit" class="btn btn-lg btn-danger">Validation</button>
+
+        <button type="submit" class="btn btn-lg btn-danger">Actualisation</button>
       </div>
       <!-- BUTTON CONFIRM END-->
-
+      {{ form_end(form) }}
 
     </div>
   </main>
     <!--  BET MATCH PAGE END -->
+{% endblock %}
+
+{% block custom_javascripts %}
+
+          <!-- FLATPICKR   CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+
+            <script>
+
+              flatpickr('.flatpickr-date', {
+                       dateFormat: 'Y-m-d',
+                       locale: 'fr',
+                       disableMobile: true,
+                       defaultDate: 'today',
+                       minDate: 'today',
+                       altInput: true,
+                       altFormat: 'd M Y',
+                       disable: [
+                       function(date) {
+                        return (date.getDay() === 0); // 0 = dimanche
+                      }
+                    ],
+
+                  });
+
+            </script>
 {% endblock %}

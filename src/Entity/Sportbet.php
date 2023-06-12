@@ -20,8 +20,8 @@ class Sportbet
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datewagerMade = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $moneyGain = null;
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?int $moneyGain = null;
 
     #[ORM\ManyToOne(inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
@@ -64,12 +64,12 @@ class Sportbet
         return $this;
     }
 
-    public function getMoneyGain(): ?string
+    public function getMoneyGain(): ?int
     {
         return $this->moneyGain;
     }
 
-    public function setMoneyGain(?string $moneyGain): self
+    public function setMoneyGain(?int $moneyGain): self
     {
         $this->moneyGain = $moneyGain;
 
