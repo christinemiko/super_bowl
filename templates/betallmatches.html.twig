@@ -76,7 +76,14 @@
                      <!-- TEAM2 END -->
 
                      <!-- BUTTON MISER SUR LA SELECTION START -->
-                     <a href="{{ path('miser', { 'id': footballMatch.id }) }}" class="card-link text-center btn btn-danger mt-2 mb-2">Miser sur la sélection</a>
+                     {% if sportbet %}
+                         {% set editUrl = path('editbetmatch', { 'id': footballMatch.id, 'userId': sportbet.user.id }) %}
+                         <a href="{{ 'Actualiser' }}" class="card-link text-center btn btn-danger mt-2 mb-2">Actualiser</a>
+                     {% else %}
+                         <a href="{{ path('miser', { 'id': footballMatch.id }) }}" class="card-link text-center btn btn-danger mt-2 mb-2">Miser sur la sélection</a>
+                     {% endif %}
+
+
                      <!-- BUTTON MISER SUR LA SELECTION END -->
 
                  </ul>

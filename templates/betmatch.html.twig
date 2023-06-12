@@ -57,7 +57,7 @@
       <!-- BUTTON CONFIRM START-->
         <div class="text-center mt-3">
             {% if existingSportbet %}
-                <button type="submit" class="btn btn-lg btn-danger">Actualisation</button>
+                <a href="{{ path('Actualiser',{'id': footballMatch.id}) }}" class="btn btn-primary btn-ml">Actualiser</a>
             {% else %}
                 <button type="submit" class="btn btn-lg btn-danger">Validation</button>
             {% endif %}
