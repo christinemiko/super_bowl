@@ -23,30 +23,41 @@ class SportbetController extends AbstractController
     {
         $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
 
-        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
+        $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
 
-        if (!$sportbet) {
+        if (!$existingSportbet) {
             $sportbet = new Sportbet();
             $sportbet->setUser($user);
             $sportbet->setFootballMatch($footballMatch);
             $currentDate = new \DateTime();
             $sportbet->setDatewagerMade($currentDate);
         }
-        $form = $this->createForm(BetMatchFormType::class, $sportbet);
+        $form = $this->createForm(BetMatchFormType::class, $existingSportbet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sportbet = $form->getData();
             $entityManager->persist($sportbet);
             $entityManager->flush();
-            return $this->redirectToRoute('Parier');
+            return $this->redirectToRoute('parier');
         }
 
-        return $this->render('user/editbetmatch.html.twig', [
-            'form' => $form->createView(),
-            'footballMatch' => $footballMatch,
-            'existingSportbet' => true,
-        ]);
+        if ($existingSportbet) {
+
+            return $this->render('user/editbetmatch.html.twig', [
+                'form' => $form->createView(),
+                'footballMatch' => $footballMatch,
+                'existingSportbet' => true,
+            ]);
+        } else {
+
+            /* Si aucun Sportbet n'existe, afficher le bouton "Validation"*/
+            return $this->render('betmatch.html.twig', [
+                'form' => $form->createView(),
+                'footballMatch' => $footballMatch,
+                'existingSportbet' => false,
+            ]);
+        }
     }
 
 
@@ -119,12 +130,11 @@ class SportbetController extends AbstractController
             return $this->redirectToRoute('parier');
         }
 
-        return $this->render('user/editbetmatch.html.twig', [
-
-            'form' => $form->createView(),
-            'footballMatch' => $footballMatch,
-            'sportbet' => $sportbet,
-        ]);
+            return $this->render('user/editbetmatch.html.twig', [
+                'form' => $form->createView(),
+                'footballMatch' => $footballMatch,
+                'existingSportbet' => true,
+            ]);
     }
 
 
