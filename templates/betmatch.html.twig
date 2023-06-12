@@ -55,12 +55,15 @@
       <!-- MONEY BET END -->
 
       <!-- BUTTON CONFIRM START-->
-      <div class="text-center mt-3">
-      <button type="submit" class="btn btn-lg btn-danger">Validation</button>
+        <div class="text-center mt-3">
+            {% if existingSportbet %}
+                <button type="submit" class="btn btn-lg btn-danger">Actualisation</button>
+            {% else %}
+                <button type="submit" class="btn btn-lg btn-danger">Validation</button>
+            {% endif %}
+        </div>
 
-        <button type="submit" class="btn btn-lg btn-danger">Actualisation</button>
-      </div>
-      <!-- BUTTON CONFIRM END-->
+        <!-- BUTTON CONFIRM END-->
       {{ form_end(form) }}
 
     </div>
