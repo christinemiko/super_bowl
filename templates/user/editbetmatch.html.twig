@@ -56,11 +56,20 @@
 
             <!-- BUTTON CONFIRM START-->
             <div class="text-center mt-3">
-                    <button type="submit" class="btn btn-lg btn-danger">Actualisation</button>
-            </div>
-            <!-- BUTTON CONFIRM END-->
+                    <button type="submit" class="btn btn-lg btn-warning text-dark m-2">Actualisation</button>
+                <!-- BUTTON CONFIRM END-->
 
-            {{ form_end(form) }}
+                <!-- BUTTON DELETE START-->
+
+                    <a href="{{ path('supprimer', { 'id': footballMatch.id, 'userId': app.user.id }) }}" class="btn btn-lg btn-danger text-light m-2">Supprimer</a>
+                </div>
+                <!-- BUTTON DELETE END-->
+
+
+
+
+
+                {{ form_end(form) }}
 
         </div>
     </main>

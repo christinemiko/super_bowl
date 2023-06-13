@@ -36,11 +36,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Sportbet::class)]
-    private Collection $user;
+    private Collection $sportbets;
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->sportbets = new ArrayCollection();
     }
 
 
@@ -137,35 +137,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
     /**
      * @return Collection<int, Sportbet>
      */
-    public function getUser(): Collection
+    public function getSportbets(): Collection
     {
-        return $this->user;
+        return $this->sportbets;
     }
 
-    public function addUser(Sportbet $user): self
+    public function addSportbet(Sportbet $sportbet): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user->add($user);
-            $user->setUser($this);
+        if (!$this->sportbets->contains($sportbet)) {
+            $this->sportbets->add($sportbet);
+            $sportbet->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUser(Sportbet $user): self
+    public function removeSportbet(Sportbet $sportbet): self
     {
-        if ($this->user->removeElement($user)) {
+        if ($this->sportbets->removeElement($sportbet)) {
             // set the owning side to null (unless already changed)
-            if ($user->getUser() === $this) {
-                $user->setUser(null);
+            if ($sportbet->getUser() === $this) {
+                $sportbet->setUser(null);
             }
         }
 
         return $this;
     }
-
 }

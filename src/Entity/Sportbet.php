@@ -23,7 +23,7 @@ class Sportbet
     #[ORM\Column(length: 10, nullable: true)]
     private ?int $moneyGain = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\ManyToOne(inversedBy: 'sportbets')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

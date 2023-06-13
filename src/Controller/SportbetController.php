@@ -19,10 +19,9 @@ class SportbetController extends AbstractController
 
     #[Route('betmatch/{id}', name:'miser', methods:['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function newBetMatch(Request $request ,EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository, int $id,  UserInterface $user): Response
+    public function newBetMatch(Request $request ,EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository, int $id,UserInterface $user): Response
     {
         $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
-
         $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
 
         if (!$existingSportbet) {
@@ -31,6 +30,7 @@ class SportbetController extends AbstractController
             $sportbet->setFootballMatch($footballMatch);
             $currentDate = new \DateTime();
             $sportbet->setDatewagerMade($currentDate);
+            $existingSportbet = $sportbet;
         }
         $form = $this->createForm(BetMatchFormType::class, $existingSportbet);
         $form->handleRequest($request);
@@ -44,6 +44,7 @@ class SportbetController extends AbstractController
 
         if ($existingSportbet) {
 
+            /* Si  Sportbet existe, afficher le bouton "Actualisation" et envoit la page Actualisation Pari */
             return $this->render('user/editbetmatch.html.twig', [
                 'form' => $form->createView(),
                 'footballMatch' => $footballMatch,
@@ -51,7 +52,7 @@ class SportbetController extends AbstractController
             ]);
         } else {
 
-            /* Si aucun Sportbet n'existe, afficher le bouton "Validation"*/
+            /* Si aucun Sportbet n'existe, afficher le bouton "Validation" et envoit la page Parier */
             return $this->render('betmatch.html.twig', [
                 'form' => $form->createView(),
                 'footballMatch' => $footballMatch,
@@ -60,60 +61,7 @@ class SportbetController extends AbstractController
         }
     }
 
-
-
-    /* {
-        $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
-
-        $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
-
-        $sportbet = new Sportbet();
-
-        /* SET USER START*/
-       /* $user = $this->getUser();
-        $sportbet->setUser($this->getUser($user));
-        /* SET USER END*/
-
-        /* SET FOOTBALL MATCH START*/
-       /* $sportbet->setFootballMatch($footballMatch);
-        /* SET FOOTBALL MATCH END*/
-
-        /* SET DATE START*/
-        /*$currentDate = new \DateTime();
-        $sportbet->setDatewagerMade($currentDate);
-        /* SET DATE END*/
-
-        /*$form = $this->createForm(BetMatchFormType::class, $sportbet);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sportbet = $form->getData();
-            $entityManager->persist($sportbet);
-            $entityManager->flush();
-            return $this->redirectToRoute('Actualiser', ['id' => $footballMatch->getId(), 'userId' => $user->getId()]);
-        }
-
-        if ($existingSportbet) {
-
-            /* Si Sportbet existe, afficher le bouton "Actualisation"*/
-           /* return $this->render('user/editbetmatch.html.twig', [
-                'form' => $form->createView(),
-                'footballMatch' => $footballMatch,
-                'existingSportbet' => true,
-            ]);
-        } else {
-
-            /* Si aucun Sportbet n'existe, afficher le bouton "Validation"*/
-            /*return $this->render('betmatch.html.twig', [
-                'form' => $form->createView(),
-                'footballMatch' => $footballMatch,
-                'existingSportbet' => false,
-            ]);
-        }
-    }*/
-
-    #[Route('editbetmatch/{id}/{userId}', name: 'Actualiser', methods: ['GET', 'POST'])]
+    #[Route('editbetmatch/{id}/{userId}', name: 'actualiser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function editBetMatch( Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, int $id, FootballMatchRepository $footballMatchRepository,int $userId):Response
     {
@@ -137,10 +85,21 @@ class SportbetController extends AbstractController
             ]);
     }
 
-
-    #[Route('betallmatches', name:'parier')]
+    #[Route('deletebetmatch/{id}/{userId}', name: 'supprimer')]
     #[IsGranted('ROLE_USER')]
-    public function BetAllMatches(FootballMatchRepository $footballMatchRepository): Response
+    public function DeleteBetMatch(Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, int $id, FootballMatchRepository $footballMatchRepository,int $userId): Response
+    {
+        $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
+        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $userId]);
+        $entityManager->remove($sportbet);
+        $entityManager->flush();
+        return $this->redirectToRoute("parier");
+    }
+
+
+    #[Route('betallmatches', name:'parier', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
+    public function BetAllMatches(FootballMatchRepository $footballMatchRepository,): Response
     {
         $footballMatch = $footballMatchRepository->findBy(['statut' => 'Prochainement']);
 
