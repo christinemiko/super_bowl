@@ -76,8 +76,9 @@
                      <!-- TEAM2 END -->
 
                      <!-- BUTTON MISER SUR LA SELECTION START -->
+                     {% if app.user %}
                      <a href="{{ path('miser', { 'id': footballMatch.id }) }}" class="card-link text-center btn btn-danger mt-2 mb-2">Miser sur la sélection</a>
-
+                     {% endif %}
 
                      <!-- BUTTON MISER SUR LA SELECTION END -->
 

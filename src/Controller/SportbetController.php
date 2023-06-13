@@ -17,22 +17,28 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class SportbetController extends AbstractController
 {
 
-    #[Route('betmatch/{id}', name:'miser', methods:['GET', 'POST'])]
+    #[Route('betmatch/{id}', name: 'miser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function newBetMatch(Request $request ,EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository, int $id,UserInterface $user): Response
+    public function newBetMatch(Request $request, EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository, int $id, UserInterface $user): Response
     {
         $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
         $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
 
         if (!$existingSportbet) {
+            // Créer un nouveau pari
             $sportbet = new Sportbet();
             $sportbet->setUser($user);
             $sportbet->setFootballMatch($footballMatch);
             $currentDate = new \DateTime();
             $sportbet->setDatewagerMade($currentDate);
-            $existingSportbet = $sportbet;
+            $existingSportbet = false; // Passer existingSportbet à false car il n'existe pas
+        } else {
+            // Modifier un pari existant
+            $sportbet = $existingSportbet;
+            $existingSportbet = true; // Passer existingSportbet à true car il existe
         }
-        $form = $this->createForm(BetMatchFormType::class, $existingSportbet);
+
+        $form = $this->createForm(BetMatchFormType::class, $sportbet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,16 +49,14 @@ class SportbetController extends AbstractController
         }
 
         if ($existingSportbet) {
-
-            /* Si  Sportbet existe, afficher le bouton "Actualisation" et envoit la page Actualisation Pari */
+            // Afficher le formulaire de modification d'un pari existant
             return $this->render('user/editbetmatch.html.twig', [
                 'form' => $form->createView(),
                 'footballMatch' => $footballMatch,
                 'existingSportbet' => true,
             ]);
         } else {
-
-            /* Si aucun Sportbet n'existe, afficher le bouton "Validation" et envoit la page Parier */
+            // Afficher le formulaire de création d'un nouveau pari
             return $this->render('betmatch.html.twig', [
                 'form' => $form->createView(),
                 'footballMatch' => $footballMatch,
@@ -60,6 +64,7 @@ class SportbetController extends AbstractController
             ]);
         }
     }
+
 
     #[Route('editbetmatch/{id}/{userId}', name: 'actualiser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
@@ -98,7 +103,6 @@ class SportbetController extends AbstractController
 
 
     #[Route('betallmatches', name:'parier', methods: ['GET'])]
-    #[IsGranted('ROLE_USER')]
     public function BetAllMatches(FootballMatchRepository $footballMatchRepository,): Response
     {
         $footballMatch = $footballMatchRepository->findBy(['statut' => 'Prochainement']);

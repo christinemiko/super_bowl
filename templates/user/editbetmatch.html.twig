@@ -8,7 +8,7 @@
     <main>
         <!-- INTRODUCTION  START   -->
         <div class="text-center"><img src="{{ asset('img/logo3NLF.png') }}" class="img-fluid imgNLF" alt="NLF logo"></div>
-        <h1 class="text-center"> Actualisation Pari-Sportif</h1>
+        <h1 class="text-center">Paris-Sportif</h1>
         <div class="d-flex justify-content-center"><img src="{{ asset('img/img31.png') }}" class=" img-fluid d-block w-90" alt="image miser"></div>
         <!-- INTRODUCTION  END   -->
 
@@ -54,12 +54,18 @@
             </div>
             <!-- MONEY BET END -->
 
-            <!-- BUTTON CONFIRM START-->
+            <!-- BUTTON CONFIRM START -->
             <div class="text-center mt-3">
+                {% if existingSportbet %}
                     <button type="submit" class="btn btn-lg btn-warning text-dark m-2">Actualisation</button>
-                <!-- BUTTON CONFIRM END-->
+                {% else %}
+                    <button type="submit" class="btn btn-lg btn-warning text-dark m-2">Valider</button>
+                {% endif %}
+            </div>
+            <!-- BUTTON CONFIRM END -->
 
-                <!-- BUTTON DELETE START-->
+
+            <!-- BUTTON DELETE START-->
 
                     <a href="{{ path('supprimer', { 'id': footballMatch.id, 'userId': app.user.id }) }}" class="btn btn-lg btn-danger text-light m-2">Supprimer</a>
                 </div>
