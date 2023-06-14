@@ -17,16 +17,24 @@ class UserController extends AbstractController
     }
 
     #[Route('/myaccount', name: 'myaccount')]
-    public function myAccount(): Response
+    public function myAccount(SportbetRepository $sportbetRepository): Response
     {
-        return $this->render('myaccount.html.twig');
+        $user = $this->getUser();
+        $sportbet = $sportbetRepository->findBy(['user' => $user], ['id' => 'DESC']);
+
+
+        return $this->render('myaccount.html.twig',[
+
+            'sportbets'=> $sportbet,
+
+        ]);
     }
 
     #[Route('/history', name: 'history')]
     public function History(SportbetRepository $sportbetRepository): Response
     {
         $user = $this->getUser();
-        $sportbet = $sportbetRepository->findBy(['user' => $user]);
+        $sportbet = $sportbetRepository->findBy(['user' => $user], ['id' => 'DESC']);
 
         return $this->render('historysportbet.html.twig',[
 

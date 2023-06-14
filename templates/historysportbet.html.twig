@@ -27,8 +27,8 @@
                     <th class="text-center">Heure de début</th>
                     <th class="text-center">Heure de fin</th>
                     <th class="text-center">Noms des équipes</th>
+                    <th class="text-center">Date Mise</th>
                     <th class="text-center">Mise effectuée</th>
-                    <th class="text-center">Date</th>
                     <th class="text-center">Gains</th>
                     <th class="text-center">Statut Match</th>
                     <th></th>
@@ -42,8 +42,8 @@
                     <td class="text-center">{{ sportbet.footballMatch.hourStart|date('H:i')}}</td>
                     <td class="text-center">{{ sportbet.footballMatch.hourFinish|date('H:i')}}</td>
                     <td class="text-center">{{ sportbet.team.teamName }}</td>
-                    <td class="text-center">{{ sportbet.wagerMade }}</td>
                     <td class="text-center">{{ sportbet.dateWagerMade|date('d/m/Y')}}</td>
+                    <td class="text-center">{{ sportbet.wagerMade }}</td>
                     <td class="text-center">{{ sportbet.moneyGain }}</td>
                     <td class="text-center">{{ sportbet.footballMatch.statut }}</td>
 
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a href="" class="btn btn-primary" data-bs-dismiss="modal">Conserver Pari</a>
-                                            <a href="{{ path('supprimer', { 'id': sportbet.footballMatch.id, 'userId': app.user.id }) }}" class=" col btn btn-ml btn-danger text-light m-2">Supprimer</a>
+                                            <a href="{{ path('supprimer', { 'id': sportbet.footballMatch.id, 'userId': app.user.id }) }}" class=" btn btn-danger text-light">Supprimer</a>
                                         </div>
                                     </div>
                                 </div>

@@ -24,12 +24,82 @@
         </div>
 
         <!-- CHART START -->
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <!-- CHART END -->
 
+        <!-- SPORT BET GRAPHIC USER START -->
+        <script>
+            const ctx = document.getElementById('myChart');
 
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
         <!-- SPORT BET GRAPHIC USER END -->
+
+        <!-- SPORT BET FINISHED HISTORY START -->
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table table-light table-striped table-bordered table-hover">
+                    <thead >
+                    <tr>
+
+                        <th class="text-center">Date du Match</th>
+                        <th class="text-center">Noms des équipes</th>
+                        <th class="text-center">Date Mise</th>
+                        <th class="text-center">Mise effectuée</th>
+                        <th class="text-center">Gains</th>
+                        <th class="text-center">Statut Match</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for sportbet in sportbets %}
+                        {% if sportbet.footballMatch.statut == 'Terminé' %}
+                    <tr>
+                        <td class="text-center">{{ sportbet.footballMatch.matchDate|date('d/m/Y')}}</td>
+                        <td class="text-center">{{ sportbet.team.teamName }}</td>
+                        <td class="text-center">{{ sportbet.dateWagerMade|date('d/m/Y')}}</td>
+                        <td class="text-center">{{ sportbet.wagerMade }}</td>
+                        <td class="text-center">{{ sportbet.moneyGain }}</td>
+                        <td class="text-center">{{ sportbet.footballMatch.statut }}</td>
+                        <td></td>
+
+                        {% endif %}
+
+                        {% endfor %}
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                <!-- SPORT BET FINISHED HISTORY END -->
     </main>
     <!-- MY ACCOUNT END -->
 
 {% endblock %}
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% endblock %}
