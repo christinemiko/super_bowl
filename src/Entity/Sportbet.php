@@ -35,6 +35,9 @@ class Sportbet
     #[ORM\JoinColumn(nullable: false)]
     private ?FootballMatch $footballMatch = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $moneyLose = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +111,18 @@ class Sportbet
     public function setFootballMatch(?FootballMatch $footballMatch): self
     {
         $this->footballMatch = $footballMatch;
+
+        return $this;
+    }
+
+    public function getMoneyLose(): ?int
+    {
+        return $this->moneyLose;
+    }
+
+    public function setMoneyLose(?int $moneyLose): self
+    {
+        $this->moneyLose = $moneyLose;
 
         return $this;
     }

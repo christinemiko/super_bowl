@@ -86,11 +86,12 @@
                     <tr>
 
                         <th class="text-center">Date du Match</th>
+                        <th class="text-center">Statut Match</th>
                         <th class="text-center">Noms des équipes</th>
                         <th class="text-center">Date Mise</th>
                         <th class="text-center">Mise effectuée</th>
                         <th class="text-center">Gains</th>
-                        <th class="text-center">Statut Match</th>
+                        <th class="text-center">Pertes</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -100,11 +101,12 @@
                         {% if sportbet.footballMatch.statut == 'Terminé' %}
                     <tr>
                         <td class="text-center">{{ sportbet.footballMatch.matchDate|date('d/m/Y')}}</td>
+                        <td class="text-center">{{ sportbet.footballMatch.statut }}</td>
                         <td class="text-center">{{ sportbet.team.teamName }}</td>
                         <td class="text-center">{{ sportbet.dateWagerMade|date('d/m/Y')}}</td>
                         <td class="text-center">{{ sportbet.wagerMade }}</td>
                         <td class="text-center">{{ sportbet.moneyGain }}</td>
-                        <td class="text-center">{{ sportbet.footballMatch.statut }}</td>
+                        <td class="text-center">{{ sportbet.moneyLose }}</td>
                         <td></td>
 
                         {% endif %}
