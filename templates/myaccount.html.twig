@@ -24,24 +24,48 @@
         </div>
 
         <!-- CHART START -->
-        <div>
-            <canvas id="myChart"></canvas>
+        <div class="container">
+            <canvas id="myGraphic"></canvas>
         </div>
         <!-- CHART END -->
 
+        <!-- CHART TITTLE START-->
+        <script>
+            Chart.defaults.plugins.title.display = true;
+            Chart.defaults.plugins.title.text = "MATCHS TERMINES";
+            Chart.defaults.plugins.title.color = "red";
+
+        </script>
+        <!-- CHART TITTLE END-->
+
         <!-- SPORT BET GRAPHIC USER START -->
         <script>
-            const ctx = document.getElementById('myChart');
+            const ctx = document.getElementById('myGraphic');
 
             new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                    }]
+                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
+                    datasets: [
+                          {
+                             label: 'Paris-Sportifs',
+                             data: [12, 19, 3],
+                             borderWidth: 1
+                          },
+
+                        {
+                            label: 'Gains',
+                            data: [137, 200, 562],
+                            borderWidth: 1
+                        },
+
+                        {
+                            label: 'Perte',
+                            data:[100,50,200],
+                            borderWidth: 1
+                        }
+
+                    ]
                 },
                 options: {
                     scales: {
