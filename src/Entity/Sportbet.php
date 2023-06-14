@@ -18,7 +18,7 @@ class Sportbet
     private ?int $wagerMade = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $datewagerMade = null;
+    private ?\DateTimeInterface $dateWagerMade = null;
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?int $moneyGain = null;
@@ -52,14 +52,14 @@ class Sportbet
         return $this;
     }
 
-    public function getDatewagerMade(): ?\DateTimeInterface
+    public function getDateWagerMade(): ?\DateTimeInterface
     {
-        return $this->datewagerMade;
+        return $this->dateWagerMade;
     }
 
-    public function setDatewagerMade(\DateTimeInterface $datewagerMade): self
+    public function setDateWagerMade(\DateTimeInterface $dateWagerMade): self
     {
-        $this->datewagerMade = $datewagerMade;
+        $this->dateWagerMade = $dateWagerMade;
 
         return $this;
     }

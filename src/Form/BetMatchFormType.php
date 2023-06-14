@@ -30,7 +30,7 @@ class BetMatchFormType extends AbstractType
                 ],
                 'label' => 'Veuillez indiquer le montant de la Mise: '])
 
-            ->add('datewagerMade',DateType::class, [
+            ->add('dateWagerMade',DateType::class, [
 
                 'widget' => 'single_text',
                 'html5' => false,

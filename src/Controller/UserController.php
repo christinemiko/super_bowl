@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\User;
+use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,9 +23,15 @@ class UserController extends AbstractController
     }
 
     #[Route('/history', name: 'history')]
-    public function History(): Response
+    public function History(SportbetRepository $sportbetRepository): Response
     {
-        return $this->render('historysportbet.html.twig');
+        $user = $this->getUser();
+        $sportbet = $sportbetRepository->findBy(['user' => $user]);
+
+        return $this->render('historysportbet.html.twig',[
+
+              'sportbets'=> $sportbet
+            ]);
     }
 
     #[Route('/information', name: 'information')]
