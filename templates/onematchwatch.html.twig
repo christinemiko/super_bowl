@@ -135,7 +135,7 @@
 
             <!-- BUTTON BET START-->
             {% if footballMatch.statut == 'Prochainement' %}
-            <div class="text-center mb-5"><a href="{{ path('miser', { 'id': footballMatch.id }) }}"  class="btn btn-primary btn-lg mt-5">Miser sur le Match</a></div>
+            <div class="text-center mb-5"><a href="{{ path('miser', { 'footballMatch' : footballMatch.id }) }}"  class="btn btn-primary btn-lg mt-5">Miser sur le Match</a></div>
             {% endif %}
             <!-- BUTTON BET END-->
 

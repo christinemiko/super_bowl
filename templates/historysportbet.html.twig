@@ -52,7 +52,7 @@
                         {% if sportbet.footballMatch.statut == 'Prochainement' %}
 
                             <!-- BUTTON UPDATE START -->
-                            <a href="{{ path('actualiser', { 'id': sportbet.footballMatch.id, 'userId': app.user.id }) }}" class=" col btn btn-ml btn-primary mt-2 text-light">Mise à jour</a>
+                            <a href="{{ path('actualiser', { 'id': sportbet.footballMatch.id,'footballMatch': sportbet.footballMatch.id }) }}" class=" col btn btn-ml btn-primary mt-2 text-light">Mise à jour</a>
                             <!-- BUTTON UPDATE END -->
 
                             <!-- BUTTON TRIGGER MODAL DELETE START -->
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <a href="" class="btn btn-primary" data-bs-dismiss="modal">Conserver Pari</a>
-                                            <a href="{{ path('supprimer', { 'id': sportbet.footballMatch.id, 'userId': app.user.id }) }}" class=" btn btn-danger text-light">Supprimer</a>
+                                            <a href="{{ path('supprimer', { 'id' : sportbet.footballMatch.id ,'footballMatch': sportbet.footballMatch.id }) }}" class=" btn btn-danger text-light">Supprimer</a>
                                         </div>
                                     </div>
                                 </div>

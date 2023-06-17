@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\FootballMatch;
 use App\Entity\User;
 use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class UserController extends AbstractController
 {
@@ -17,23 +22,39 @@ class UserController extends AbstractController
     }
 
     #[Route('/myaccount', name: 'myaccount')]
-    public function myAccount(SportbetRepository $sportbetRepository): Response
+    public function myAccount(SportbetRepository $sportbetRepository,SerializerInterface $serializer, UserInterface $user): Response
     {
-        $user = $this->getUser();
-        $sportbet = $sportbetRepository->findBy(['user' => $user], ['id' => 'DESC']);
+        $sportbets = $sportbetRepository->findBy(['user' => $user], ['id' => 'ASC']);
 
+        // Préparez les données pour le graphique
+        $wagerMadeData = [];
+        $moneyGainData = [];
+        $moneyLoseData = [];
+
+
+        foreach ($sportbets as $sportbet) {
+
+            // Ajoutez les valeurs appropriées à chaque tableau de données
+            $wagerMadeData[] = $sportbet->getWagerMade();
+            $moneyGainData[] = $sportbet->getMoneyGain();
+            $moneyLoseData[] = $sportbet->getMoneyLose();
+
+        }
 
         return $this->render('myaccount.html.twig',[
 
-            'sportbets'=> $sportbet,
+            'sportbets'=> $sportbets,
+            'wagerMadeData' => json_encode($wagerMadeData), // Convertit les tableaux en chaînes JSON
+            'moneyGainData' => json_encode($moneyGainData),
+            'moneyLoseData' => json_encode($moneyLoseData),
+
 
         ]);
     }
 
     #[Route('/history', name: 'history')]
-    public function History(SportbetRepository $sportbetRepository): Response
+    public function History(SportbetRepository $sportbetRepository, UserInterface $user,): Response
     {
-        $user = $this->getUser();
         $sportbet = $sportbetRepository->findBy(['user' => $user], ['id' => 'DESC']);
 
         return $this->render('historysportbet.html.twig',[

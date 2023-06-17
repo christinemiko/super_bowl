@@ -40,7 +40,9 @@
 
         <!-- SPORT BET GRAPHIC USER START -->
         <script>
+
             const ctx = document.getElementById('myGraphic');
+
 
             new Chart(ctx, {
                 type: 'line',
@@ -49,21 +51,21 @@
                     datasets: [
                           {
                              label: 'Paris-Sportifs',
-                             data: [12, 19, 3],
+                              data:{{ wagerMadeData|raw }},
                              borderWidth: 1
                           },
 
                         {
                             label: 'Gains',
-                            data: [137, 200, 562],
-                            borderWidth: 1
+                            data: {{ moneyGainData|raw }},
+                            borderWidth: 2
                         },
 
                         {
                             label: 'Perte',
-                            data:[100,50,200],
-                            borderWidth: 1
-                        }
+                            data:{{ moneyLoseData|raw }},
+                            borderWidth: 3
+                        },
 
                     ]
                 },
@@ -127,5 +129,6 @@
 {% block javascripts %}
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 {% endblock %}

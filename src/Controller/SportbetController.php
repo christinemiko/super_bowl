@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
 use App\Form\BetMatchFormType;
 use App\Repository\FootballMatchRepository;
@@ -13,15 +14,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SportbetController extends AbstractController
 {
 
-    #[Route('betmatch/{id}', name: 'miser', methods: ['GET', 'POST'])]
+    #[Route('betmatch/{footballMatch}', name: 'miser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function newBetMatch(Request $request, EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository, int $id, UserInterface $user): Response
+
+    public function newBetMatch(Request $request, EntityManagerInterface $entityManager, FootballMatch $footballMatch, UserInterface $user): Response
     {
-        $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
+
+        $team1 = $footballMatch->getTeam1();
+        $team2 = $footballMatch->getTeam2();
         $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
 
         if (!$existingSportbet) {
@@ -38,7 +44,11 @@ class SportbetController extends AbstractController
             $existingSportbet = true; // Passer existingSportbet à true car il existe
         }
 
-        $form = $this->createForm(BetMatchFormType::class, $sportbet);
+        //Integrer uniquement les deux équipes du Match dans le menu déroulant du Formulaire
+        $form = $this->createForm(BetMatchFormType::class, $sportbet,[
+            'team1' => $team1,
+            'team2' => $team2,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -66,13 +76,12 @@ class SportbetController extends AbstractController
     }
 
 
-    #[Route('editbetmatch/{id}/{userId}', name: 'actualiser', methods: ['GET', 'POST'])]
+    #[Route('editbetmatch/{footballMatch}', name: 'actualiser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function editBetMatch( Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, int $id, FootballMatchRepository $footballMatchRepository,int $userId):Response
+    public function editBetMatch( Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch, UserInterface $user):Response
     {
-        $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
 
-        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $userId]);
+        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
 
         $form = $this->createForm(BetMatchFormType::class, $sportbet);
         $form->handleRequest($request);
@@ -90,12 +99,11 @@ class SportbetController extends AbstractController
             ]);
     }
 
-    #[Route('deletebetmatch/{id}/{userId}', name: 'supprimer')]
+    #[Route('deletebetmatch/{footballMatch}', name: 'supprimer')]
     #[IsGranted('ROLE_USER')]
-    public function DeleteBetMatch(Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, int $id, FootballMatchRepository $footballMatchRepository,int $userId): Response
+    public function DeleteBetMatch(Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch, UserInterface $user): Response
     {
-        $footballMatch = $footballMatchRepository->findOneBy(["id" => $id]);
-        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $userId]);
+        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
         $entityManager->remove($sportbet);
         $entityManager->flush();
         return $this->redirectToRoute("parier");

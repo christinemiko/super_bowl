@@ -77,7 +77,7 @@
 
                      <!-- BUTTON MISER SUR LA SELECTION START -->
                      {% if app.user %}
-                     <a href="{{ path('miser', { 'id': footballMatch.id }) }}" class="card-link text-center btn btn-primary mt-2 mb-2">Miser sur la sélection</a>
+                     <a href="{{ path('miser', { 'footballMatch' : footballMatch.id }) }}" class="card-link text-center btn btn-primary mt-2 mb-2">Miser sur la sélection</a>
                      {% endif %}
 
                      <!-- BUTTON MISER SUR LA SELECTION END -->

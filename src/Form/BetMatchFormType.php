@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Sportbet;
 use App\Entity\Team;
+use Doctrine\ORM\EntityRepository;
 use App\Repository\TeamRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,13 +17,22 @@ class BetMatchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('team',EntityType::class,[
-                'class'=> Team:: class,
-                'choice_label' => function(Team $team) {
-                    return $team->getTeamName();
-                },
-                'label' => ' Equipe : '])
+               $team1 = $options['team1'];
+               $team2 = $options['team2'];
+
+    $builder
+        ->add('team', EntityType::class, [
+            'class' => Team::class,
+            'query_builder' => function (EntityRepository $teamRepository) use ($team1, $team2) {
+                return $teamRepository->createQueryBuilder('t')
+                    ->where('t = :team1 OR t = :team2')
+                    ->setParameter('team1', $team1)
+                    ->setParameter('team2', $team2)
+                    ->orderBy('t.teamName');
+            },
+            'choice_label' => 'teamName',
+            'label' => 'Equipe :',
+        ])
 
             ->add('wagerMade', NumberType::class, [ 'attr' => [
                 'class' => 'form-control',
@@ -49,6 +59,8 @@ class BetMatchFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Sportbet::class,
+            'team1' => null,
+            'team2' => null,
         ]);
     }
 }
