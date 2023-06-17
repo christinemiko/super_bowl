@@ -23,9 +23,9 @@ class SportbetController extends AbstractController
     #[Route('betmatch/{footballMatch}', name: 'miser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
 
-    public function newBetMatch(Request $request, EntityManagerInterface $entityManager, FootballMatch $footballMatch, UserInterface $user): Response
+    public function newBetMatch(Request $request, EntityManagerInterface $entityManager, FootballMatch $footballMatch): Response
     {
-
+        $user = $this->getUser();
         $team1 = $footballMatch->getTeam1();
         $team2 = $footballMatch->getTeam2();
         $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
@@ -78,9 +78,9 @@ class SportbetController extends AbstractController
 
     #[Route('editbetmatch/{footballMatch}', name: 'actualiser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-    public function editBetMatch( Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch, UserInterface $user):Response
+    public function editBetMatch( Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch):Response
     {
-
+        $user = $this->getUser();
         $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
 
         $form = $this->createForm(BetMatchFormType::class, $sportbet);
@@ -101,8 +101,9 @@ class SportbetController extends AbstractController
 
     #[Route('deletebetmatch/{footballMatch}', name: 'supprimer')]
     #[IsGranted('ROLE_USER')]
-    public function DeleteBetMatch(Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch, UserInterface $user): Response
+    public function DeleteBetMatch(Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch): Response
     {
+        $user = $this->getUser();
         $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
         $entityManager->remove($sportbet);
         $entityManager->flush();

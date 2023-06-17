@@ -22,8 +22,9 @@ class UserController extends AbstractController
     }
 
     #[Route('/myaccount', name: 'myaccount')]
-    public function myAccount(SportbetRepository $sportbetRepository,SerializerInterface $serializer, UserInterface $user): Response
+    public function myAccount(SportbetRepository $sportbetRepository,SerializerInterface $serializer): Response
     {
+        $user = $this->getUser();
         $sportbets = $sportbetRepository->findBy(['user' => $user], ['id' => 'ASC']);
 
         // Préparez les données pour le graphique
@@ -53,8 +54,9 @@ class UserController extends AbstractController
     }
 
     #[Route('/history', name: 'history')]
-    public function History(SportbetRepository $sportbetRepository, UserInterface $user,): Response
+    public function History(SportbetRepository $sportbetRepository): Response
     {
+        $user = $this->getUser();
         $sportbet = $sportbetRepository->findBy(['user' => $user], ['id' => 'DESC']);
 
         return $this->render('historysportbet.html.twig',[
