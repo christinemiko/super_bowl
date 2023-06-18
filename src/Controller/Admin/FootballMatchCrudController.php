@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\FootballMatch;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -23,15 +26,46 @@ class FootballMatchCrudController extends AbstractCrudController
         return FootballMatch::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Match')
+            ->setEntityLabelInPlural('Matchs')
+            ->setPageTitle('index','Les Matchs');
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+
+            //PAGE INDEX START
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Créer');
+            })
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
+                return $action->setLabel('Modifier');
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+                return $action->setLabel('Supprimer');
+            })
+            //PAGE INDEX END
+
+            //PAGE NEW START
+
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
+                return $action->setLabel('Créer et Ajouter+');
+            });
+           //PAGE NEW END
+    }
 
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
 
-            DateField::new('matchDate'),
+            DateField::new('matchDate', 'Date du Match'),
 
-            AssociationField::new('team1')
+            AssociationField::new('team1', ' l\'équipe 1')
                 ->setFormType(EntityType::class)
                 ->setFormTypeOptions([
                     'class' => 'App\Entity\Team',
@@ -47,7 +81,7 @@ class FootballMatchCrudController extends AbstractCrudController
                     return $value;
                 }),
 
-            AssociationField::new('team2')
+            AssociationField::new('team2', ' l\'équipe 2')
                 ->setFormType(EntityType::class)
                 ->setFormTypeOptions([
                     'class' => 'App\Entity\Team',
@@ -64,18 +98,18 @@ class FootballMatchCrudController extends AbstractCrudController
                 }),
 
 
-            TimeField::new('hourStart'),
-            TimeField::new('hourFinish'),
-            TextField::new('weather'),
-            TextField::new('scoreGame'),
+            TimeField::new('hourStart', 'Heure de début'),
+            TimeField::new('hourFinish', 'Heure de fin'),
+            TextField::new('weather', 'Météo'),
+            TextField::new('scoreGame', 'Score du Jeu'),
             ChoiceField::new('statut')
-                ->setLabel('Statut')
+                ->setLabel( 'Statut ')
                 ->setChoices([
                     'Prochainement' => 'Prochainement',
                     'Terminé' => 'Terminé',
-                    'En Cours' => 'En Cours',
+                    'En Cours' => 'En Cours'
                 ]),
-            TextEditorField::new('comments'),
+            TextEditorField::new('comments', 'Commentaires'),
         ];
     }
 

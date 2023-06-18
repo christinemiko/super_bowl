@@ -40,37 +40,37 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Administration', 'fa-solid fa-football');
 
         // MATCHES START
-        yield MenuItem::subMenu('Matches', 'fas fa-bars')->setSubItems([
-            menuItem::linkToCrud('Create FootballMatch', 'fas fa-plus', FootballMatch::class)->setAction(Crud::PAGE_NEW),
-            menuItem::linkToCrud('Show FootballMatches', 'fas fa-eye', FootballMatch::class),
+        yield MenuItem::subMenu(' Les Matchs', 'fas fa-bars')->setSubItems([
+            menuItem::linkToCrud('Créer un Match', 'fas fa-plus', FootballMatch::class)->setAction(Crud::PAGE_NEW),
+            menuItem::linkToCrud('Visualiser les Matchs', 'fas fa-eye', FootballMatch::class),
         ]);
         // MATCHES END
 
         // FOOTBALL PLAYER START
-        yield MenuItem::subMenu('FootballMatch Players', 'fas fa-bars')->setSubItems([
-            menuItem::linkToCrud('Create Football Player', 'fas fa-plus', FootballPlayer::class)->setAction(Crud::PAGE_NEW),
-            menuItem::linkToCrud('Show Football Players', 'fas fa-eye', FootballPlayer::class),
+        yield MenuItem::subMenu('Les Joueurs de Football', 'fas fa-bars')->setSubItems([
+            menuItem::linkToCrud('Créer un Joueur', 'fas fa-plus', FootballPlayer::class)->setAction(Crud::PAGE_NEW),
+            menuItem::linkToCrud('Visualiser les Joueurs', 'fas fa-eye', FootballPlayer::class),
         ]);
         // FOOTBALL PLAYER  END
 
         // TEAMS START
-        yield MenuItem::subMenu('Teams', 'fas fa-bars')->setSubItems([
-            menuItem::linkToCrud('Create Team', 'fas fa-plus', Team::class)->setAction(Crud::PAGE_NEW),
-            menuItem::linkToCrud('Show Teams', 'fas fa-eye', Team::class),
+        yield MenuItem::subMenu(' Les Equipes', 'fas fa-bars')->setSubItems([
+            menuItem::linkToCrud('Créer une équipe', 'fas fa-plus', Team::class)->setAction(Crud::PAGE_NEW),
+            menuItem::linkToCrud('Visualiser les équipes', 'fas fa-eye', Team::class),
         ]);
         // TEAMS END
 
         // SPORT BETS START
-        yield MenuItem::subMenu('Sport Bets', 'fas fa-bars')->setSubItems([
-            menuItem::linkToCrud('Create Sport bet', 'fas fa-plus', Sportbet::class)->setAction(Crud::PAGE_NEW),
-            menuItem::linkToCrud('Show Sport Bets', 'fas fa-eye', Sportbet::class),
+        yield MenuItem::subMenu('Les Paris Sportifs', 'fas fa-bars')->setSubItems([
+            menuItem::linkToCrud('Créer un pari sportif', 'fas fa-plus', Sportbet::class)->setAction(Crud::PAGE_NEW),
+            menuItem::linkToCrud('Visualiser les Paris Sportifs', 'fas fa-eye', Sportbet::class),
         ]);
         // SPORT BETS END
 
         // USERS START
-        yield MenuItem::subMenu('Users', 'fas fa-bars')->setSubItems([
-            menuItem::linkToCrud('Create User', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
-            menuItem::linkToCrud('Show Users', 'fas fa-eye', User::class),
+        yield MenuItem::subMenu('Les Utilisateurs', 'fas fa-bars')->setSubItems([
+            menuItem::linkToCrud('Créer un utilisateur', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+            menuItem::linkToCrud('Visualiser un utilisateur', 'fas fa-eye', User::class),
         ]);
         // USERS END
     }
