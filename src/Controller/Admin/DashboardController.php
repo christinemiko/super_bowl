@@ -37,36 +37,41 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::section('Administration');
+        yield MenuItem::section('Administration', 'fa-solid fa-football');
 
-        yield MenuItem::section('Matches', 'fa-solid fa-football');
-        yield MenuItem::subMenu('', 'fas fa-bars')->setSubItems([
+        // MATCHES START
+        yield MenuItem::subMenu('Matches', 'fas fa-bars')->setSubItems([
             menuItem::linkToCrud('Create FootballMatch', 'fas fa-plus', FootballMatch::class)->setAction(Crud::PAGE_NEW),
             menuItem::linkToCrud('Show FootballMatches', 'fas fa-eye', FootballMatch::class),
         ]);
+        // MATCHES END
 
-        yield MenuItem::section('FootballMatch Players','');
-        yield MenuItem::subMenu('', 'fas fa-bars')->setSubItems([
+        // FOOTBALL PLAYER START
+        yield MenuItem::subMenu('FootballMatch Players', 'fas fa-bars')->setSubItems([
             menuItem::linkToCrud('Create Football Player', 'fas fa-plus', FootballPlayer::class)->setAction(Crud::PAGE_NEW),
             menuItem::linkToCrud('Show Football Players', 'fas fa-eye', FootballPlayer::class),
         ]);
+        // FOOTBALL PLAYER  END
 
-        yield MenuItem::section('Teams', 'fa-solid fa-people-group');
-        yield MenuItem::subMenu('', 'fas fa-bars')->setSubItems([
+        // TEAMS START
+        yield MenuItem::subMenu('Teams', 'fas fa-bars')->setSubItems([
             menuItem::linkToCrud('Create Team', 'fas fa-plus', Team::class)->setAction(Crud::PAGE_NEW),
             menuItem::linkToCrud('Show Teams', 'fas fa-eye', Team::class),
         ]);
+        // TEAMS END
 
-        yield MenuItem::section('Sport Bets', '');
-        yield MenuItem::subMenu('', 'fas fa-bars')->setSubItems([
+        // SPORT BETS START
+        yield MenuItem::subMenu('Sport Bets', 'fas fa-bars')->setSubItems([
             menuItem::linkToCrud('Create Sport bet', 'fas fa-plus', Sportbet::class)->setAction(Crud::PAGE_NEW),
             menuItem::linkToCrud('Show Sport Bets', 'fas fa-eye', Sportbet::class),
         ]);
+        // SPORT BETS END
 
-        yield MenuItem::section('Users');
-        yield MenuItem::subMenu('', 'fas fa-bars')->setSubItems([
+        // USERS START
+        yield MenuItem::subMenu('Users', 'fas fa-bars')->setSubItems([
             menuItem::linkToCrud('Create User', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
             menuItem::linkToCrud('Show Users', 'fas fa-eye', User::class),
         ]);
+        // USERS END
     }
 }
