@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\FootballMatch;
+use App\Entity\FootballPlayer;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -19,6 +20,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Form\Type\CrudAutocompleteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
+
 class FootballMatchCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -31,7 +33,9 @@ class FootballMatchCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Match')
             ->setEntityLabelInPlural('Matchs')
-            ->setPageTitle('index','Les Matchs');
+            ->setPageTitle('index','Les Matchs')
+            ->setPageTitle('new', ' Créer un nouveau Match')
+             ->setPageTitle('edit', ' Modifier un Match');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -51,15 +55,31 @@ class FootballMatchCrudController extends AbstractCrudController
             //PAGE INDEX END
 
             //PAGE NEW START
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Créer');
+            })
 
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
                 return $action->setLabel('Créer et Ajouter+');
-            });
+            })
+
            //PAGE NEW END
+
+          //PAGE EDIT START
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+            return $action->setLabel('Sauvegarder et continuer');
+           })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Sauvegarder');
+            })
+
+            ;
+
     }
 
     public function configureFields(string $pageName): iterable
     {
+
         return [
             IdField::new('id')->hideOnForm(),
 
@@ -70,13 +90,14 @@ class FootballMatchCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'class' => 'App\Entity\Team',
                     'choice_label' => 'teamName',
+                    'choice_value' => 'id',
                     'attr' => [
                         'data-widget' => 'select2',
                     ],
                 ])
                 ->formatValue(function ($value, $entity) {
                     if ($entity instanceof FootballMatch && $entity->getTeam1() !== null) {
-                        return $entity->getTeam1()->getId();
+                        return $entity->getTeam1()->getTeamName();
                     }
                     return $value;
                 }),
@@ -86,17 +107,17 @@ class FootballMatchCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'class' => 'App\Entity\Team',
                     'choice_label' => 'teamName',
+                    'choice_value' => 'id',
                     'attr' => [
                         'data-widget' => 'select2',
                     ],
                 ])
                 ->formatValue(function ($value, $entity) {
                     if ($entity instanceof FootballMatch && $entity->getTeam2() !== null) {
-                        return $entity->getTeam2()->getId();
+                        return $entity->getTeam2()->getTeamName();
                     }
                     return $value;
                 }),
-
 
             TimeField::new('hourStart', 'Heure de début'),
             TimeField::new('hourFinish', 'Heure de fin'),
@@ -110,6 +131,7 @@ class FootballMatchCrudController extends AbstractCrudController
                     'En Cours' => 'En Cours'
                 ]),
             TextEditorField::new('comments', 'Commentaires'),
+
         ];
     }
 

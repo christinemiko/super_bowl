@@ -197,4 +197,22 @@ class FootballMatch
         return $this;
     }
 
+   //Recupérer le nom de chaque équipe Crud Controller FottballMatch
+    public function getTeam1Name(): ?string
+    {
+        if ($this->team1 !== null) {
+            return $this->team1->getTeamName();
+        }
+
+        return null;
+    }
+
+    public function getTeam2Name(): ?string
+    {
+        if ($this->team2 !== null) {
+            return $this->team2->getTeamName();
+        }
+
+        return null;
+    }
 }

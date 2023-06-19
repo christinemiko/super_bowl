@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\FootballMatch;
 use App\Entity\FootballPlayer;
 use App\Entity\Sportbet;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -27,7 +29,45 @@ class SportbetCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Pari-sportif')
             ->setEntityLabelInPlural('Pari-sportifs')
-            ->setPageTitle('index','Les Paris-sportifs');
+            ->setPageTitle('index','Les Paris-sportifs')
+            ->setPageTitle('new', ' Créer un nouveau Pari-Sportif')
+            ->setPageTitle('edit', ' Modifier un Pari-Sportif');
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+
+            //PAGE INDEX START
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Créer');
+            })
+            ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
+                return $action->setLabel('Modifier');
+            })
+            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
+                return $action->setLabel('Supprimer');
+            })
+            //PAGE INDEX END
+
+            //PAGE NEW START
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Créer');
+            })
+
+            ->update(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER, function (Action $action) {
+                return $action->setLabel('Créer et Ajouter+');
+            })
+
+          //PAGE NEW END
+
+          //PAGE EDIT START
+          ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+              return $action->setLabel('Sauvegarder et continuer');
+          })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Sauvegarder');
+            });
     }
 
     public function configureFields(string $pageName): iterable
@@ -53,8 +93,8 @@ class SportbetCrudController extends AbstractCrudController
                     ],
                 ])
                 ->formatValue(function ($value, $entity) {
-                    if ($entity instanceof FootballPlayer && $entity->getTeam() !== null) {
-                        return $entity->getTeam()->getId();
+                    if ($entity instanceof Sportbet && $entity->getTeam() !== null) {
+                        return $entity->getTeam()->getTeamName();
                     }
                     return $value;
                 }),
@@ -103,6 +143,12 @@ class SportbetCrudController extends AbstractCrudController
                     ],
                 ])
 
+                ->formatValue(function ($value, $entity) {
+                    if ($entity instanceof Sportbet && $entity->getUser() !== null) {
+                        return $entity->getUser()->getLastName() . ' ' . $entity->getUser()->getFirstName();
+                    }
+                    return $value;
+                }),
 
 
         ];
