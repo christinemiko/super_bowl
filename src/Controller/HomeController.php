@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     public function Accueil(FootballMatchRepository $footballMatchRepository): Response
     {
 
-        $footballMatch = $footballMatchRepository->findBy(['statut' => 'En cours']);
+        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Actuellement']);
         return $this->render('homepage.html.twig', [
 
             'footballMatches' => $footballMatch

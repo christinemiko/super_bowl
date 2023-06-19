@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
 use App\Form\BetMatchFormType;
-use App\Form\ReservationsFormType;
 use App\Repository\FootballMatchRepository;
 use App\Repository\FootballPlayerRepository;
 use App\Repository\SportbetRepository;
@@ -31,7 +30,7 @@ class FootballMatchController extends AbstractController
     #[Route('allmatcheswatch', name:'visualiserlesmatchs')]
     public function Allmatcheswatch(FootballMatchRepository $footballMatchRepository): Response
     {
-        $footballMatch = $footballMatchRepository->findBy(['statut' => 'En cours']);
+        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Actuellement']);
         $footballMatch2 = $footballMatchRepository->findBy(['statut' => 'Prochainement']);
         $footballMatch3 = $footballMatchRepository->findBy(['statut' => 'Terminé']);
 

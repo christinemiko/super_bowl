@@ -18,7 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\CrudAutocompleteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 
 
 class FootballMatchCrudController extends AbstractCrudController
@@ -80,6 +80,12 @@ class FootballMatchCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
 
+        $statusChoices = [
+            'Prochainement' => 'Prochainement',
+            'A Venir' => 'A Venir',
+            'En Cours' => 'En Cours',
+        ];
+
         return [
             IdField::new('id')->hideOnForm(),
 
@@ -123,13 +129,15 @@ class FootballMatchCrudController extends AbstractCrudController
             TimeField::new('hourFinish', 'Heure de fin'),
             TextField::new('weather', 'Météo'),
             TextField::new('scoreGame', 'Score du Jeu'),
+
             ChoiceField::new('statut')
                 ->setLabel( 'Statut ')
                 ->setChoices([
                     'Prochainement' => 'Prochainement',
                     'Terminé' => 'Terminé',
-                    'En Cours' => 'En Cours'
+                    'Actuellement' => 'Actuellement'
                 ]),
+
             TextEditorField::new('comments', 'Commentaires'),
 
         ];

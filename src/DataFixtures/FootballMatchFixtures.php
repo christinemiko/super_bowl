@@ -44,7 +44,7 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $footballMatch->setHourStart($hourStart);
             $footballMatch->setHourFinish($hourFinish);
 
-            $footballMatch->setStatut('En cours');
+            $footballMatch->setStatut('Actuellement');
 
             $teamReference = 'team' . $this->faker->numberBetween(1, 32);
             $footballMatch->setTeam1($this->getReference($teamReference));
