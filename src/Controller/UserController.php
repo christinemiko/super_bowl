@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Entity\FootballMatch;
 use App\Entity\User;
+use App\Repository\FootballMatchRepository;
 use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,9 +17,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user', methods: ['GET'])]
-    public function index(): Response
+    public function index(FootballMatchRepository $footballMatchRepository): Response
     {
-        return $this->render('homepage.html.twig');
+        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Actuellement']);
+        return $this->render('homepage.html.twig', [
+            'footballMatches' => $footballMatch
+        ]);
     }
 
     #[Route('/myaccount', name: 'myaccount')]

@@ -31,6 +31,7 @@ class UserFixtures extends Fixture
           $user->setEmail($this->faker->email());
           $user->setPassword($this->faker->password());
           $user->setRoles(['ROLE_USER']);
+          $user->setEnable(true);
             $manager->persist($user);
 
         }
@@ -41,6 +42,7 @@ class UserFixtures extends Fixture
         $user->setEmail('christinechau@gmail.com');
         $user->setPassword('$2y$10$wpNfCugEUnogBioPlbtbveYPVmhsx5hm8REUXfAY/MC516/DpvEf2');
         $user->setRoles(['ROLE_ADMIN']);
+        $user->setEnable(true);
 
         $manager->persist($user);
 
@@ -50,6 +52,7 @@ class UserFixtures extends Fixture
         $user->setEmail('martin@gmail.com');
         $user->setPassword('$2y$10$ZtZQWRK2xNC0eV0qbBxwV.PcAJPREurnS36BfFHf51dpF5rRdiDwy');
         $user->setRoles(['ROLE_SPORTSCASTER']);
+        $user->setEnable(true);
 
 
         $manager->persist($user);

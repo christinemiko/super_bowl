@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+          {% block body %}
+
+              <!--VALIDATION INSCRIPTION START -->
+
+              <main class="container-fluid">
+
+              <div class=" block text-center">
+                  <img src="{{ asset('img/logo4.png') }}" class="img-fluid" alt="Logo SuperBowl">
+                  <h1 class="mt-3 text-center text-light">Validation d'Inscription</h1>
+
+              </div>
+
+              <p>Bonjour {{ user.firstName }},</p>
+              <p>Merci de vous être inscrit(e) sur le site du Super Bowl.</p>
+              <p>Veuillez cliquez sur le lien ci-joint afin de valider votre inscription.</p>
+
+                  <!-- VALIDATION LINK START -->
+                  <a href="{{ url('confirmAccount', {"token": token})  }}"> Je confirme mon inscription.</a>
+                  <!-- VALIDATION LINK END -->
+
+                  <p> En vous remerciant d'avance et à très bien bientôt sur Super Bowl.</p>
+
+                  <p> Toute l'équipe de Super Bowl</p>
+
+              </main>
+
+              <!--VALIDATION INSCRIPTION START -->
+
+          {% endblock %}

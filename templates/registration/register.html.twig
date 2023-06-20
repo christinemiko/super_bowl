@@ -16,6 +16,15 @@
 
     <section class="container">
         <div class="row">
+
+            <!-- FLASH MESSAGE START -->
+            {% for flashError in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ flashError }}
+                </div>
+            {% endfor %}
+            <!-- FLASH MESSAGE END -->
+
             <div >
                 {{ form_start(registrationForm) }}
                 <fieldset>
