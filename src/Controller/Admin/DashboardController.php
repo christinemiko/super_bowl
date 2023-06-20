@@ -37,6 +37,10 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        // Ajouter un lien vers la page d'accueil de l'application
+        yield MenuItem::linkToUrl('Retour à l\'application', 'fas fa-home', $this->generateUrl('accueil'));
+
+
         yield MenuItem::section('Administration', 'fa-solid fa-football');
 
         // MATCHES START

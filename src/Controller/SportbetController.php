@@ -122,4 +122,28 @@ class SportbetController extends AbstractController
         ]);
 
     }
+
+    #[Route('/betselections', name: 'betselections', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
+    public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository): Response
+    {
+        $selectedMatches = $request->request->get('selectedMatches');
+
+        // Enregistrez les identifiants des matchs sélectionnés dans la variable de session
+        $session = $request->getSession();
+        $session->set('selectedMatches', $selectedMatches);
+
+        // Récupérez les matchs sélectionnés à partir de la base de données en utilisant les identifiants
+        $selectedFootballMatches = $footballMatchRepository->findBy(['id' => $selectedMatches]);
+
+        // Crée une instance du formulaire
+        $form = $this->createForm(BetMatchFormType::class);
+
+        // Passez le formulaire et les matchs sélectionnés au fichier Twig lors du rendu de la vue
+        return $this->render('betselections.html.twig', [
+            'selectedFootballMatches' => $selectedFootballMatches,
+            'form' => $form->createView(),
+        ]);
+    }
+
 }

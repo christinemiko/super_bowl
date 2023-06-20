@@ -128,5 +128,10 @@ title {
 }
 /*  WATCH ONE MATCH PAGE END*/
 
+/* BET ALL MATCHES PAGE START*/
+.large-checkbox {
+    transform: scale(2);
+}
 
+/* BET ALL MATCHES PAGE END*/
 
