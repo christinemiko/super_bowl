@@ -47,7 +47,11 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
+                    labels: [    {% for sportbet in sportbets %}
+                        {% if sportbet.footballMatch.statut == 'Terminé' %}
+                        '{{ sportbet.dateWagerMade|date('d/m/Y') }}',
+                        {% endif %}
+                        {% endfor %}],
                     datasets: [
                           {
                              label: 'Paris-Sportifs',
@@ -71,12 +75,25 @@
                 },
                 options: {
                     scales: {
-                        y: {
-                            beginAtZero: true
+                        y: {}
+                    },
+                    layout: {
+                        padding: {
+                            top: 10, // Ajustez la valeur ici pour définir l'espace vers le haut
+                            bottom: 100 // Ajustez la valeur ici pour définir l'espace vers le bas
                         }
-                    }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "MATCHS TERMINES",
+                            color: "red"
+                        },
+                        // ...
+                    },
                 }
             });
+
         </script>
         <!-- SPORT BET GRAPHIC USER END -->
 

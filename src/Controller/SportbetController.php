@@ -127,23 +127,29 @@ class SportbetController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository): Response
     {
-        $selectedMatches = $request->request->get('selectedMatches');
+        $selectedMatches = $request->request->all('selectedMatches', []);
+        $selectedMatches = array_map('intval', $selectedMatches);
 
         // Enregistrez les identifiants des matchs sélectionnés dans la variable de session
         $session = $request->getSession();
         $session->set('selectedMatches', $selectedMatches);
+         //var_dump($selectedMatches);
 
         // Récupérez les matchs sélectionnés à partir de la base de données en utilisant les identifiants
-        $selectedFootballMatches = $footballMatchRepository->findBy(['id' => $selectedMatches]);
+        $footballMatches = $footballMatchRepository->findBySelection($selectedMatches);
+        var_dump($footballMatches);
 
         // Crée une instance du formulaire
         $form = $this->createForm(BetMatchFormType::class);
 
         // Passez le formulaire et les matchs sélectionnés au fichier Twig lors du rendu de la vue
         return $this->render('betselections.html.twig', [
-            'selectedFootballMatches' => $selectedFootballMatches,
+            'footballMatches' => $footballMatches,
             'form' => $form->createView(),
         ]);
     }
+
+
+
 
 }

@@ -41,20 +41,21 @@ class FootballMatchRepository extends ServiceEntityRepository
 
 
 
-//    /**
-//     * @return FootballMatch[] Returns an array of FootballMatch objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('f.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     *  @param array $selectedMatches
+     * @return FootballMatch[] Returns an array of FootballMatch objects
+     */
+    public function findBySelection(array $selectedMatches): array
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.id IN (:selectedMatches)')
+           ->setParameter('selectedMatches', $selectedMatches)
+            ->orderBy('f.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?FootballMatch
 //    {
