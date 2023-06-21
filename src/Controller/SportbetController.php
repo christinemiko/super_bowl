@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
+use App\Entity\User;
 use App\Form\BetMatchFormType;
 use App\Repository\FootballMatchRepository;
 use App\Repository\SportbetRepository;
@@ -16,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class SportbetController extends AbstractController
 {
@@ -125,7 +127,7 @@ class SportbetController extends AbstractController
 
     #[Route('/betselections', name: 'betselections', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
-    public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository): Response
+     public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository, EntityManagerInterface $entityManager, RouterInterface $router): Response
     {
         $selectedMatches = $request->request->all('selectedMatches', []);
         $selectedMatches = array_map('intval', $selectedMatches);
@@ -137,19 +139,57 @@ class SportbetController extends AbstractController
 
         // Récupérez les matchs sélectionnés à partir de la base de données en utilisant les identifiants
         $footballMatches = $footballMatchRepository->findBySelection($selectedMatches);
-        var_dump($footballMatches);
 
-        // Crée une instance du formulaire
-        $form = $this->createForm(BetMatchFormType::class);
+        // Récupérez l'utilisateur actuellement connecté (assumant que tu utilises un système d'authentification)
+        $user = $this->getUser();
 
-        // Passez le formulaire et les matchs sélectionnés au fichier Twig lors du rendu de la vue
+        // Créez un tableau pour stocker les formulaires
+        $forms = [];
+
+        foreach ($footballMatches as $footballMatch) {
+            // Créez une instance du formulaire pour chaque match
+            $form = $this->createForm(BetMatchFormType::class);
+            $form->handleRequest($request);
+
+            //Integrer uniquement les deux équipes du Match dans le menu déroulant du Formulaire
+            $form = $this->createForm(BetMatchFormType::class, null,[
+                'team1' => $footballMatch->getTeam1(),
+                'team2' =>  $footballMatch->getTeam2(),
+            ]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                // Créez une nouvelle instance de Sportbet et configurez ses propriétés
+                $sportbet = new Sportbet();
+                $sportbet->setUser($user);
+                $sportbet->setFootballMatch($footballMatch);
+                $currentDate = new \DateTime();
+                $sportbet->setDatewagerMade($currentDate);
+
+                // Récupérez et traitez les données du formulaire pour définir les autres propriétés du pari sportif
+                $sportbet = $form->getData();
+
+                // Enregistrez le pari sportif dans la base de données
+                $entityManager->persist($sportbet);
+
+                // Ajoutez ici le code pour enregistrer le pari sportif dans la base de données
+                $entityManager->flush();
+
+                // Redirigez l'utilisateur vers la même page 'betselections' avec les cartes des matchs restants
+                $redirectUrl = $router->generate('betselections');
+                return $this->redirect($redirectUrl);
+            }
+
+            // Ajoutez le formulaire au tableau des formulaires
+            $forms[$footballMatch->getId()] = $form->createView();
+        }
+
+        // Passez le tableau des formulaires au fichier Twig lors du rendu de la vue
         return $this->render('betselections.html.twig', [
             'footballMatches' => $footballMatches,
-            'form' => $form->createView(),
+            'forms' => $forms,
         ]);
     }
-
-
 
 
 }

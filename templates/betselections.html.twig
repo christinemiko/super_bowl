@@ -14,11 +14,17 @@
 
         <div class="mb-2 red"><h2 class="text-center rectangle1"> Les équipes</h2></div>
         <div class="container">
-    <div class="row justify-content-around align-items-center">
+            <div class="row justify-content-center text-center">
 
-        {% for footballMatch in footballMatches %}
 
-            <div class="card mt-5" style="width: 25rem;">
+    {% for footballMatch in footballMatches %}
+
+            <!-- CREATION MANY FORMS FOR EACH FOOTBALL MATCH WITH ID / START-->
+           <div class="text-center">
+               <div class="d-inline-block">
+               {{ form_start(forms[footballMatch.id]) }}
+
+            <div class="card mt-5 text-center" style="width: 25rem;">
                 <ul class="list-group list-group-flush">
 
                     <li class="list-group-item">
@@ -64,9 +70,59 @@
                     </li>
                     <!-- TEAM2 END -->
 
+                    <!-- MONEY BET START -->
+                    <!--<div class="row justify-content-center">-->
+                        <div class=" rectangle2 blue text-center col-sm mt-2">
+                            <h4 class="text-center text-light">Mise</h4>
+
+                            <p class="text-center mt-5 mb-5 text-light"> Sélectionner l'équipe sur laquelle vous souhaitez miser :</p>
+                            <div class="text-center mb-2 text-light">{{ form_row(forms[footballMatch.id].team) }}</div>
+
+                            <div class="text-center col-6 mx-auto mt-5 mb-5 text-light" >{{ form_row(forms[footballMatch.id].wagerMade) }}</div>
+
+                            <div class="text-center col-6 mx-auto mb-2 mb-5 text-light">{{ form_row(forms[footballMatch.id].dateWagerMade) }}</div>
+
+                        </div>
+                   <!-- </div>-->
+                    <!-- MONEY BET END -->
+
+                    <!-- BUTTON CONFIRM START-->
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-lg btn-danger">Validation</button>
+                    </div>
+
+                    <!-- BUTTON CONFIRM END-->
+
                 </ul>
             </div>
+            <!-- CREATION MANY FORMS FOR EACH FOOTBALL MATCH WITH ID / END-->
+            {{ form_end(forms[footballMatch.id]) }}
+           </div>
+           </div>
         {% endfor %}
     </div>
 
+{% endblock %}
+
+            {% block custom_javascripts %}
+
+          <!-- FLATPICKR   CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                 <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+
+            <script>
+
+              flatpickr('.flatpickr-date', {
+                       dateFormat: 'Y-m-d',
+                       locale: 'fr',
+                       disableMobile: true,
+                       defaultDate: 'today',
+                       minDate: 'today',
+                       altInput: true,
+                       altFormat: 'd M Y',
+
+                  });
+
+            </script>
 {% endblock %}
