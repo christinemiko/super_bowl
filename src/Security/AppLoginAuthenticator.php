@@ -46,6 +46,11 @@ class AppLoginAuthenticator extends AbstractLoginFormAuthenticator
     {
         $user = $token->getUser();
 
+        if (!$user->isEnable()) {
+            $request->getSession()->getFlashBag()->add('error', 'Veuillez valider votre inscription par email.');
+            return new RedirectResponse($this->urlGenerator->generate(self::LOGIN_ROUTE));
+        }
+
         if (in_array('ROLE_ADMIN', $user->getRoles(), true)){
 
             return new RedirectResponse($this->urlGenerator->generate('app_admin'));
