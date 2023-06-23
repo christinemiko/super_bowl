@@ -59,7 +59,7 @@ class Mailer
             ->subject('Modification Mot de Passe Super Bowl!')
 
             // path of the Twig template to render
-            ->htmlTemplate('emails/signup.html.twig')
+            ->htmlTemplate('emails/resetpassword.html.twig')
 
             // pass variables (name => value) to the template
             ->context([

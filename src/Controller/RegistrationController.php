@@ -15,10 +15,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
-
-
-
-
 class RegistrationController extends AbstractController
 {
 
@@ -71,7 +67,7 @@ class RegistrationController extends AbstractController
 
             // SEND EMAIL SERVICE MAILER FOR CONFIRMATION SUBSCRIPTION END
 
-            return $this->redirectToRoute('app_login'); // Redirige vers le formulaire d'inscription
+            return $this->redirectToRoute('app_login'); // Redirige vers le formulaire de connexion
             // do anything else you need here, like send an email
 
         }
@@ -83,10 +79,8 @@ class RegistrationController extends AbstractController
     }
 
     // FUNCTION CONFIRM ACCOUNT TOKEN START
-    /**
-     * @Route("/confirmAccount/{token}", name= "confirmAccount")
-     */
 
+    #[Route('/confirmAccount/{token}', name: 'confirmAccount')]
     public function confirmAccount(string $token, EntityManagerInterface $entityManager)
     {
         $user = $this->userRepository->findOneBy(["token" =>$token]);
@@ -106,9 +100,6 @@ class RegistrationController extends AbstractController
     // FUNCTION CONFIRM ACCOUNT TOKEN END
 
     // GENERATE TOKEN START
-    /**
-     * @return string
-     */
 
     private function generateToken()
     {
