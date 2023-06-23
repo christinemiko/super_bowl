@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\AppLoginAuthenticator;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,20 +14,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Component\Mailer\MailerInterface;
+
 
 
 
 
 class RegistrationController extends AbstractController
 {
-    /**
-     * @var MailerInterface
-     */
+
     private $mailer;
     private $userRepository;
 
-    public function __construct(MailerInterface $mailer, UserRepository$userRepository)
+    public function __construct(Mailer $mailer, UserRepository$userRepository)
     {
         $this->mailer = $mailer;
         $this->userRepository = $userRepository;
@@ -97,7 +96,7 @@ class RegistrationController extends AbstractController
             $user->setEnable(true);
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute("/");
+            return $this->redirectToRoute("accueil");
         } else {
             $this->addFlash('error', 'Vous n\'avez pas validé votre inscription.');
             return $this->redirectToRoute("app_login");

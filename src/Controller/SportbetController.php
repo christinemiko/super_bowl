@@ -11,11 +11,12 @@ use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -113,7 +114,7 @@ class SportbetController extends AbstractController
     }
 
 
-    #[Route('betallmatches', name:'parier', methods: ['GET'])]
+    #[Route('betallmatches', name:'parier')]
     public function BetAllMatches(FootballMatchRepository $footballMatchRepository,): Response
     {
         $footballMatch = $footballMatchRepository->findBy(['statut' => 'Prochainement']);
@@ -125,11 +126,23 @@ class SportbetController extends AbstractController
 
     }
 
-    #[Route('/betselections', name: 'betselections', methods: ['POST'])]
+    #[Route('roadselections', name: 'roadselections')]
+    public function RoadSelections(RequestStack $requestStack): Response
+    {
+        $request = $requestStack->getCurrentRequest();
+        $session = $request->getSession();
+        $selectedMatches = $session->get('selectedMatches', []);
+
+        return $this->redirectToRoute('betselections', ['selectedMatches' => $selectedMatches]);
+    }
+
+
+    #[Route('/betselections', name: 'betselections', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
      public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository, EntityManagerInterface $entityManager, RouterInterface $router): Response
     {
-        $selectedMatches = $request->request->all('selectedMatches', []);
+        $selectedMatches = $request->query->all()['selectedMatches'] ?? [];
+        // Convertir les identifiants des matchs sélectionnés en entiers
         $selectedMatches = array_map('intval', $selectedMatches);
 
         // Enregistrez les identifiants des matchs sélectionnés dans la variable de session
@@ -140,12 +153,12 @@ class SportbetController extends AbstractController
         // Récupérez les matchs sélectionnés à partir de la base de données en utilisant les identifiants
         $footballMatches = $footballMatchRepository->findBySelection($selectedMatches);
 
-        // Récupérez l'utilisateur actuellement connecté (assumant que tu utilises un système d'authentification)
+        // Récupérez l'utilisateur actuellement connecté (assumant que j' utilises un système d'authentification)
         $user = $this->getUser();
 
         // Créez un tableau pour stocker les formulaires
         $forms = [];
-
+         //dump($footballMatches);
         foreach ($footballMatches as $footballMatch) {
             // Créez une instance du formulaire pour chaque match
             $form = $this->createForm(BetMatchFormType::class);
@@ -160,14 +173,22 @@ class SportbetController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 // Créez une nouvelle instance de Sportbet et configurez ses propriétés
+
+                $team = $form->get('team')->getData();
                 $sportbet = new Sportbet();
                 $sportbet->setUser($user);
                 $sportbet->setFootballMatch($footballMatch);
                 $currentDate = new \DateTime();
                 $sportbet->setDatewagerMade($currentDate);
+                $sportbet->setTeam($team);
 
-                // Récupérez et traitez les données du formulaire pour définir les autres propriétés du pari sportif
-                $sportbet = $form->getData();
+                // Récupérez les données du formulaire
+
+                $formData = $form->getData();
+                $wagerMade = $formData->getWagerMade();
+
+                // Définissez la propriété wagerMade avec les données du formulaire
+                $sportbet->setWagerMade($wagerMade);
 
                 // Enregistrez le pari sportif dans la base de données
                 $entityManager->persist($sportbet);
