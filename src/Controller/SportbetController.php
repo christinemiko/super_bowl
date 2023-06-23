@@ -127,12 +127,10 @@ class SportbetController extends AbstractController
     }
 
     #[Route('roadselections', name: 'roadselections')]
-    public function RoadSelections(RequestStack $requestStack): Response
+    public function RoadSelections(Request $request): Response
     {
-        $request = $requestStack->getCurrentRequest();
-        $session = $request->getSession();
-        $selectedMatches = $session->get('selectedMatches', []);
-
+        // recupère les selected Matches en POST parameters et envoie sur betselections
+        $selectedMatches = $request->request->all('selectedMatches', []);
         return $this->redirectToRoute('betselections', ['selectedMatches' => $selectedMatches]);
     }
 
@@ -142,6 +140,7 @@ class SportbetController extends AbstractController
      public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository, EntityManagerInterface $entityManager, RouterInterface $router): Response
     {
         $selectedMatches = $request->query->all()['selectedMatches'] ?? [];
+
         // Convertir les identifiants des matchs sélectionnés en entiers
         $selectedMatches = array_map('intval', $selectedMatches);
 
@@ -182,12 +181,8 @@ class SportbetController extends AbstractController
                 $sportbet->setDatewagerMade($currentDate);
                 $sportbet->setTeam($team);
 
-                // Récupérez les données du formulaire
-
                 $formData = $form->getData();
                 $wagerMade = $formData->getWagerMade();
-
-                // Définissez la propriété wagerMade avec les données du formulaire
                 $sportbet->setWagerMade($wagerMade);
 
                 // Enregistrez le pari sportif dans la base de données

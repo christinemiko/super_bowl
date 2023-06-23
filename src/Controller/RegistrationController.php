@@ -119,4 +119,6 @@ class RegistrationController extends AbstractController
     }
     // GENERATE TOKEN END
 
+
+
 }
