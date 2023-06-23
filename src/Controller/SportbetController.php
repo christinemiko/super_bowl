@@ -191,8 +191,11 @@ class SportbetController extends AbstractController
                 // Ajoutez ici le code pour enregistrer le pari sportif dans la base de données
                 $entityManager->flush();
 
+                // Enlevez le match actuel des matchs sélectionnés
+                $selectedMatches = array_diff($selectedMatches, [$footballMatch->getId()]);
+
                 // Redirigez l'utilisateur vers la même page 'betselections' avec les cartes des matchs restants
-                $redirectUrl = $router->generate('betselections');
+                $redirectUrl = $router->generate('betselections', ['selectedMatches' => $selectedMatches]);
                 return $this->redirect($redirectUrl);
             }
 
