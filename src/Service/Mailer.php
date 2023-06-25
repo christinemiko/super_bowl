@@ -20,9 +20,9 @@ class Mailer
         $this->mailer = $mailer;
     }
 
+    // SEND EMAIL FOR CONFIRMATION SUBSCRIPTION START
     public function sendEmail($email, $token, $user)
     {
-        // SEND EMAIL FOR CONFIRMATION SUBSCRIPTION START
 
         $templatedEmail = (new TemplatedEmail())
             ->from('noreply@superbowl.com')
@@ -41,9 +41,11 @@ class Mailer
         ;
 
         $this->mailer->send($templatedEmail);
-        // SEND EMAIL FOR CONFIRMATION SUBSCRIPTION END
-    }
 
+    }
+    // SEND EMAIL FOR CONFIRMATION SUBSCRIPTION END
+
+    // SEND EMAIL FOR RESET PASSWORD START
     public function sendTemplatedEmail(TemplatedEmail $templatedEmail)
     {
         $this->mailer->send($templatedEmail);

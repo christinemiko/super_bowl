@@ -25,6 +25,7 @@ class ForgotPasswordController extends AbstractController
         $this->mailer = $mailer;
     }
 
+    // FORGOT PASSWORD START
     #[Route('/forgotpassword', name: 'forgotpassword_request')]
     public function ForgotPassword(Request $request, Mailer $mailer, EntityManagerInterface $entityManager): Response
     {
@@ -56,40 +57,51 @@ class ForgotPasswordController extends AbstractController
                 ['form' => $form->createView(),]);
         }
 
-
-
     // FORGOT PASSWORD END
 
-    #[Route('/resetpassword', name: 'resetpassword_request')]
-    public function resetPassword(Request $request,EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher,): Response
+    // RESET PASSWORD START
+    #[Route('/resetpassword/{token}', name: 'resetpassword_request')]
+    public function resetPassword(Request $request,EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher,string $token, UserRepository $userRepository,): Response
     {
-        $user = $this->getUser();
+        $user = $userRepository->findOneBy(["token" =>$token]);
 
-        $form = $this->createForm(ResetPasswordFormType::class, $user);
+        if($user) {
+            $form = $this->createForm(ResetPasswordFormType::class, $user);
+            $form->handleRequest($request);
 
-        $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Handle form submission, e.g., persist user entity, flush entity manager, etc.
-            // encode the plain password
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
 
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
+                // ERASE TOKEN AND  CHANGE ENABLE
+                $user->setToken(null);
+                $user->setEnable(true);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('accueil');
+                return $this->redirectToRoute('accueil');
+            }
+
+        } else {
+            $this->addFlash('error', ' Vos identifiants sont invalides.');
+            return $this->redirectToRoute("app_login");
         }
 
-        return $this->render('security/resetpassword.html.twig', [
+
+        return $this->render('security/confirmnewpassword.html.twig', [
             'resetpasswordForm' => $form->createView(),
+            'user' => $user,
+            'token' => $token,
         ]);
     }
+    // RESET PASSWORD END
+
     // GENERATE TOKEN START
 
     private function generateToken()
