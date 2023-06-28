@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FootballMatchRepository::class)]
 class FootballMatch
@@ -17,32 +19,57 @@ class FootballMatch
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    /**
+     * @Groups("footballmatch")
+     * @Assert\DateTime
+     */
     private ?\DateTimeInterface $matchDate = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?\DateTimeInterface $hourStart = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?\DateTimeInterface $hourFinish = null;
 
     #[ORM\Column(length: 50)]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?string $statut = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $weather = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?string $scoreGame = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?string $comments = null;
 
     #[ORM\ManyToOne(inversedBy: 'team1')]
     #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?Team $team1 = null;
 
     #[ORM\ManyToOne(inversedBy: 'team2')]
     #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?Team $team2 = null;
 
     #[ORM\OneToMany(mappedBy: 'footballMatch', targetEntity: Sportbet::class)]
