@@ -103,7 +103,7 @@ class SportbetController extends AbstractController
     {
         $user = $this->getUser();
         $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
-        $entityManager->remove($sportbet);
+        $sportbet->setDeleted(true);
         $entityManager->flush();
         return $this->redirectToRoute("parier");
     }
@@ -112,7 +112,7 @@ class SportbetController extends AbstractController
     #[Route('betallmatches', name:'parier')]
     public function BetAllMatches(FootballMatchRepository $footballMatchRepository,): Response
     {
-        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Prochainement']);
+        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Prochainement', 'deleted' => false]);
 
         return $this->render('betallmatches.html.twig', [
 

@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Controller\Api;
-use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
 use App\Form\FootballMatchFormType;
 use App\Repository\FootballMatchRepository;
-use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ApiFootballMatchController extends AbstractController
+class ApiSportbetController extends AbstractController
 {
-    // Affiche tous les footballMatchs statut == ACTUELLEMENT //
+    // Affiche tous les Paris sportifs//
 
     #[Route('/api/footballmatches', name: 'get_apifootballmatches', methods: ['GET'])]
     public function getApifootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
@@ -25,33 +23,6 @@ class ApiFootballMatchController extends AbstractController
         $json = $serializer->serialize($footballMatches, 'json', ['groups' => 'footballmatch']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
-
-    // Affiche tous les footballMatchs statut == ACTUELLEMENT où le USER a parié //
-
-    #[Route('/api/getfootballmatchesuser', name: 'get_apigetfootballmatchesuser', methods: ['GET'])]
-    public function getApiGetfootballmatchesUser(SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
-    {
-        $user = $this->getUser();
-
-        // Trouver tous les paris sportifs de l'utilisateur actuel
-        $userSportbets = $sportbetRepository->findBy(['user' => $user]);
-
-        // Initialiser un tableau pour stocker les matchs de football
-        $footballMatches = [];
-
-        // Parcourir les paris sportifs pour obtenir les matchs de football
-        foreach ($userSportbets as $sportbet) {
-            $footballMatch = $sportbet->getFootballMatch();
-
-            // Vérifier que le match est actuellement en cours et non supprimé
-            if ($footballMatch->getStatut() === 'Actuellement' && $footballMatch->isDeleted() === false) {
-                $footballMatches[] = $footballMatch;
-            }
-        }
-        $json = $serializer->serialize($footballMatches, 'json', ['groups' => 'footballmatch']);
-        return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
-    }
-
 
     // Affiche tous les footballMatchs statut == ACTUELLEMENT, PROCHAINEMENT, TERMINE//
     #[Route('/api/allfootballmatches', name: 'get_apiallfootballmatches', methods: ['GET'])]

@@ -38,6 +38,9 @@ class Sportbet
     #[ORM\Column(nullable: true)]
     private ?int $moneyLose = null;
 
+    #[ORM\Column]
+    private ?bool $deleted = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +126,17 @@ class Sportbet
     public function setMoneyLose(?int $moneyLose): self
     {
         $this->moneyLose = $moneyLose;
+
+        return $this;
+    }
+    public function isDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
 
         return $this;
     }

@@ -19,7 +19,7 @@ class UserController extends AbstractController
     #[Route('/user', name: 'app_user', methods: ['GET'])]
     public function index(FootballMatchRepository $footballMatchRepository): Response
     {
-        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Actuellement']);
+        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false]);
         return $this->render('homepage.html.twig', [
             'footballMatches' => $footballMatch
         ]);
@@ -61,7 +61,10 @@ class UserController extends AbstractController
     public function History(SportbetRepository $sportbetRepository): Response
     {
         $user = $this->getUser();
-        $sportbet = $sportbetRepository->findBy(['user' => $user], ['id' => 'DESC']);
+        $sportbet = $sportbetRepository->findBy(
+            ['user' => $user, 'deleted' => false],  // critères
+            ['id' => 'DESC']  // options
+        );
 
         return $this->render('historysportbet.html.twig',[
 

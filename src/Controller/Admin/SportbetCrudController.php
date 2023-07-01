@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -36,6 +37,11 @@ class SportbetCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+        // Créez une nouvelle action personnalisée
+        $setDeleted = Action::new('setDeleted', 'Marquer comme supprimé')
+            ->linkToCrudAction('setDeleted')
+            ->addCssClass('btn btn-danger');
+
         return $actions
 
             //PAGE INDEX START
@@ -45,10 +51,12 @@ class SportbetCrudController extends AbstractCrudController
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
                 return $action->setLabel('Modifier');
             })
-            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
-                return $action->setLabel('Supprimer');
-            })
+            // Désactivez l'action de suppression par défaut
+            ->disable(Action::DELETE)
+            // Ajoutez l'action personnalisée à la page d'index
+            ->add(Crud::PAGE_INDEX, $setDeleted)
             //PAGE INDEX END
+
 
             //PAGE NEW START
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, function (Action $action) {
@@ -150,6 +158,7 @@ class SportbetCrudController extends AbstractCrudController
                     return $value;
                 }),
 
+              BooleanField::new('deleted', 'Deleted'),
 
         ];
     }
