@@ -50,7 +50,6 @@ class ApiSportbetController extends AbstractController
         ];
 
         $json = $serializer->serialize($data, 'json');
-
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
@@ -74,16 +73,16 @@ class ApiSportbetController extends AbstractController
         }
     }
 
-    // Supprimer un Football Match
-    #[Route('/api/deletefootballmatch/{id}', name: 'delete_apifootballmatch', methods: ['DELETE'])]
-    public function deleteApiFootballMatch(int $id, EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository): JsonResponse
+       // Supprimer un sportbet
+    #[Route('/api/sportbet/{id}', name: 'delete_apisportbet', methods: ['DELETE'])]
+    public function deleteApiSportbet(int $id, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository): JsonResponse
     {
-        $footballMatch = $footballMatchRepository->find($id);
+        $sportbet = $sportbetRepository->find($id);
 
-        if (is_null($footballMatch)) {
-            throw $this->createNotFoundException('Match non trouvé');
+        if (is_null($sportbet)) {
+            throw $this->createNotFoundException('Pari-sportif non trouvé');
         }
-        $footballMatch->setDeleted(true);
+        $sportbet->setDeleted(true);
         $entityManager->flush();
 
         return new JsonResponse('', 204, ['Content-Type' => 'application/json']);
