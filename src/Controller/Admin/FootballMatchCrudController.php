@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -19,10 +20,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\CrudAutocompleteType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
-
+use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 
 class FootballMatchCrudController extends AbstractCrudController
 {
+
     public static function getEntityFqcn(): string
     {
         return FootballMatch::class;
@@ -40,6 +44,11 @@ class FootballMatchCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+        // Créez une nouvelle action personnalisée
+        $setDeleted = Action::new('setDeleted', 'Marquer comme supprimé')
+            ->linkToCrudAction('setDeleted')
+            ->addCssClass('btn btn-danger');
+
         return $actions
 
             //PAGE INDEX START
@@ -49,9 +58,10 @@ class FootballMatchCrudController extends AbstractCrudController
             ->update(Crud::PAGE_INDEX, Action::EDIT, function (Action $action) {
                 return $action->setLabel('Modifier');
             })
-            ->update(Crud::PAGE_INDEX, Action::DELETE, function (Action $action) {
-                return $action->setLabel('Supprimer');
-            })
+            // Désactivez l'action de suppression par défaut
+            ->disable(Action::DELETE)
+            // Ajoutez l'action personnalisée à la page d'index
+            ->add(Crud::PAGE_INDEX, $setDeleted)
             //PAGE INDEX END
 
             //PAGE NEW START
@@ -140,7 +150,25 @@ class FootballMatchCrudController extends AbstractCrudController
 
             TextEditorField::new('comments', 'Commentaires'),
 
+            BooleanField::new('deleted', 'Deleted'),
+
         ];
     }
+
+    public function setDeleted(AdminContext $context, EntityManagerInterface $entityManager): Response
+    {
+        $data = $context->getEntity()->getInstance();
+
+        if (!$data instanceof FootballMatch) {
+            throw new \RuntimeException(sprintf('Expected a FootballMatch object, %s given.', get_class($data)));
+        }
+
+        $data->setDeleted(true);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Match marqué comme supprimé.');
+        return $this->redirectToRoute('app_admin');
+    }
+
 
 }

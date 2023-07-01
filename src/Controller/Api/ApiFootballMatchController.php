@@ -7,6 +7,7 @@ use App\Repository\FootballMatchRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +19,7 @@ class ApiFootballMatchController extends AbstractController
     #[Route('/api/footballmatches', name: 'get_apifootballmatches', methods: ['GET'])]
     public function getApifootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
     {
-        $footballMatches = $footballMatchRepository->findBy(['statut' => 'Actuellement']);
+        $footballMatches = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false]);
         $json = $serializer->serialize($footballMatches, 'json', ['groups' => 'footballmatch']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
@@ -46,8 +47,7 @@ class ApiFootballMatchController extends AbstractController
     }
 
     // Création dun nouveau football Match
-
-    #[Route('api/newfootballmatch', name: 'create_newfootballmatch', methods: ['POST'])]
+    #[Route('/api/newfootballmatch', name: 'create_newfootballmatch', methods: ['POST'])]
     public function createNewfootballmatch(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $footballMatch = new FootballMatch();
@@ -59,7 +59,6 @@ class ApiFootballMatchController extends AbstractController
             // Sauvegarde l'objet FootballMatch dans la base de données
             $entityManager->persist($footballMatch);
             $entityManager->flush();
-
             return new JsonResponse(['status' => 'Match created'], 201);
         } else {
             return new JsonResponse(['error' => (string) $form->getErrors(true)], 400);
@@ -67,14 +66,20 @@ class ApiFootballMatchController extends AbstractController
     }
 
     // Supprimer un Football Match
-    #[Route('/api/deletefootballmatch/{footballmatch}', name: 'delete_apifootballmatch', methods: ['DELETE'])]
-    public function deleteApiFootballMatch(Footballmatch $footballMatch,EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/api/deletefootballmatch/{id}', name: 'delete_apifootballmatch', methods: ['DELETE'])]
+    public function deleteApiFootballMatch(int $id, EntityManagerInterface $entityManager, FootballMatchRepository $footballMatchRepository): JsonResponse
     {
-        $entityManager->remove($footballMatch);
+        $footballMatch = $footballMatchRepository->find($id);
+
+        if (is_null($footballMatch)) {
+            throw $this->createNotFoundException('Match non trouvé');
+        }
+        $footballMatch->setDeleted(true);
         $entityManager->flush();
 
 
-        return new JsonResponse(null, 204, ['Content-Type' => 'application/json'], true);
+        // Doute sur ceci? Dois je retourner "" vide en json, est ce vraiment nécessaire ?
+        return new JsonResponse('', 204, ['Content-Type' => 'application/json']);
     }
 
     // Modifier un Football Match complètement

@@ -21,7 +21,6 @@ class FootballMatch
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     /**
      * @Groups("footballmatch")
-     * @Assert\DateTime
      */
     private ?\DateTimeInterface $matchDate = null;
 
@@ -74,6 +73,9 @@ class FootballMatch
 
     #[ORM\OneToMany(mappedBy: 'footballMatch', targetEntity: Sportbet::class)]
     private Collection $FootballMatch;
+
+    #[ORM\Column]
+    private ?bool $deleted = false;
 
     public function __construct()
     {
@@ -241,5 +243,17 @@ class FootballMatch
         }
 
         return null;
+    }
+
+    public function isDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
+
+        return $this;
     }
 }
