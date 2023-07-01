@@ -97,4 +97,24 @@ class ApiFootballMatchController extends AbstractController
         }
 
       }
+    // Modifier un Football Match partiellement sur Statut et finished_hour
+    #[Route('/api/patchfootballmatch/{footballMatch}', name: 'patch_footballMatch', methods: ['PATCH'])]
+    public function patchFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch): JsonResponse
+    {
+        $form = $this->createForm(FootballMatchFormType::class,$footballMatch);
+        $parameters = json_decode($request->getContent(), true);
+
+        // Soumettre le formulaire avec le second paramètre à "PATCH"
+        $form->submit($parameters, false);
+
+        if ($form->isValid()) {
+            $entityManager->persist($footballMatch);
+            $entityManager->flush();
+
+            return new JsonResponse(['status' => 'Match modified'], 200);
+        } else {
+            return new JsonResponse(['error' => (string) $form->getErrors(true)], 400);
+        }
+
+    }
 }
