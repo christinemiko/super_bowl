@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Sportbet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+
 
 /**
  * @extends ServiceEntityRepository<Sportbet>
@@ -38,6 +41,43 @@ class SportbetRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function countUsersByMatch($matchId)
+    {
+        try {
+            return $this->createQueryBuilder('sb')
+                ->select('count(sb.user) as userCount')
+                ->where('sb.footballMatch = :matchId')
+                ->setParameter('matchId', $matchId)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+            // Handle the exception, e.g. log it, rethrow it, or return a default value
+        } catch (NoResultException $e) {
+            return 0;  // No users bet on this match
+        }
+    }
+
+    public function countUsersByTeamInMatch($matchId, $teamId)
+    {
+        try {
+            return $this->createQueryBuilder('sb')
+                ->select('count(sb.user) as userCount')
+                ->where('sb.footballMatch = :matchId')
+                ->andWhere('sb.team = :teamId')
+                ->setParameter('matchId', $matchId)
+                ->setParameter('teamId', $teamId)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+            // Handle the exception, e.g. log it, rethrow it, or return a default value
+        } catch (NoResultException $e) {
+            return 0;  // No users bet on this team in this match
+        }
+    }
+
+
+
 
 //    /**
 //     * @return Sportbet[] Returns an array of Sportbet objects

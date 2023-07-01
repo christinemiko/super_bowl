@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SportbetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SportbetRepository::class)]
 class Sportbet
@@ -15,30 +16,54 @@ class Sportbet
     private ?int $id = null;
 
     #[ORM\Column]
+    /**
+     * @Groups("sportbet")
+     */
     private ?int $wagerMade = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    /**
+     * @Groups("sportbet")
+     */
     private ?\DateTimeInterface $dateWagerMade = null;
 
     #[ORM\Column(length: 10, nullable: true)]
+    /**
+     * @Groups("sportbet")
+     */
     private ?int $moneyGain = null;
 
     #[ORM\ManyToOne(inversedBy: 'sportbets')]
     #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @Groups("sportbet")
+     */
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'team_bet')]
     #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @Groups("sportbet")
+     */
     private ?Team $team = null;
 
     #[ORM\ManyToOne(inversedBy: 'FootballMatch')]
     #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @Groups("sportbet")
+     */
     private ?FootballMatch $footballMatch = null;
 
     #[ORM\Column(nullable: true)]
+    /**
+     * @Groups("sportbet")
+     */
     private ?int $moneyLose = null;
 
     #[ORM\Column]
+    /**
+     * @Groups("sportbet")
+     */
     private ?bool $deleted = false;
 
     public function getId(): ?int

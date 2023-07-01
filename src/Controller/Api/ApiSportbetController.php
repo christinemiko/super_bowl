@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Controller\Api;
+use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
+use App\Entity\Team;
 use App\Form\FootballMatchFormType;
 use App\Repository\FootballMatchRepository;
+use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,35 +18,42 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ApiSportbetController extends AbstractController
 {
     // Affiche tous les Paris sportifs//
-
-    #[Route('/api/footballmatches', name: 'get_apifootballmatches', methods: ['GET'])]
-    public function getApifootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
+    #[Route('/api/sportbets', name: 'get_apisportbets', methods: ['GET'])]
+    public function getApisportbets(SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
     {
-        $footballMatches = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false]);
-        $json = $serializer->serialize($footballMatches, 'json', ['groups' => 'footballmatch']);
+        $sportbets = $sportbetRepository->findAll();
+        $json = $serializer->serialize($sportbets, 'json', ['groups' => 'sportbet']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
-    // Affiche tous les footballMatchs statut == ACTUELLEMENT, PROCHAINEMENT, TERMINE//
-    #[Route('/api/allfootballmatches', name: 'get_apiallfootballmatches', methods: ['GET'])]
-    public function getApiallfootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
+
+    // Affiche tous les Paris sportifs d'un USER//
+    #[Route('/api/usersportbets', name: 'get_apiusersportbets', methods: ['GET'])]
+    public function getApiusersportbets(SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
     {
-        $footballMatches = $footballMatchRepository->findAll();
-        $json = $serializer->serialize( $footballMatches, 'json', ['groups' => 'footballmatch']);
+        $user = $this->getUser();
+        $sportbets = $sportbetRepository->findBy(['user' => $user]);
+        $json = $serializer->serialize($sportbets, 'json', ['groups' => 'sportbet']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
-    // Affiche un seul footballMatch //
-
-    #[Route('/api/footballmatch/{footballMatch}', name: 'get_apifootballmatch', methods: ['GET'])]
-    public function getApiFootballMatch( SerializerInterface $serializer, Footballmatch $footballMatch): JsonResponse
+    // Compte et affiche le nombre de User/footballMatch et le nbe User/team
+    #[Route('/api/match/{footballMatch}/team/{team}/usersCount', name: 'get_user_counts', methods: ['GET'])]
+    public function getUserCountsForMatch(SportbetRepository $sportbetRepository, SerializerInterface $serializer, Footballmatch $footballMatch, Team $team): JsonResponse
     {
-        //$footballMatch = $footballMatchRepository->find($footballMatch);
-        //inutile car jai injecté le paramConverter (Footballmatch $footballMatch)
+        $userCountForMatch = $sportbetRepository->countUsersByMatch($footballMatch->getId());
+        $userCountForTeamInMatch = $sportbetRepository->countUsersByTeamInMatch($footballMatch->getId(), $team->getId());
 
-        $json = $serializer->serialize($footballMatch, 'json', ['groups' => 'footballmatch']);
+        $data = [
+            'userCountForMatch' => $userCountForMatch,
+            'userCountForTeamInMatch' => $userCountForTeamInMatch,
+        ];
+
+        $json = $serializer->serialize($data, 'json');
+
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
+
 
     // Création dun nouveau football Match
     #[Route('/api/newfootballmatch', name: 'create_newfootballmatch', methods: ['POST'])]
