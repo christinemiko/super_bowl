@@ -165,10 +165,8 @@ class FootballMatchCrudController extends AbstractCrudController
 
         $data->setDeleted(true);
         $entityManager->flush();
-
         $this->addFlash('success', 'Match marqué comme supprimé.');
         return $this->redirectToRoute('app_admin');
     }
-
 
 }

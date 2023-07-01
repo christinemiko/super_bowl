@@ -25,7 +25,6 @@ class ApiFootballMatchController extends AbstractController
     }
 
     // Affiche tous les footballMatchs statut == ACTUELLEMENT, PROCHAINEMENT, TERMINE//
-
     #[Route('/api/allfootballmatches', name: 'get_apiallfootballmatches', methods: ['GET'])]
     public function getApiallfootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
     {
@@ -77,11 +76,25 @@ class ApiFootballMatchController extends AbstractController
         $footballMatch->setDeleted(true);
         $entityManager->flush();
 
-
-        // Doute sur ceci? Dois je retourner "" vide en json, est ce vraiment nécessaire ?
         return new JsonResponse('', 204, ['Content-Type' => 'application/json']);
     }
 
     // Modifier un Football Match complètement
+    #[Route('/api/putfootballmatch/{footballMatch}', name: 'put_footballMatch', methods: ['PUT'])]
+    public function putFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch ): JsonResponse
+    {
+        $form = $this->createForm(FootballMatchFormType::class,$footballMatch);
+        $parameters = json_decode($request->getContent(), true);
+        $form->submit($parameters);
 
+        if ($form->isValid()) {
+            $entityManager->persist($footballMatch);
+            $entityManager->flush();
+
+            return new JsonResponse(['status' => 'Match modified'], 200);
+        } else {
+            return new JsonResponse(['error' => (string) $form->getErrors(true)], 400);
+        }
+
+      }
 }
