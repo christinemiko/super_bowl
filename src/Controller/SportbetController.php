@@ -20,7 +20,6 @@ class SportbetController extends AbstractController
 
     #[Route('betmatch/{footballMatch}', name: 'miser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-
     public function newBetMatch(Request $request, EntityManagerInterface $entityManager, FootballMatch $footballMatch): Response
     {
         $user = $this->getUser();

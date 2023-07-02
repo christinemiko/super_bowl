@@ -4,9 +4,12 @@ namespace App\Controller\Api;
 use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
 use App\Entity\Team;
+use App\Form\BetMatchFormType;
 use App\Form\FootballMatchFormType;
+use App\Form\SportbetFormType;
 use App\Repository\FootballMatchRepository;
 use App\Repository\SportbetRepository;
+use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +28,6 @@ class ApiSportbetController extends AbstractController
         $json = $serializer->serialize($sportbets, 'json', ['groups' => 'sportbet']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
-
 
     // Affiche tous les Paris sportifs d'un USER//
     #[Route('/api/usersportbets', name: 'get_apiusersportbets', methods: ['GET'])]
@@ -54,18 +56,32 @@ class ApiSportbetController extends AbstractController
     }
 
 
-    // Création dun nouveau football Match
-    #[Route('/api/newfootballmatch', name: 'create_newfootballmatch', methods: ['POST'])]
-    public function createNewfootballmatch(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    // Création dun nouveau sportbet
+    #[Route('/api/newsportbet/{footballMatch}', name: 'create_newsportbet', methods: ['POST'])]
+    public function createNewsportbet(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        FootballMatch $footballMatch,
+        TeamRepository $teamRepository
+        ): JsonResponse
     {
-        $footballMatch = new FootballMatch();
-        $form = $this->createForm(FootballMatchFormType::class, $footballMatch);
         $parameters = json_decode($request->getContent(), true);
-        $form->submit($parameters);
+
+        $sportbet = new Sportbet();
+        $sportbet->setUser($this->getUser());
+        $sportbet->setTeam($teamRepository->find($parameters['team']));
+        $sportbet->setFootballMatch($footballMatch);
+
+        $team1 = $footballMatch->getTeam1();
+        $team2 = $footballMatch->getTeam2();
+
+        $form = $this->createForm(SportbetFormType::class, $sportbet, ['team1' => $team1, 'team2' => $team2]);
+        $form->submit($parameters, false);
+        // Passer false pour que les valeurs manquantes dans $parameters ne soient pas remplies par null
 
         if ($form->isValid()) {
-            // Sauvegarde l'objet FootballMatch dans la base de données
-            $entityManager->persist($footballMatch);
+            // Sauvegarde l'objet Sportbet dans la base de données
+            $entityManager->persist($sportbet);
             $entityManager->flush();
             return new JsonResponse(['status' => 'Match created'], 201);
         } else {
@@ -73,7 +89,8 @@ class ApiSportbetController extends AbstractController
         }
     }
 
-       // Supprimer un sportbet
+
+    // Supprimer un sportbet
     #[Route('/api/sportbet/{id}', name: 'delete_apisportbet', methods: ['DELETE'])]
     public function deleteApiSportbet(int $id, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository): JsonResponse
     {
@@ -88,29 +105,55 @@ class ApiSportbetController extends AbstractController
         return new JsonResponse('', 204, ['Content-Type' => 'application/json']);
     }
 
-    // Modifier un Football Match complètement
-    #[Route('/api/putfootballmatch/{footballMatch}', name: 'put_footballMatch', methods: ['PUT'])]
-    public function putFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch ): JsonResponse
-    {
-        $form = $this->createForm(FootballMatchFormType::class,$footballMatch);
+    // Modifier un sportbet totalement
+    #[Route('/api/putsportbet/{id}', name: 'put_sportbet', methods: ['PUT'])]
+    public function putSportbet(
+        $id,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SportbetRepository $sportbetRepository
+    ): JsonResponse {
+        $sportbet = $sportbetRepository->find($id);
+
+        if (!$sportbet) {
+            return new JsonResponse(['error' => 'Sportbet not found'], 404);
+        }
+
+        $team1 = $sportbet->getFootballMatch()->getTeam1();
+        $team2 = $sportbet->getFootballMatch()->getTeam2();
+
+        $form = $this->createForm(SportbetFormType::class, $sportbet, ['team1' => $team1, 'team2' => $team2]);
         $parameters = json_decode($request->getContent(), true);
         $form->submit($parameters);
 
         if ($form->isValid()) {
-            $entityManager->persist($footballMatch);
+            $entityManager->persist($sportbet);
             $entityManager->flush();
 
-            return new JsonResponse(['status' => 'Match modified'], 200);
+            return new JsonResponse(['status' => 'Sportbet modified'], 200);
         } else {
             return new JsonResponse(['error' => (string) $form->getErrors(true)], 400);
         }
+    }
 
-      }
-    // Modifier un Football Match partiellement sur Statut et finished_hour
-    #[Route('/api/patchfootballmatch/{footballMatch}', name: 'patch_footballMatch', methods: ['PATCH'])]
-    public function patchFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch): JsonResponse
-    {
-        $form = $this->createForm(FootballMatchFormType::class,$footballMatch);
+
+    // Modifier un sportbet partiellement
+    #[Route('/api/patchsportbet/{id}', name: 'patch_footballMatch', methods: ['PATCH'])]
+    public function patchSportbet(
+        $id,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        SportbetRepository $sportbetRepository
+    ): JsonResponse {
+        $sportbet = $sportbetRepository->find($id);
+
+        if (!$sportbet) {
+            return new JsonResponse(['error' => 'Sportbet not found'], 404);
+        }
+        $team1 = $sportbet->getFootballMatch()->getTeam1();
+        $team2 = $sportbet->getFootballMatch()->getTeam2();
+
+        $form = $this->createForm(SportbetFormType::class, $sportbet, ['team1' => $team1, 'team2' => $team2]);
         $parameters = json_decode($request->getContent(), true);
 
         // Soumettre le formulaire avec le second paramètre à "PATCH", permet dafficher les datas existantes à modifier
@@ -118,7 +161,7 @@ class ApiSportbetController extends AbstractController
         $form->submit($parameters, false);
 
         if ($form->isValid()) {
-            $entityManager->persist($footballMatch);
+            $entityManager->persist( $sportbet);
             $entityManager->flush();
 
             return new JsonResponse(['status' => 'Match modified'], 200);
