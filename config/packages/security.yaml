@@ -4,6 +4,7 @@ security:
         ROLE_SPORTSCASTER: ROLE_CLIENT
         ROLE_ADMIN: ROLE_SPORTSCASTER
 
+    enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
@@ -33,13 +34,28 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
+            # Easy way to control access for large sections of your site
+            # Note: Only the *first* access control that matches will be used
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/api
+            stateless: true
+            jwt: ~
+
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_USER }
-        - { path: ^/client, roles: ROLE_CLIENT }
-        - { path: ^/sportscaster, roles: ROLE_SPORTSCASTER }
+            - { path: ^/api/login, roles: PUBLIC_ACCESS }
+            - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+            - { path: ^/admin, roles: ROLE_ADMIN }
+            - { path: ^/user, roles: ROLE_USER }
+            - { path: ^/client, roles: ROLE_CLIENT }
+            - { path: ^/sportscaster, roles: ROLE_SPORTSCASTER }
 
 when@test:
     security:
