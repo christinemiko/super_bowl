@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\DBAL\Types\Types;
 
-class FootballMatchFormType extends AbstractType
+class ApiFootballMatchFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

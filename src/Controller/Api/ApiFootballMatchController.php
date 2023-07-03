@@ -3,7 +3,7 @@
 namespace App\Controller\Api;
 use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
-use App\Form\FootballMatchFormType;
+use App\Form\ApiFootballMatchFormType;
 use App\Repository\FootballMatchRepository;
 use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -79,7 +79,7 @@ class ApiFootballMatchController extends AbstractController
     public function createNewfootballmatch(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $footballMatch = new FootballMatch();
-        $form = $this->createForm(FootballMatchFormType::class, $footballMatch);
+        $form = $this->createForm(ApiFootballMatchFormType::class, $footballMatch);
         $parameters = json_decode($request->getContent(), true);
         $form->submit($parameters);
 
@@ -112,7 +112,7 @@ class ApiFootballMatchController extends AbstractController
     #[Route('/api/putfootballmatch/{footballMatch}', name: 'put_footballMatch', methods: ['PUT'])]
     public function putFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch ): JsonResponse
     {
-        $form = $this->createForm(FootballMatchFormType::class,$footballMatch);
+        $form = $this->createForm(ApiFootballMatchFormType::class,$footballMatch);
         $parameters = json_decode($request->getContent(), true);
         $form->submit($parameters);
 
@@ -130,7 +130,7 @@ class ApiFootballMatchController extends AbstractController
     #[Route('/api/patchfootballmatch/{footballMatch}', name: 'patch_footballMatch', methods: ['PATCH'])]
     public function patchFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch): JsonResponse
     {
-        $form = $this->createForm(FootballMatchFormType::class,$footballMatch);
+        $form = $this->createForm(ApiFootballMatchFormType::class,$footballMatch);
         $parameters = json_decode($request->getContent(), true);
 
         // Soumettre le formulaire avec le second paramètre à "PATCH", permet dafficher les datas existantes à modifier
