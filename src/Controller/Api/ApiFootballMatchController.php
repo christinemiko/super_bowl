@@ -27,12 +27,10 @@ class ApiFootballMatchController extends AbstractController
     }
 
     // Affiche tous les footballMatchs statut == ACTUELLEMENT où le USER a parié //
-
     #[Route('/api/getfootballmatchesuser', name: 'get_apigetfootballmatchesuser', methods: ['GET'])]
     public function getApiGetfootballmatchesUser(SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
     {
         $user = $this->getUser();
-
         // Trouver tous les paris sportifs de l'utilisateur actuel
         $userSportbets = $sportbetRepository->findBy(['user' => $user]);
 
