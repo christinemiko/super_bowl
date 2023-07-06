@@ -21,7 +21,7 @@ class ApiFootballMatchController extends AbstractController
     #[Route('/api/footballmatches', name: 'get_apifootballmatches', methods: ['GET'])]
     public function getApifootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
     {
-        $footballMatches = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false]);
+        $footballMatches = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false],['hourStart' => 'ASC']);
         $json = $serializer->serialize($footballMatches, 'json', ['groups' => 'footballmatch']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }

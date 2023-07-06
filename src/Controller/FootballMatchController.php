@@ -30,9 +30,9 @@ class FootballMatchController extends AbstractController
     #[Route('allmatcheswatch', name:'visualiserlesmatchs')]
     public function Allmatcheswatch(FootballMatchRepository $footballMatchRepository): Response
     {
-        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false]);
-        $footballMatch2 = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false]);
-        $footballMatch3 = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false]);
+        $footballMatch = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false],['hourStart' => 'ASC']);
+        $footballMatch2 = $footballMatchRepository->findBy(['statut' => 'Prochainement', 'deleted' => false],['hourStart' => 'ASC']);
+        $footballMatch3 = $footballMatchRepository->findBy(['statut' => 'Terminé', 'deleted' => false],['hourStart' => 'ASC'] );
 
         return $this->render('allmatcheswatch.html.twig',[
             'footballMatches' => $footballMatch,
