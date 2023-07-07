@@ -16,6 +16,9 @@ class FootballMatch
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    /**
+     * @Groups("footballmatch")
+     */
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
