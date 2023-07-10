@@ -5,7 +5,7 @@ use App\Entity\FootballMatch;
 use App\Entity\Sportbet;
 use App\Entity\Team;
 use App\Form\BetMatchFormType;
-use App\Form\FootballMatchFormType;
+use App\Form\ApiFootballMatchFormType;
 use App\Form\SportbetFormType;
 use App\Repository\FootballMatchRepository;
 use App\Repository\SportbetRepository;
@@ -52,6 +52,19 @@ class ApiSportbetController extends AbstractController
         ];
 
         $json = $serializer->serialize($data, 'json');
+        return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
+    }
+
+    // Affiche tous les paris pour un footballmatch
+    #[Route('/api/footballmatch/{footballMatch}/getsportbets', name: 'get_sportbets_for_match', methods: ['GET'])]
+    public function getSportbetsForMatch(Footballmatch $footballMatch,SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
+    {
+        // Récupérer les paris pour le match
+        $bets = $sportbetRepository->findBy(['footballMatch' => $footballMatch]);
+
+        // Sérialiser les paris en JSON
+        $json = $serializer->serialize($bets, 'json');
+
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
@@ -138,7 +151,7 @@ class ApiSportbetController extends AbstractController
 
 
     // Modifier un sportbet partiellement
-    #[Route('/api/patchsportbet/{id}', name: 'patch_footballMatch', methods: ['PATCH'])]
+    #[Route('/api/patchsportbet/{id}', name: 'patch_sportbet', methods: ['PATCH'])]
     public function patchSportbet(
         $id,
         Request $request,
@@ -170,4 +183,46 @@ class ApiSportbetController extends AbstractController
         }
 
     }
+
+    // modifie la mise wager_made si team a gagné ou perdu
+    #[Route('/api/footballmatch/{id}/patchsportbets', name: 'patch_sportbets_for_match', methods: ['PATCH'])]
+    public function patchSportbetsForMatch(int $id, Request $request, EntityManagerInterface $entityManager, FootballmatchRepository $footballmatchRepository, SportbetRepository $sportbetRepository): JsonResponse
+    {
+        // Récupérer le match de football
+        $footballmatch = $footballmatchRepository->find($id);
+
+        // Vérifier si le match de football existe
+        if (!$footballmatch) {
+            return new JsonResponse(['error' => 'Match de football non trouvé'], 404);
+        }
+
+        // Récupérer tous les paris pour le match de football
+        $sportbets = $sportbetRepository->findBy(['footballmatch' => $footballmatch]);
+
+        // Vérifier si des paris ont été trouvés
+        if (!$sportbets) {
+            return new JsonResponse(['error' => 'Pas de paris trouvés pour ce match de football'], 404);
+        }
+
+        // Récupérer les données de la requête
+        $data = json_decode($request->getContent(), true);
+
+        // Mettre à jour chaque pari
+
+        foreach ($sportbets as $sportbet) {
+            if (isset($data['moneyGain'])) {
+                $sportbet->setMoneyGain($data['moneyGain']);
+            }
+            if (isset($data['moneyLose'])) {
+                $sportbet->setMoneyLose($data['moneyLose']);
+            }
+            $entityManager->persist($sportbet);
+        }
+
+        // Enregistrer les changements
+        $entityManager->flush();
+
+        return new JsonResponse(['success' => 'Paris mis à jour'], 200);
+    }
+
 }
