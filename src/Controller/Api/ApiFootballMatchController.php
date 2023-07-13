@@ -21,14 +21,14 @@ class ApiFootballMatchController extends AbstractController
     #[Route('/api/footballmatches', name: 'get_apifootballmatches', methods: ['GET'])]
     public function getApifootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
     {
-        $footballMatches = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false],['hourStart' => 'ASC']);
+        $footballMatches = $footballMatchRepository->findBy(['statut' => 'Actuellement', 'deleted' => false], ['hourStart' => 'ASC']);
         $json = $serializer->serialize($footballMatches, 'json', ['groups' => 'footballmatch']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
     // Affiche tous les footballMatchs statut == ACTUELLEMENT où le USER a parié //
     #[Route('/api/getfootballmatchesuser', name: 'get_apigetfootballmatchesuser', methods: ['GET'])]
-    public function getApiGetfootballmatchesUser(SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
+    public function getApiGetfootballmatchesUser(SportbetRepository $sportbetRepository, SerializerInterface $serializer, Footballmatch $footballMatch): JsonResponse
     {
         $user = $this->getUser();
         // Trouver tous les paris sportifs de l'utilisateur actuel
@@ -56,14 +56,14 @@ class ApiFootballMatchController extends AbstractController
     public function getApiallfootballmatches(FootballMatchRepository $footballMatchRepository, SerializerInterface $serializer): JsonResponse
     {
         $footballMatches = $footballMatchRepository->findAll();
-        $json = $serializer->serialize( $footballMatches, 'json', ['groups' => 'footballmatch']);
+        $json = $serializer->serialize($footballMatches, 'json', ['groups' => 'footballmatch']);
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
     // Affiche un seul footballMatch //
 
     #[Route('/api/footballmatch/{footballMatch}', name: 'get_apifootballmatch', methods: ['GET'])]
-    public function getApiFootballMatch( SerializerInterface $serializer, Footballmatch $footballMatch): JsonResponse
+    public function getApiFootballMatch(SerializerInterface $serializer, Footballmatch $footballMatch): JsonResponse
     {
         //$footballMatch = $footballMatchRepository->find($footballMatch);
         //inutile car jai injecté le paramConverter (Footballmatch $footballMatch)
@@ -87,7 +87,7 @@ class ApiFootballMatchController extends AbstractController
             $entityManager->flush();
             return new JsonResponse(['status' => 'Match created'], 201);
         } else {
-            return new JsonResponse(['error' => (string) $form->getErrors(true)], 400);
+            return new JsonResponse(['error' => (string)$form->getErrors(true)], 400);
         }
     }
 
@@ -108,9 +108,9 @@ class ApiFootballMatchController extends AbstractController
 
     // Modifier un Football Match complètement
     #[Route('/api/putfootballmatch/{footballMatch}', name: 'put_footballMatch', methods: ['PUT'])]
-    public function putFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch ): JsonResponse
+    public function putFootballMatch(Request $request, EntityManagerInterface $entityManager, Footballmatch $footballMatch): JsonResponse
     {
-        $form = $this->createForm(ApiFootballMatchFormType::class,$footballMatch);
+        $form = $this->createForm(ApiFootballMatchFormType::class, $footballMatch);
         $parameters = json_decode($request->getContent(), true);
         $form->submit($parameters);
 
@@ -120,29 +120,81 @@ class ApiFootballMatchController extends AbstractController
 
             return new JsonResponse(['status' => 'Match modified'], 200);
         } else {
-            return new JsonResponse(['error' => (string) $form->getErrors(true)], 400);
+            return new JsonResponse(['error' => (string)$form->getErrors(true)], 400);
         }
 
-      }
+    }
+
     // Modifier un Football Match partiellement sur Statut et finished_hour
     #[Route('/api/patchfootballmatch/{footballMatch}', name: 'patch_footballMatch', methods: ['PATCH'])]
-    public function patchFootballMatch(Request $request, EntityManagerInterface $entityManager,Footballmatch $footballMatch): JsonResponse
+    public function patchFootballMatch(Request $request, EntityManagerInterface $entityManager, Footballmatch $footballMatch, SportbetRepository $sportbetRepository): JsonResponse
     {
-        $form = $this->createForm(ApiFootballMatchFormType::class,$footballMatch);
+        $form = $this->createForm(ApiFootballMatchFormType::class, $footballMatch);
         $parameters = json_decode($request->getContent(), true);
+
+        // Avant la soumission du formulaire, stocke le statut de $footballMatch=== actuellement
+        $originalStatus = $footballMatch->getStatut();
 
         // Soumettre le formulaire avec le second paramètre à "PATCH", permet dafficher les datas existantes à modifier
         // sur statut et hourfinish de footballMatch
         $form->submit($parameters, false);
 
+        // Vérifier si le statut de $footballmatch a changé de "Actuellement" à "Terminé"
         if ($form->isValid()) {
+
+            if ($originalStatus === 'Actuellement' && $footballMatch->getStatut() === 'Terminé') {
+
+                // la logique de calcul des gains / pertes
+                // Si le match est terminé, calculer les gains
+                $scores = explode('_', $footballMatch->getScoregame());
+                $team1Score = (int)$scores[0];
+                $team2Score = (int)$scores[1];
+
+                // Déterminez quelle équipe a gagné
+                $winningTeam = null;
+                if ($team1Score > $team2Score) {
+                    $winningTeam = 1;
+                } else if ($team1Score < $team2Score) {
+                    $winningTeam = 2;
+                }
+
+                // Récupérer les paris pour ce match
+                $bets = $sportbetRepository->findBetsForMatch($footballMatch);
+
+                foreach ($bets as $bet) {
+                    $moneyGain = null;
+                    $moneyLose = null;
+
+                    // Logique pour les gains et pertes en fonction de léquipe parié du User
+                    if ($bet->getTeam() === $winningTeam) {
+                        $wagerMade = $bet->getWagerMade();
+                        $oddsteam = $winningTeam === 1 ? $footballMatch->getTeam1()->getOddsteam() : $footballMatch->getTeam2()->getOddsteam();
+                        $moneyGain = $wagerMade * $oddsteam;
+                    } else if ($winningTeam !== null) {
+                        $moneyLose = $bet->getWagerMade();
+                    }
+
+                    // Mettre à jour le pari avec les gains
+                    $bet->setMoneyGain($moneyGain);
+                    $bet->setMoneyLose($moneyLose);
+                    $entityManager->persist($bet);
+                }
+
+                $entityManager->flush();
+            }
+
             $entityManager->persist($footballMatch);
             $entityManager->flush();
-
             return new JsonResponse(['status' => 'Match modified'], 200);
-        } else {
-            return new JsonResponse(['error' => (string) $form->getErrors(true)], 400);
-        }
 
+        } else {
+            return new JsonResponse(['error' => (string)$form->getErrors(true)], 400);
+        }
     }
 }
+
+
+
+
+
+

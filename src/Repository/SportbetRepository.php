@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Sportbet;
+use App\Entity\FootballMatch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
@@ -75,6 +76,19 @@ class SportbetRepository extends ServiceEntityRepository
             return 0;  // No users bet on this team in this match
         }
     }
+
+    /**
+     * @return Sportbet[] Returns an array of Sportbet objects in function of One footballmatch
+     */
+    public function findBetsForMatch(FootballMatch $match)
+    {
+        return $this->createQueryBuilder('sb')
+            ->andWhere('sb.match = :match')
+            ->setParameter('match', $match)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
 

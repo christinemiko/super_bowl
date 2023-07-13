@@ -184,7 +184,7 @@ class ApiSportbetController extends AbstractController
 
     }
 
-    // modifie la mise wager_made si team a gagné ou perdu
+    // modifie la mise wager_made si team a gagné ou perdu des USERS
     #[Route('/api/footballmatch/{id}/patchsportbets', name: 'patch_sportbets_for_match', methods: ['PATCH'])]
     public function patchSportbetsForMatch(int $id, Request $request, EntityManagerInterface $entityManager, FootballmatchRepository $footballmatchRepository, SportbetRepository $sportbetRepository): JsonResponse
     {
