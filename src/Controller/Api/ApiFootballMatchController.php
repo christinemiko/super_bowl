@@ -179,10 +179,7 @@ class ApiFootballMatchController extends AbstractController
                     $bet->setMoneyLose($moneyLose);
                     $entityManager->persist($bet);
                 }
-
-                $entityManager->flush();
             }
-
             $entityManager->persist($footballMatch);
             $entityManager->flush();
             return new JsonResponse(['status' => 'Match modified'], 200);
