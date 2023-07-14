@@ -165,8 +165,9 @@ class ApiFootballMatchController extends AbstractController
                     $moneyGain = null;
                     $moneyLose = null;
 
-                    // Logique pour les gains et pertes en fonction de léquipe parié du User
-                    if ($bet->getTeam() === $winningTeam) {
+                    // Logique pour les gains et pertes en fonction de l'équipe pariée du User
+                    if (($winningTeam === 1 && $bet->getTeam() === $footballMatch->getTeam1())
+                        || ($winningTeam === 2 && $bet->getTeam() === $footballMatch->getTeam2())) {
                         $wagerMade = $bet->getWagerMade();
                         $oddsteam = $winningTeam === 1 ? $footballMatch->getTeam1()->getOddsteam() : $footballMatch->getTeam2()->getOddsteam();
                         $moneyGain = $wagerMade * $oddsteam;

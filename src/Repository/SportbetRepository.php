@@ -83,7 +83,7 @@ class SportbetRepository extends ServiceEntityRepository
     public function findBetsForMatch(FootballMatch $match)
     {
         return $this->createQueryBuilder('sb')
-            ->andWhere('sb.match = :match')
+            ->andWhere('sb.footballMatch = :match')
             ->setParameter('match', $match)
             ->getQuery()
             ->getResult();

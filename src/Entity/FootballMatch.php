@@ -75,14 +75,14 @@ class FootballMatch
     private ?Team $team2 = null;
 
     #[ORM\OneToMany(mappedBy: 'footballMatch', targetEntity: Sportbet::class)]
-    private Collection $FootballMatch;
+    private Collection $footballMatch;
 
     #[ORM\Column]
     private ?bool $deleted = false;
 
     public function __construct()
     {
-        $this->FootballMatch = new ArrayCollection();
+        $this->footballMatch = new ArrayCollection();
     }
 
 
@@ -204,13 +204,13 @@ class FootballMatch
      */
     public function getFootballMatch(): Collection
     {
-        return $this->FootballMatch;
+        return $this->footballMatch;
     }
 
     public function addFootballMatch(Sportbet $footballMatch): self
     {
-        if (!$this->FootballMatch->contains($footballMatch)) {
-            $this->FootballMatch->add($footballMatch);
+        if (!$this->footballMatch->contains($footballMatch)) {
+            $this->footballMatch->add($footballMatch);
             $footballMatch->setFootballMatch($this);
         }
 
@@ -219,7 +219,7 @@ class FootballMatch
 
     public function removeFootballMatch(Sportbet $footballMatch): self
     {
-        if ($this->FootballMatch->removeElement($footballMatch)) {
+        if ($this->footballMatch->removeElement($footballMatch)) {
             // set the owning side to null (unless already changed)
             if ($footballMatch->getFootballMatch() === $this) {
                 $footballMatch->setFootballMatch(null);
