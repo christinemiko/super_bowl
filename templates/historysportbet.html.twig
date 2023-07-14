@@ -30,6 +30,7 @@
                     <th class="text-center">Date Mise</th>
                     <th class="text-center">Mise effectuée</th>
                     <th class="text-center">Gains</th>
+                    <th class="text-center">Pertes</th>
                     <th class="text-center">Statut Match</th>
                     <th></th>
                 </tr>
@@ -45,6 +46,7 @@
                     <td class="text-center">{{ sportbet.dateWagerMade|date('d/m/Y')}}</td>
                     <td class="text-center">{{ sportbet.wagerMade }}</td>
                     <td class="text-center">{{ sportbet.moneyGain }}</td>
+                    <td class="text-center">{{ sportbet.moneyLose }}</td>
                     <td class="text-center">{{ sportbet.footballMatch.statut }}</td>
 
 
