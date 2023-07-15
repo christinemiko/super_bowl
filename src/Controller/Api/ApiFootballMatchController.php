@@ -26,7 +26,7 @@ class ApiFootballMatchController extends AbstractController
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
-    // Affiche tous les footballMatchs statut == ACTUELLEMENT où le USER a parié //
+    // Affiche tous les footballMatchsoù le USER a parié //
     #[Route('/api/getfootballmatchesuser', name: 'get_apigetfootballmatchesuser', methods: ['GET'])]
     public function getApiGetfootballmatchesUser(SportbetRepository $sportbetRepository, SerializerInterface $serializer, Footballmatch $footballMatch): JsonResponse
     {
@@ -41,8 +41,8 @@ class ApiFootballMatchController extends AbstractController
         foreach ($userSportbets as $sportbet) {
             $footballMatch = $sportbet->getFootballMatch();
 
-            // Vérifier que le match est actuellement en cours et non supprimé
-            if ($footballMatch->getStatut() === 'Actuellement' && $footballMatch->isDeleted() === false) {
+            // Vérifier que le match est non supprimé
+            if ( $footballMatch->isDeleted() === false) {
                 $footballMatches[] = $footballMatch;
             }
         }
