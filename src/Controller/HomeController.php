@@ -28,8 +28,6 @@ class HomeController extends AbstractController
     #[Route('inscription', name:'inscription')]
     public function Inscription(): Response
     {
-
         return $this->render('register.html.twig');
-
     }
 }

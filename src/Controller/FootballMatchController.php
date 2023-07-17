@@ -19,13 +19,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class FootballMatchController extends AbstractController
 {
-    #[Route('/football/match', name: 'app_football_match')]
-    public function index(): Response
-    {
-        return $this->render('football_match/index.html.twig', [
-            'controller_name' => 'FootballMatchController',
-        ]);
-    }
 
     #[Route('allmatcheswatch', name:'visualiserlesmatchs')]
     public function Allmatcheswatch(FootballMatchRepository $footballMatchRepository): Response
