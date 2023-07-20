@@ -163,7 +163,9 @@ lancer la commande suivante pour lancer Expo Go, cela va générer un QR code.
 ```
 ![github](public/img/readme6.png)
 7. télécharger dans lapps store de votre mobile, "expo go" https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US&pli=1
+
 8. Ouvrir Expo go sur votre mobile et cliquez sur SCAN QR CODE et scanner le QR CODE du terminal de VSCODE.
+
 9. L'appli mobile Super Bowl s'affiche sur votre mobile.
 
 ## Déploiement en Local pour l'appli BUREAUTIQUE
