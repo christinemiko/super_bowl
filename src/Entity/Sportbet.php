@@ -35,9 +35,6 @@ class Sportbet
 
     #[ORM\ManyToOne(inversedBy: 'sportbets')]
     #[ORM\JoinColumn(nullable: false)]
-    /**
-     * @Groups("sportbet")
-     */
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'team_bet')]

@@ -55,15 +55,18 @@ class ApiSportbetController extends AbstractController
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
 
-    // Affiche tous les paris pour un footballmatch
-    #[Route('/api/footballmatch/{footballMatch}/getsportbets', name: 'get_sportbets_for_match', methods: ['GET'])]
-    public function getSportbetsForMatch(Footballmatch $footballMatch,SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
+    // Affiche le pari pour un utilisateur connecté et un footballmatch
+    #[Route('/api/footballmatch/{footballMatch}/getsportbet', name: 'get_sportbet_for_match_and_user', methods: ['GET'])]
+    public function getSportbetForMatchAndUser(Footballmatch $footballMatch, SportbetRepository $sportbetRepository, SerializerInterface $serializer): JsonResponse
     {
-        // Récupérer les paris pour le match
-        $bets = $sportbetRepository->findBy(['footballMatch' => $footballMatch]);
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
 
-        // Sérialiser les paris en JSON
-        $json = $serializer->serialize($bets, 'json');
+        // Récupérer le pari pour le match et l'utilisateur
+        $sportbet = $sportbetRepository->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
+
+        // Sérialiser le pari en JSON
+        $json = $serializer->serialize($sportbet, 'json', ['groups' => 'sportbet']);
 
         return new JsonResponse($json, 200, ['Content-Type' => 'application/json'], true);
     }
