@@ -225,3 +225,9 @@ git clone https://github.com/christinemiko/bureautique-superbowl.git
 
 ```
 11. Ouvrir VSCODE File> Open Folder > SuperBowlBureautique Vous avez accès à l'appli Bureautique en LocalHost avec Electron.
+12. Attention, il est nécessaire à chaque fois de lancer dans le terminal VSCODE ' npm start' pour lancer electron, et l'affichage 
+du projet apparaît après 2 minutes !!!
+```bash 
+npm start
+
+```
