@@ -63,7 +63,6 @@ class ApiFootballMatchController extends AbstractController
     }
 
     // Affiche un seul footballMatch //
-
     #[Route('/api/footballmatch/{footballMatch}', name: 'get_apifootballmatch', methods: ['GET'])]
     public function getApiFootballMatch(SerializerInterface $serializer, Footballmatch $footballMatch): JsonResponse
     {

@@ -91,8 +91,6 @@ class UserCrudController extends AbstractCrudController
     }
 
     private $passwordHasher;
-
-
     private $requestStack;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher, RequestStack $requestStack)

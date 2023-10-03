@@ -179,10 +179,8 @@ class SportbetController extends AbstractController
                 $wagerMade = $formData->getWagerMade();
                 $sportbet->setWagerMade($wagerMade);
 
-                // Enregistrez le pari sportif dans la base de données
-                $entityManager->persist($sportbet);
 
-                // Ajoutez ici le code pour enregistrer le pari sportif dans la base de données
+                $entityManager->persist($sportbet);
                 $entityManager->flush();
 
                 // Enlevez le match actuel des matchs sélectionnés

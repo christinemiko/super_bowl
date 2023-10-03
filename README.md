@@ -17,6 +17,7 @@ L'Appli WEB a été réalisé avec les versions:
 - PHP 8.1
 - SQL 10.4.27-MariaDB
 - SYMFONY 6.3
+- TWIG
 - JAVASCRIPT ESCMA SCRIPT 6
 
 L'Appli Mobile a été réalisé avec les versions:
