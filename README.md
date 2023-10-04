@@ -97,6 +97,21 @@ Pré-requis:  L'installation des logiciels suivants est nécessaire pour le dép
  dans Windows(C:) > symfony > super_bowl .
 
 3. Etape
+- Ouvrir ce dossier super_bowl dans PhpStorm.
+- Aller dans le terminal sous phpStorm.
+- Tapez la commande suivante pour installer les dépendances du projet :
+```bash
+composer install
+```
+Cela installera toutes les dépendances nécessaires pour le projet qui sont listées dans le fichier composer.json.
+
+4. Etape
+   Une fois que toutes les dépendances sont installées, il faut  exécuter les migrations pour créer la structure de base de données nécessaire pour le projet. Dans le terminal de PhpStorm, tapez :
+```bash
+php bin/console doctrine:migrations:migrate
+```
+
+5. Etape
 - Lancer XAMPP sur Apache ( clic start) et sur MYSQL ( clic start).  " Apache" et "Msql" deviennent vert lorsquils sont connectés en Localhost.
 - Ouvrir ce dossier super_bowl dans PhpStorm.
 - Aller dans votre terminal sous phpStorm 
@@ -113,7 +128,7 @@ le message suivant s'affiche dans le terminal :
       http://127.0.0.1:8000                   
 
 ```
-4. Etape
+6. Etape
 - Cliquez sur   http://127.0.0.1:8000  dans le terminal de PhpStorm.
 ![github](public/img/readme2.png)
 
