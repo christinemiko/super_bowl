@@ -106,12 +106,30 @@ composer install
 Cela installera toutes les dépendances nécessaires pour le projet qui sont listées dans le fichier composer.json.
 
 4. Etape
+- Installez le bundle DoctrineFixturesBundle pour gérer les fixtures :
+```bash
+composer require --dev orm-fixtures
+```
+
+5. Etape
+- Installez la bibliothèque Faker pour générer des données fictives :
+```bash
+composer require fakerphp/faker
+```
+
+6. Etape
    Une fois que toutes les dépendances sont installées, il faut  exécuter les migrations pour créer la structure de base de données nécessaire pour le projet. Dans le terminal de PhpStorm, tapez :
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
 
-5. Etape
+7. Etape
+   Chargez les fixtures pour remplir la base de données avec des données d'exemple :
+```bash
+php bin/console doctrine:fixtures:load
+```
+
+8. Etape
 - Lancer XAMPP sur Apache ( clic start) et sur MYSQL ( clic start).  " Apache" et "Msql" deviennent vert lorsquils sont connectés en Localhost.
 - Ouvrir ce dossier super_bowl dans PhpStorm.
 - Aller dans votre terminal sous phpStorm 
