@@ -105,35 +105,20 @@ composer install
 ```
 Cela installera toutes les dépendances nécessaires pour le projet qui sont listées dans le fichier composer.json.
 
+
 4. Etape
-- Installez le bundle DoctrineFixturesBundle pour gérer les fixtures :
-```bash
-composer require --dev orm-fixtures
-```
-
-5. Etape
-- Installez la bibliothèque Faker pour générer des données fictives :
-```bash
-composer require fakerphp/faker
-```
-
-6. Etape
    Une fois que toutes les dépendances sont installées, il faut  exécuter les migrations pour créer la structure de base de données nécessaire pour le projet. Dans le terminal de PhpStorm, tapez :
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
 
-7. Etape
+5. Etape
    Chargez les fixtures pour remplir la base de données avec des données d'exemple :
 ```bash
 php bin/console doctrine:fixtures:load
 ```
-8. Etape 
-Installez JWT pour le système d'authentification.
-```bash
- composer require "lexik/jwt-authentication-bundle"
-```
-9. Etape
+
+6. Etape
 Générer les clés SSL privé et public.
 ```bash
 php bin/console lexik:jwt:generate-keypair
@@ -141,17 +126,17 @@ php bin/console lexik:jwt:generate-keypair
 Après cette commande, les clés privés et public apparaitront dans le dossier jwt, à l'intérieur du dossier config.
 " config/jwt/private.pem " et  " config/jwt/public.pem ".
 
-10. Etape 
+7. Etape 
 Pour des mesures de sécurité, ne pas afficher le JWT PASSPHRASE dans le fichier.env mais le déplacer dans le fichier.env.local.
 
-11. Voici le fichier .env ou le Mot de passe est caché. " JWT_PASSPHRASE=MDP "
-    ![github](public/img/readme9.png)
+8. Voici le fichier .env ou le Mot de passe est caché. " JWT_PASSPHRASE=MDP "
+   ![github](public/img/readme9.png)
 
 Placer le mot de passe JWT_PASSPHRASE et le APP_SECRET dans le fichier .env.local.
 voici un fichier .env.local , pour des mesures de sécurité, les MDP sont faux sur cette image. 
 ![github](public/img/readme10.png)
 
-12. Etape
+9. Etape
 - Lancer XAMPP sur Apache ( clic start) et sur MYSQL ( clic start).  " Apache" et "Msql" deviennent vert lorsquils sont connectés en Localhost.
 - Ouvrir ce dossier super_bowl dans PhpStorm.
 - Aller dans votre terminal sous phpStorm 
@@ -168,7 +153,7 @@ le message suivant s'affiche dans le terminal :
       http://127.0.0.1:8000                   
 
 ```
-13. Etape
+10. Etape
 - Cliquez sur   http://127.0.0.1:8000  dans le terminal de PhpStorm.
 ![github](public/img/readme2.png)
 
@@ -176,14 +161,14 @@ le message suivant s'affiche dans le terminal :
  Pour les Admins et les clients , le portail de connexion est le même. Il suffit de rentrer ses identifiants pour avoir accès, en fonction du rôle de l'utilisateur aux différentes interfaces du site.
 ![github](public/img/readme4.png)
 
-14. Etape
+11. Etape
 -Pour créer un admin  dans le terminal de PhpStorm.
 ```bash 
 php bin/console app:create-admin [email] [password]
 exemple: php bin/console app:create-admin christine@gmail.com hek125hds
 ```
 
-15. Etape
+12. Etape
     -Pour créer un sportcaster  dans le terminal de PhpStorm.
 ```bash 
 php bin/console app:create-sportcaster [email] [password]
