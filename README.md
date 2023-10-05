@@ -129,7 +129,7 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
 8. Etape 
-Installez JWT pour le sytsème d'authentification.
+Installez JWT pour le système d'authentification.
 ```bash
  composer require "lexik/jwt-authentication-bundle"
 ```
