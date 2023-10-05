@@ -176,6 +176,19 @@ le message suivant s'affiche dans le terminal :
  Pour les Admins et les clients , le portail de connexion est le même. Il suffit de rentrer ses identifiants pour avoir accès, en fonction du rôle de l'utilisateur aux différentes interfaces du site.
 ![github](public/img/readme4.png)
 
+14. Etape
+-Pour créer un admin  dans le terminal de PhpStorm.
+```bash 
+php bin/console app:create-admin [email] [password]
+exemple: php bin/console app:create-admin christine@gmail.com hek125hds
+```
+
+15. Etape
+    -Pour créer un sportcaster  dans le terminal de PhpStorm.
+```bash 
+php bin/console app:create-sportcaster [email] [password]
+exemple: php bin/console app:create-admin paul@gmail.com hjf56146
+```
 
 ## Déploiement en Local pour l'appli MOBILE
 
