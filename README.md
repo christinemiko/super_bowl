@@ -1,7 +1,7 @@
 
 # SUPER BOWL
 
-Création de trois Applications: Web, Mobile et Bureautique pour l'évènement du Super Bowl, mandaté par une start up Stania, passionnée de sports. 
+Création de trois Applications: Web, Mobile et Bureautique pour l'évènement du Super Bowl, mandaté par une start up fictive Stania, passionnée de sports. 
 
 Ces plateformes permettent aux visiteurs d'accéder à toutes les informations relatives aux matchs en cours, à venir ou terminés afin de favoriser les paris sportifs ainsi que la gestion des matchs pour les administrateurs.
 
@@ -128,8 +128,30 @@ php bin/console doctrine:migrations:migrate
 ```bash
 php bin/console doctrine:fixtures:load
 ```
+8. Etape 
+Installez JWT pour le sytsème d'authentification.
+```bash
+ composer require "lexik/jwt-authentication-bundle"
+```
+9. Etape
+Générer les clés SSL privé et public.
+```bash
+php bin/console lexik:jwt:generate-keypair
+```
+Après cette commande, les clés privés et public apparaitront dans le dossier jwt, à l'intérieur du dossier config.
+" config/jwt/private.pem " et  " config/jwt/public.pem ".
 
-8. Etape
+10. Etape 
+Pour des mesures de sécurité, ne pas afficher le JWT PASSPHRASE dans le fichier.env mais le déplacer dans le fichier.env.local.
+
+11. Voici le fichier .env ou le Mot de passe est caché. " JWT_PASSPHRASE=MDP "
+    ![github](public/img/readme9.png)
+
+Placer le mot de passe JWT_PASSPHRASE et le APP_SECRET dans le fichier .env.local.
+voici un fichier .env.local , pour des mesures de sécurité, les MDP sont faux sur cette image. 
+![github](public/img/readme10.png)
+
+12. Etape
 - Lancer XAMPP sur Apache ( clic start) et sur MYSQL ( clic start).  " Apache" et "Msql" deviennent vert lorsquils sont connectés en Localhost.
 - Ouvrir ce dossier super_bowl dans PhpStorm.
 - Aller dans votre terminal sous phpStorm 
@@ -146,7 +168,7 @@ le message suivant s'affiche dans le terminal :
       http://127.0.0.1:8000                   
 
 ```
-6. Etape
+13. Etape
 - Cliquez sur   http://127.0.0.1:8000  dans le terminal de PhpStorm.
 ![github](public/img/readme2.png)
 
