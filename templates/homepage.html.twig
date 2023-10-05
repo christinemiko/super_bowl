@@ -103,6 +103,8 @@
                         <!-- TEAM 1 & TEAM 2 LOGO AND NAME END -->
 
                         <!-- BUTTON WATCH ONE MATCH START -->
+                        <li class="list-group-item text-center">
+                            Score : {{ footballMatch.scoreTeam1 }}  _  {{ footballMatch.scoreTeam2 }}</li>
                         <a href="{{ path('visualiserunmatch', { 'id': footballMatch.id }) }}" class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
                         <!-- BUTTON WATCH ONE MATCH END -->
 

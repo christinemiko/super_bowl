@@ -54,7 +54,7 @@
                         {{ footballMatch.team2.teamName }}
 
                     <li class="list-group-item text-center">
-                        Score : {{ footballMatch.scoreGame }}</li>
+                        Score : {{ footballMatch.scoreTeam1 }}  _  {{ footballMatch.scoreTeam2 }}</li>
                     <a href="{{ path('visualiserunmatch', { 'id': footballMatch.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
                 </ul>
 
@@ -105,7 +105,6 @@
                                 {{ footballMatch2.team2.teamName }}
 
                             <li class="list-group-item text-center">
-                                Score : {{ footballMatch2.scoreGame }}</li>
                             <a href="{{ path('visualiserunmatch', { 'id': footballMatch2.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
                         </ul>
 
@@ -155,7 +154,7 @@
                                 {{ footballMatch3.team2.teamName }}
 
                             <li class="list-group-item text-center">
-                                Score : {{ footballMatch3.scoreGame }}</li>
+                                Score : {{ footballMatch3.scoreTeam1 }}  _  {{ footballMatch3.scoreTeam2 }}</li>
                             <a href="{{ path('visualiserunmatch', { 'id': footballMatch3.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
                         </ul>
 
