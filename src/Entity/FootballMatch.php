@@ -52,9 +52,15 @@ class FootballMatch
     /**
      * @Groups("footballmatch")
      */
-    private ?string $scoreGame = null;
+    private ?int $scoreTeam1 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 3, nullable: true)]
+    /**
+     * @Groups("footballmatch")
+     */
+    private ?int $scoreTeam2 = null;
+
+    #[ORM\Column(length: 3, nullable: true)]
     /**
      * @Groups("footballmatch")
      */
@@ -151,14 +157,25 @@ class FootballMatch
         return $this;
     }
 
-    public function getScoreGame(): ?string
+    public function getScoreTeam1(): ?int
     {
-        return $this->scoreGame;
+        return $this->scoreTeam1;
     }
 
-    public function setScoreGame(?string $scoreGame): self
+    public function setScoreTeam1(?int $scoreTeam1): self
     {
-        $this->scoreGame = $scoreGame;
+        $this->scoreTeam1 = $scoreTeam1;
+
+        return $this;
+    }
+    public function getScoreTeam2(): ?int
+    {
+        return $this->scoreTeam2;
+    }
+
+    public function setScoreTeam2(?int $scoreTeam2): self
+    {
+        $this->scoreTeam2 = $scoreTeam2;
 
         return $this;
     }

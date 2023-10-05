@@ -65,7 +65,8 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $weatherDescription = $this->faker->randomElement($weatherConditions1);
             $footballMatch->setWeather($weatherDescription);
 
-            $footballMatch-> setScoreGame($this->faker->numberBetween(0, 40) . '_' . $this->faker->numberBetween(0, 40));
+            $footballMatch-> setScoreTeam1($this->faker->numberBetween(0, 40));
+            $footballMatch-> setScoreTeam2($this->faker->numberBetween(0, 40));
 
             $footballMatch->setComments('Le match est surprenant avec ces deux équipes et la fin du match se prononce très serré.');
 
@@ -112,7 +113,8 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $footballMatch->setWeather($weatherDescription);
 
 
-            $footballMatch-> setScoreGame($this->faker->numberBetween(0, 40) . '_' . $this->faker->numberBetween(0, 40));
+            $footballMatch-> setScoreTeam1($this->faker->numberBetween(0, 40));
+            $footballMatch-> setScoreTeam2($this->faker->numberBetween(0, 40));
 
             $footballMatch->setComments('Ce fut un très beau Match, pleins de rebondissements, avec les grands favoris de la NLF.' );
 
@@ -157,9 +159,6 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
 
             $weatherDescription = $this->faker->randomElement($weatherConditions2);
             $footballMatch->setWeather($weatherDescription);
-
-
-            $footballMatch-> setScoreGame($this->faker->numberBetween(0, 40) . '_' . $this->faker->numberBetween(0, 40));
 
             $footballMatch->setComments('C/est un match attendu pour cette saison avec des équipes, prêtes pour la victoire.');
 
