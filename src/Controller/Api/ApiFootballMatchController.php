@@ -147,9 +147,8 @@ class ApiFootballMatchController extends AbstractController
 
                 // la logique de calcul des gains / pertes
                 // Si le match est terminé, calculer les gains
-                $scores = explode('_', $footballMatch->getScoregame());
-                $team1Score = (int)$scores[0];
-                $team2Score = (int)$scores[1];
+                $team1Score = $footballMatch->getScoreTeam1();
+                $team2Score = $footballMatch->getScoreTeam2();
 
                 // Déterminez quelle équipe a gagné
                 $winningTeam = null;
