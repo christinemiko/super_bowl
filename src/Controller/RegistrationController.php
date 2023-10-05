@@ -64,7 +64,7 @@ class RegistrationController extends AbstractController
 
             // SEND EMAIL SERVICE MAILER FOR CONFIRMATION SUBSCRIPTION START
 
-            $this->mailer->sendEmail($user->getEmail(), $user->getToken(), $user);
+            $this->mailer->sendValidationSubscription($user->getEmail(), $user->getToken(), $user);
 
             // SEND EMAIL SERVICE MAILER FOR CONFIRMATION SUBSCRIPTION END
 

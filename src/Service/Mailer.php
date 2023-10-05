@@ -21,7 +21,7 @@ class Mailer
     }
 
     // SEND EMAIL FOR CONFIRMATION SUBSCRIPTION START
-    public function sendEmail($email, $token, $user)
+    public function sendValidationSubscription($email, $token, $user)
     {
 
         $templatedEmail = (new TemplatedEmail())
