@@ -93,6 +93,8 @@ class SportbetController extends AbstractController
                 'form' => $form->createView(),
                 'footballMatch' => $footballMatch,
                 'existingSportbet' => true,
+                'sportbet' => $sportbet,
+
             ]);
     }
 

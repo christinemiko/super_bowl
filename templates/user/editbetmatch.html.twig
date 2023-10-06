@@ -44,7 +44,11 @@
                     <h4 class="text-center">Mise</h4>
 
                     <p class="text-center mt-5 mb-5"> Sélectionner l'équipe sur laquelle vous souhaitez miser :</p>
-                    <div class="text-center mb-2">{{ form_row(form.team) }}</div>
+                    <label>{{ form_label(form.team) }}</label>
+                    <select name="team" id="team">
+                        <option value="{{ sportbet.team.id }}" selected>{{ sportbet.team.teamName }}</option>
+                    </select>
+
 
                     <div class="text-center col-6 mx-auto mt-5 mb-5" >{{ form_row(form.wagerMade) }}</div>
 
@@ -63,9 +67,6 @@
                     <a href="{{ path('supprimer', { 'footballMatch' : footballMatch.id }) }}" class="btn btn-danger text-light m-2">Supprimer</a>
                 </div>
                 <!-- BUTTON DELETE END-->
-
-
-
 
 
                 {{ form_end(form) }}
