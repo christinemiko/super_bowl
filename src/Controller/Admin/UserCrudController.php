@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -75,43 +76,22 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $fields = [
             IdField::new('id')->hideOnForm(),
             TextField::new('lastName', 'Nom'),
             TextField::new('firstName', 'Prénom'),
             EmailField::new('email', 'Email'),
             ArrayField::new('roles', 'roles'),
-            TextField::new('password', 'Mot de passe')
+            BooleanField::new('enable', 'Activé')->renderAsSwitch(true)
+        ];
+        if ($pageName == Crud::PAGE_NEW) {
+            $fields[] = TextField::new('password', 'Mot de passe')
                 ->setFormType(PasswordType::class)
                 ->onlyOnForms()
-                ->setRequired(true),
+                ->setRequired(true);
+        }
 
-
-        ];
-    }
-
-    private $passwordHasher;
-    private $requestStack;
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher, RequestStack $requestStack)
-    {
-        $this->passwordHasher = $passwordHasher;
-        $this->requestStack = $requestStack;
-    }
-
-    private function prePersistEntity(User $user): void
-    {
-        // Récupération des rôles depuis la requête
-        $request = $this->requestStack->getCurrentRequest();
-        $roles = $request->request->get('User')['roles'] ?? [];
-
-        // Attribution des rôles à l'utilisateur
-        $user->setRoles($roles);
-
-        // Hashage du mot de passe
-        $password = $user->getPassword();
-        $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
-        $user->setPassword($hashedPassword);
+        return $fields;
     }
 
 }
