@@ -73,7 +73,7 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('football_match1_' . $i, $footballMatch);
             $manager->persist($footballMatch);
 
-            $manager->persist($footballMatch);
+
         }
         /* FIXTURE MATCHES IN PROGRESS END*/
 
@@ -121,7 +121,7 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('football_match2_' . $i, $footballMatch);
             $manager->persist($footballMatch);
 
-            $manager->persist($footballMatch);
+
         }
         /* FIXTURES MATCHES FINISHED END*/
 
@@ -165,9 +165,7 @@ class FootballMatchFixtures extends Fixture implements DependentFixtureInterface
             $this->addReference('football_match3_' . $i, $footballMatch);
             $manager->persist($footballMatch);
 
-            $manager->persist($footballMatch);
         }
-
 
         /* FIXTURES MATCHES COMING END*/
 

@@ -45,7 +45,7 @@ class SportbetFixtures extends Fixture implements DependentFixtureInterface
 
 
         foreach ($users as $user) {
-           // Créez 5 Sportbet pour chaque utilisateur
+           // Créez 5 Sportbet Gagnants pour chaque utilisateur
             for ($i = 0; $i < 5; $i++) {
                 $sportbet = new Sportbet();
                 $sportbet->setWagerMade($faker->randomNumber(3))
@@ -55,9 +55,32 @@ class SportbetFixtures extends Fixture implements DependentFixtureInterface
                     ->setTeam($faker->randomElement($teams))
                     ->setFootballMatch($faker->randomElement($footballMatches))
                     ->setDeleted(false);
-
                 $manager->persist($sportbet);
             }
+            // Créez 5 Sportbet Perdants pour chaque utilisateur
+            for ($i = 0; $i < 5; $i++) {
+                $sportbet = new Sportbet();
+                $sportbet->setWagerMade($faker->randomNumber(3))
+                    ->setDateWagerMade(new \DateTime()) // définir la date d'aujourd'hui
+                    ->setMoneyLose($faker->numberBetween($min = 100, $max = 999))
+                    ->setUser($user)
+                    ->setTeam($faker->randomElement($teams))
+                    ->setFootballMatch($faker->randomElement($footballMatches))
+                    ->setDeleted(false);
+                $manager->persist($sportbet);
+            }
+            // Créez 5 Sportbet en attente pour chaque utilisateur
+            for ($i = 0; $i < 5; $i++) {
+                $sportbet = new Sportbet();
+                $sportbet->setWagerMade($faker->randomNumber(3))
+                    ->setDateWagerMade(new \DateTime()) // définir la date d'aujourd'hui
+                    ->setUser($user)
+                    ->setTeam($faker->randomElement($teams))
+                    ->setFootballMatch($faker->randomElement($footballMatches))
+                    ->setDeleted(false);
+                $manager->persist($sportbet);
+            }
+
         }
         $manager->flush();
     }
