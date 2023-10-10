@@ -25,7 +25,7 @@ class SportbetController extends AbstractController
         $user = $this->getUser();
         $team1 = $footballMatch->getTeam1();
         $team2 = $footballMatch->getTeam2();
-        $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
+        $existingSportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user, 'deleted' => false]);
 
         if (!$existingSportbet) {
             // Créer un nouveau pari
@@ -82,7 +82,7 @@ class SportbetController extends AbstractController
         $user = $this->getUser();
         $team1 = $footballMatch->getTeam1();
         $team2 = $footballMatch->getTeam2();
-        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
+        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user, 'deleted' => false]);
 
         //Integrer uniquement les deux équipes du Match dans le menu déroulant du Formulaire
         $form = $this->createForm(BetMatchFormType::class, $sportbet,[
@@ -111,8 +111,9 @@ class SportbetController extends AbstractController
     public function DeleteBetMatch(Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch): Response
     {
         $user = $this->getUser();
-        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
+        $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user, 'deleted' => false]);
         $sportbet->setDeleted(true);
+        $entityManager->persist($sportbet);
         $entityManager->flush();
         return $this->redirectToRoute("history");
     }

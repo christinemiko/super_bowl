@@ -51,7 +51,7 @@
 
 
                     <td class="col-md-2 text-center">
-                        {% if sportbet.footballMatch.statut == 'Prochainement' %}
+                        {% if sportbet.footballMatch.statut == 'Prochainement' and sportbet.isDeleted == false %}
 
                             <!-- BUTTON UPDATE START -->
                             <a href="{{ path('actualiser', { 'id': sportbet.footballMatch.id,'footballMatch': sportbet.footballMatch.id }) }}" class=" col btn btn-ml btn-primary mt-2 text-light">Mise à jour</a>
