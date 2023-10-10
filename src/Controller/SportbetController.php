@@ -196,9 +196,18 @@ class SportbetController extends AbstractController
                 // Enlevez le match actuel des matchs sélectionnés
                 $selectedMatches = array_diff($selectedMatches, [$footballMatch->getId()]);
 
-                // Redirigez l'utilisateur vers la même page 'betselections' avec les cartes des matchs restants
-                $redirectUrl = $router->generate('betselections', ['selectedMatches' => $selectedMatches]);
-                return $this->redirect($redirectUrl);
+                // Supposons que $totalMatches contienne le nombre total de matchs disponibles
+                $totalMatches = count($selectedMatches);
+
+                if (count($selectedMatches) === 0) {
+                    // Si tous les matchs ont été sélectionnés, redirigez vers la page 'parier'
+                    return $this->redirectToRoute('parier');
+                } else {
+                    // Sinon, redirigez vers la même page avec les matchs restants
+                    $redirectUrl = $router->generate('betselections', ['selectedMatches' => $selectedMatches]);
+                    return $this->redirect($redirectUrl);
+                }
+
             }
 
             // Ajoutez le formulaire au tableau des formulaires

@@ -63,7 +63,8 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $sportbet = $sportbetRepository->findBy(
             ['user' => $user, 'deleted' => false],  // critères
-            ['id' => 'DESC']  // options
+            ['id' => 'DESC'],
+        // options
         );
 
         return $this->render('historysportbet.html.twig',[
