@@ -61,6 +61,7 @@ class SportbetController extends AbstractController
                 'form' => $form->createView(),
                 'footballMatch' => $footballMatch,
                 'existingSportbet' => true,
+                'sportbet' => $sportbet,
             ]);
         } else {
             // Afficher le formulaire de création d'un nouveau pari
@@ -68,25 +69,32 @@ class SportbetController extends AbstractController
                 'form' => $form->createView(),
                 'footballMatch' => $footballMatch,
                 'existingSportbet' => false,
+                'sportbet' => $sportbet,
+
             ]);
         }
     }
-
 
     #[Route('editbetmatch/{footballMatch}', name: 'actualiser', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function editBetMatch( Request $request, EntityManagerInterface $entityManager, SportbetRepository $sportbetRepository, FootballMatch $footballMatch):Response
     {
         $user = $this->getUser();
+        $team1 = $footballMatch->getTeam1();
+        $team2 = $footballMatch->getTeam2();
         $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
 
-        $form = $this->createForm(BetMatchFormType::class, $sportbet);
+        //Integrer uniquement les deux équipes du Match dans le menu déroulant du Formulaire
+        $form = $this->createForm(BetMatchFormType::class, $sportbet,[
+            'team1' => $team1,
+            'team2' => $team2,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($sportbet);
             $entityManager->flush();
-            return $this->redirectToRoute('parier');
+            return $this->redirectToRoute('history');
         }
 
             return $this->render('user/editbetmatch.html.twig', [
@@ -106,7 +114,7 @@ class SportbetController extends AbstractController
         $sportbet = $entityManager->getRepository(Sportbet::class)->findOneBy(['footballMatch' => $footballMatch, 'user' => $user]);
         $sportbet->setDeleted(true);
         $entityManager->flush();
-        return $this->redirectToRoute("parier");
+        return $this->redirectToRoute("history");
     }
 
 
@@ -148,7 +156,7 @@ class SportbetController extends AbstractController
         // Récupérez les matchs sélectionnés à partir de la base de données en utilisant les identifiants
         $footballMatches = $footballMatchRepository->findBySelection($selectedMatches);
 
-        // Récupérez l'utilisateur actuellement connecté (assumant que j' utilises un système d'authentification)
+        // Récupérez l'utilisateur actuellement connecté (assumant que j'utilise un système d'authentification)
         $user = $this->getUser();
 
         // Créez un tableau pour stocker les formulaires

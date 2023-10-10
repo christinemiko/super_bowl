@@ -44,11 +44,7 @@
                     <h4 class="text-center">Mise</h4>
 
                     <p class="text-center mt-5 mb-5"> Sélectionner l'équipe sur laquelle vous souhaitez miser :</p>
-                    <label>{{ form_label(form.team) }}</label>
-                    <select name="team" id="team">
-                        <option value="{{ sportbet.team.id }}" selected>{{ sportbet.team.teamName }}</option>
-                    </select>
-
+                    <label>{{ form_row(form.team) }}</label>
 
                     <div class="text-center col-6 mx-auto mt-5 mb-5" >{{ form_row(form.wagerMade) }}</div>
 
