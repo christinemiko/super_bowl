@@ -48,7 +48,7 @@
                 type: 'line',
                 data: {
                     labels: [    {% for sportbet in sportbets %}
-                        {% if sportbet.footballMatch.statut == 'Terminé' %}
+                        {% if sportbet.footballMatch.statut == 'Terminé' and sportbet.deleted == false %}
                         '{{ sportbet.dateWagerMade|date('d/m/Y') }}',
                         {% endif %}
                         {% endfor %}],
@@ -117,7 +117,7 @@
 
                     <tbody>
                     {% for sportbet in sportbets %}
-                        {% if sportbet.footballMatch.statut == 'Terminé' %}
+                        {% if sportbet.footballMatch.statut == 'Terminé' and sportbet.deleted == false %}
                     <tr>
                         <td class="text-center">{{ sportbet.footballMatch.matchDate|date('d/m/Y')}}</td>
                         <td class="text-center">{{ sportbet.footballMatch.statut }}</td>

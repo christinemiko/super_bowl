@@ -4,10 +4,13 @@ namespace App\Repository;
 
 use App\Entity\Sportbet;
 use App\Entity\FootballMatch;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\DBAL\ParameterType;
+
 
 
 /**
@@ -89,6 +92,17 @@ class SportbetRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findExistingBets(User $user, array $selectedMatches): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.user = :user')
+            ->andWhere('s.footballMatch IN (:selectedMatches)')
+            ->andWhere('s.deleted = false')
+            ->setParameter('user', $user)
+            ->setParameter('selectedMatches', $selectedMatches)
+            ->getQuery()
+            ->getResult();
+    }
 
 
 

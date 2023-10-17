@@ -8,6 +8,7 @@ use App\Form\BetMatchFormType;
 use App\Repository\FootballMatchRepository;
 use App\Repository\SportbetRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -142,55 +143,54 @@ class SportbetController extends AbstractController
 
     #[Route('/betselections', name: 'betselections', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
-     public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository, EntityManagerInterface $entityManager, RouterInterface $router): Response
+     public function betSelections(Request $request, FootballMatchRepository $footballMatchRepository, EntityManagerInterface $entityManager, RouterInterface $router,SportbetRepository $sportbetRepository, LoggerInterface $logger): Response
     {
+
         $selectedMatches = $request->query->all()['selectedMatches'] ?? [];
 
         // Convertir les identifiants des matchs sélectionnés en entiers
         $selectedMatches = array_map('intval', $selectedMatches);
-
-        // Enregistrez les identifiants des matchs sélectionnés dans la variable de session
-        $session = $request->getSession();
-        $session->set('selectedMatches', $selectedMatches);
-         //var_dump($selectedMatches);
 
         // Récupérez les matchs sélectionnés à partir de la base de données en utilisant les identifiants
         $footballMatches = $footballMatchRepository->findBySelection($selectedMatches);
 
         // Récupérez l'utilisateur actuellement connecté (assumant que j'utilise un système d'authentification)
         $user = $this->getUser();
+        $existingBets = $sportbetRepository->findExistingBets($user, $selectedMatches);
 
+        $existingBetsAssoc = [];
+        foreach ($existingBets as $bet) {
+            $existingBetsAssoc[$bet->getFootballMatch()->getId()] = $bet;
+        }
         // Créez un tableau pour stocker les formulaires
         $forms = [];
          //dump($footballMatches);
+        $sportbet = null;
+
         foreach ($footballMatches as $footballMatch) {
-            // Créez une instance du formulaire pour chaque match
-            $form = $this->createForm(BetMatchFormType::class);
-            $form->handleRequest($request);
 
-            //Integrer uniquement les deux équipes du Match dans le menu déroulant du Formulaire
-            $form = $this->createForm(BetMatchFormType::class, null,[
-                'team1' => $footballMatch->getTeam1(),
-                'team2' =>  $footballMatch->getTeam2(),
-            ]);
-            $form->handleRequest($request);
+            $existingSportbet =  $existingBetsAssoc[$footballMatch->getId()] ?? null;
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                // Créez une nouvelle instance de Sportbet et configurez ses propriétés
-
-                $team = $form->get('team')->getData();
+            if ($existingSportbet) {
+                $sportbet = $existingSportbet;
+            } else {
                 $sportbet = new Sportbet();
                 $sportbet->setUser($user);
                 $sportbet->setFootballMatch($footballMatch);
-                $currentDate = new \DateTime();
-                $sportbet->setDatewagerMade($currentDate);
-                $sportbet->setTeam($team);
 
-                $formData = $form->getData();
-                $wagerMade = $formData->getWagerMade();
-                $sportbet->setWagerMade($wagerMade);
+            }
 
+            //Integrer uniquement les deux équipes du Match dans le menu déroulant du Formulaire
+            $form = $this->createForm(BetMatchFormType::class, $sportbet,[
+                'team1' => $footballMatch->getTeam1(),
+                'team2' =>  $footballMatch->getTeam2(),
+            ]);
 
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $sportbet = $form->getData();
                 $entityManager->persist($sportbet);
                 $entityManager->flush();
 
@@ -199,6 +199,7 @@ class SportbetController extends AbstractController
 
                 // Supposons que $totalMatches contienne le nombre total de matchs disponibles
                 $totalMatches = count($selectedMatches);
+                $logger->info('Redirection pour le match id: ' . $footballMatch->getId());
 
                 if (count($selectedMatches) === 0) {
                     // Si tous les matchs ont été sélectionnés, redirigez vers la page 'parier'
@@ -208,7 +209,6 @@ class SportbetController extends AbstractController
                     $redirectUrl = $router->generate('betselections', ['selectedMatches' => $selectedMatches]);
                     return $this->redirect($redirectUrl);
                 }
-
             }
 
             // Ajoutez le formulaire au tableau des formulaires
@@ -219,8 +219,8 @@ class SportbetController extends AbstractController
         return $this->render('betselections.html.twig', [
             'footballMatches' => $footballMatches,
             'forms' => $forms,
+            'sportbet' => $sportbet,
         ]);
     }
-
 
 }
