@@ -16,21 +16,31 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
 
-class UserCrudController extends AbstractCrudController
+class UserCrudController extends AbstractCrudController implements EventSubscriberInterface
 {
 
-    public static function getEntityFqcn(): string
+    public static function getSubscribedEvents()
     {
-        return User::class;
+        return [
+            BeforeEntityPersistedEvent::class => ['setUserPassword'],
+        ];
     }
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
     }
+
+    public static function getEntityFqcn(): string
+    {
+        return User::class;
+    }
+
 
     public function configureCrud(Crud $crud): Crud
     {
@@ -90,14 +100,32 @@ class UserCrudController extends AbstractCrudController
             BooleanField::new('enable', 'Activé')->renderAsSwitch(true)
         ];
         if ($pageName == Crud::PAGE_NEW) {
-            $fields[] = TextField::new('password', 'Mot de passe')
+            $password = TextField::new('password', 'Mot de passe')
                 ->setFormType(PasswordType::class)
                 ->onlyOnForms()
                 ->setRequired(true);
+            $fields[] = $password;
         }
 
         return $fields;
     }
+
+    public function setUserPassword(BeforeEntityPersistedEvent $event)
+    {
+        $entity = $event->getEntityInstance();
+
+        if (!($entity instanceof User)) {
+            return;
+        }
+
+        $entity->setPassword(
+            $this->passwordHasher->hashPassword(
+                $entity,
+                $entity->getPassword()
+            )
+        );
+    }
+
 
 
 }
