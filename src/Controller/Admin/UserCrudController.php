@@ -18,6 +18,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 
+
 class UserCrudController extends AbstractCrudController
 {
 
@@ -26,6 +27,10 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
 
     public function configureCrud(Crud $crud): Crud
     {
@@ -93,5 +98,6 @@ class UserCrudController extends AbstractCrudController
 
         return $fields;
     }
+
 
 }

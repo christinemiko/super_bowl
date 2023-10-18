@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -138,7 +139,9 @@ class FootballMatchCrudController extends AbstractCrudController
             TimeField::new('hourStart', 'Heure de début'),
             TimeField::new('hourFinish', 'Heure de fin'),
             TextField::new('weather', 'Météo'),
-            TextField::new('scoreGame', 'Score du Jeu'),
+            NumberField::new('scoreTeam1', 'scoreTeam1'),
+            NumberField::new('scoreTeam2', 'scoreTeam2'),
+
 
             ChoiceField::new('statut')
                 ->setLabel( 'Statut ')
