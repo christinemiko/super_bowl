@@ -15,12 +15,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use App\Event\RegistrationEvent;
 
 class RegistrationController extends AbstractController
 {
 
     private $mailer;
     private $userRepository;
+    private $eventDispatcher;
 
     public function __construct(Mailer $mailer, UserRepository$userRepository)
     {
@@ -63,8 +65,10 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // SEND EMAIL SERVICE MAILER FOR CONFIRMATION SUBSCRIPTION START
+            $event = new RegistrationEvent($user);
+            $this->eventDispatcher->dispatch($event, RegistrationEvent::NAME);
 
-            $this->mailer->sendValidationSubscription($user->getEmail(), $user->getToken(), $user);
+           // $this->mailer->sendValidationSubscription($user->getEmail(), $user->getToken(), $user);
 
             // SEND EMAIL SERVICE MAILER FOR CONFIRMATION SUBSCRIPTION END
 
