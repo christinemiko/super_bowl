@@ -151,7 +151,7 @@ class FootballMatchCrudController extends AbstractCrudController
                     'Actuellement' => 'Actuellement'
                 ]),
 
-            TextEditorField::new('comments', 'Commentaires'),
+            TextField::new('comments', 'Commentaires'),
 
             BooleanField::new('deleted', 'Deleted'),
 
