@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use App\Event\RegistrationEvent;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -32,7 +33,7 @@ class RegistrationController extends AbstractController
 
 
     #[Route('/inscription', name: 'inscription')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppLoginAuthenticator $authenticator, EntityManagerInterface $entityManager ): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppLoginAuthenticator $authenticator, EntityManagerInterface $entityManager,EventDispatcherInterface $eventDispatcher ): Response
     {
 
         $user = new User();
@@ -66,7 +67,7 @@ class RegistrationController extends AbstractController
 
             // SEND EMAIL SERVICE MAILER FOR CONFIRMATION SUBSCRIPTION START
             $event = new RegistrationEvent($user);
-            $this->eventDispatcher->dispatch($event, RegistrationEvent::NAME);
+            $eventDispatcher->dispatch($event, RegistrationEvent::NAME);
 
            // $this->mailer->sendValidationSubscription($user->getEmail(), $user->getToken(), $user);
 

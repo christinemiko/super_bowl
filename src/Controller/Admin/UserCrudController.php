@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -14,27 +13,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
-
-class UserCrudController extends AbstractCrudController implements EventSubscriberInterface
+class UserCrudController extends AbstractCrudController
 {
 
-    public static function getSubscribedEvents()
-    {
-        return [
-            BeforeEntityPersistedEvent::class => ['setUserPassword'],
-        ];
-    }
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
-    {
-        $this->passwordHasher = $passwordHasher;
-    }
 
     public static function getEntityFqcn(): string
     {
@@ -109,23 +92,5 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
 
         return $fields;
     }
-
-    public function setUserPassword(BeforeEntityPersistedEvent $event)
-    {
-        $entity = $event->getEntityInstance();
-
-        if (!($entity instanceof User)) {
-            return;
-        }
-
-        $entity->setPassword(
-            $this->passwordHasher->hashPassword(
-                $entity,
-                $entity->getPassword()
-            )
-        );
-    }
-
-
 
 }

@@ -60,7 +60,7 @@ class FootballMatch
      */
     private ?int $scoreTeam2 = null;
 
-    #[ORM\Column(length: 3, nullable: true)]
+    #[ORM\Column(type:"text", nullable: true)]
     /**
      * @Groups("footballmatch")
      */
