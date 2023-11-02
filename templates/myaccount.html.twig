@@ -34,15 +34,18 @@
             Chart.defaults.plugins.title.display = true;
             Chart.defaults.plugins.title.text = "MATCHS TERMINES";
             Chart.defaults.plugins.title.color = "red";
+            function filterOutNulls(dataArray) {
+                return dataArray.filter(item => item !== null);
+            }
 
+            // Utilisation de la fonction pour filtrer moneyLoseData
+            const filteredMoneyLoseData = filterOutNulls({{ moneyLoseData|raw }});
         </script>
         <!-- CHART TITTLE END-->
 
         <!-- SPORT BET GRAPHIC USER START -->
         <script>
-
             const ctx = document.getElementById('myGraphic');
-
 
             new Chart(ctx, {
                 type: 'line',
@@ -67,8 +70,8 @@
 
                         {
                             label: 'Perte',
-                            data:{{ moneyLoseData|raw }},
-                            borderWidth: 3
+                            data:filteredMoneyLoseData,
+                            borderWidth: 1,
                         },
 
                     ]
