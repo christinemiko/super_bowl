@@ -33,7 +33,13 @@ class ApiFootballMatchFormType extends AbstractType
             ])
             ->add('statut')
             ->add('weather')
-            ->add('scoreGame')
+            ->add('team1', EntityType::class, [
+                'class' => Team::class,
+            ])
+            ->add('team2', EntityType::class, [
+                'class' => Team::class,
+            ])
+
             ->add('comments')
 
             ->add('team1', EntityType::class, [
