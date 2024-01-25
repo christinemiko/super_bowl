@@ -119,6 +119,28 @@ title {
     background-color: white;
     color: black;
 }
+.image-text-container {
+    display: flex;
+    align-items: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+}
+
+.text-button-container {
+    text-align: center;
+    margin-top: -150px;
+}
+
+.img-title-game {
+    height: 100%;
+    width: 100%;
+
+}
+.btn {
+    display: inline-block; /* Rend le bouton traitable comme un élément en ligne pour le centrage */
+}
 /* HOME PAGE END*/
 
 /*  WATCH ALL MATCHES PAGE START*/
