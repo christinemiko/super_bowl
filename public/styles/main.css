@@ -38,6 +38,10 @@ body,main{
 .navbar-toggler-light {
     color:white;
 }
+.custom-navbar .nav-link {
+    font-size: 20px;
+}
+
 /* NAV BAR */
 
 /* FOOTER */
