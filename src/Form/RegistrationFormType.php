@@ -43,15 +43,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-
-            ->add('RGPDConsent', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez accepter les conditions d\'inscriptions.',
-                    ]),
-                ], 'label' => 'Je confirme mon inscription par l\'enregistrement de ses données sur le site Super Bowl.'
-            ])
         ;
     }
 
