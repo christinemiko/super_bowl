@@ -1,13 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap');
 
 
 body,main {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     background-image: linear-gradient(216deg, rgba(77, 77, 77,0.05) 0%, rgba(77, 77, 77,0.05) 25%,rgba(42, 42, 42,0.05) 25%, rgba(42, 42, 42,0.05) 38%,rgba(223, 223, 223,0.05) 38%, rgba(223, 223, 223,0.05) 75%,rgba(36, 36, 36,0.05) 75%, rgba(36, 36, 36,0.05) 100%),linear-gradient(44deg, rgba(128, 128, 128,0.05) 0%, rgba(128, 128, 128,0.05) 34%,rgba(212, 212, 212,0.05) 34%, rgba(212, 212, 212,0.05) 57%,rgba(25, 25, 25,0.05) 57%, rgba(25, 25, 25,0.05) 89%,rgba(135, 135, 135,0.05) 89%, rgba(135, 135, 135,0.05) 100%),linear-gradient(241deg, rgba(55, 55, 55,0.05) 0%, rgba(55, 55, 55,0.05) 14%,rgba(209, 209, 209,0.05) 14%, rgba(209, 209, 209,0.05) 60%,rgba(245, 245, 245,0.05) 60%, rgba(245, 245, 245,0.05) 69%,rgba(164, 164, 164,0.05) 69%, rgba(164, 164, 164,0.05) 100%),linear-gradient(249deg, rgba(248, 248, 248,0.05) 0%, rgba(248, 248, 248,0.05) 32%,rgba(148, 148, 148,0.05) 32%, rgba(148, 148, 148,0.05) 35%,rgba(202, 202, 202,0.05) 35%, rgba(202, 202, 202,0.05) 51%,rgba(181, 181, 181,0.05) 51%, rgba(181, 181, 181,0.05) 100%),linear-gradient(92deg, rgb(0,0,0),rgb(0,0,0));
     width: 100%;
     height: 100%;
     color: white;
+}
+.anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.anton-regular2 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 100px;
 }
 
 .no-padding-margin {
@@ -31,7 +41,7 @@ body,main {
 
 /* HOME PAGE START*/
 title {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Anton', sans-serif;
     color:white;
 }
 
@@ -77,8 +87,37 @@ title {
     background-color: white;
 }
 .imgteam{
-    width: 120px; /* Définissez la largeur souhaitée */
-    object-fit: cover;
+    min-height: 80px; /* Ajustez cette valeur en fonction de la hauteur souhaitée */
+    max-height: 80px; /* Ajustez cette valeur en fonction de la hauteur souhaitée */
+    width: auto;
+}
+.card .list-group-item {
+    height: 110px; /* Hauteur fixe */
+    overflow: auto; /* Pour gérer le contenu dépassant */
+}
+.small-text {
+    font-size: 14px;
+}
+.team-name {
+    display: flex; /* Utilisation de flexbox */
+    justify-content: flex-end; /* Aligner le contenu à l'extrémité droite */
+    align-items: center; /* Centrer verticalement le contenu */
+}
+
+.btn-round {
+    border-radius: 50%; /* Arrondir les coins à 50% pour créer un cercle */
+    padding: 10px 20px; /* Ajustez le rembourrage selon vos préférences */
+    text-align: center;
+    font-size: 30px; /* Ajustez la taille du texte */
+    display: inline-block; /* Pour que le bouton s'ajuste automatiquement à la taille du contenu */
+    min-width: 150px; /* Définissez une largeur minimale pour le bouton */
+    width: 400px; /* Permet au bouton de s'ajuster automatiquement à la largeur du contenu */
+    height: 400px;
+    line-height: 380px; /* Ajustez la valeur de line-height pour déplacer le texte vers le bas */
+}
+.btn-round:hover {
+    background-color: white;
+    color: black;
 }
 /* HOME PAGE END*/
 
@@ -121,7 +160,7 @@ title {
     background-color: #ef0e0e;
 }
 .btn-warning{
-    background-color: #f65b07;
+    background-color: grey;
 }
 .btn-primary{
     background-color: #2563EB;

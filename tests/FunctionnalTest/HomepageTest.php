@@ -11,7 +11,6 @@ class HomepageTest extends WebTestCase
         $client = static::createClient();
         $client->followRedirects(true);
         $client->request('GET', '/');
-
         $this->assertResponseIsSuccessful();
 
     }
@@ -21,7 +20,6 @@ class HomepageTest extends WebTestCase
         $client = static::createClient();
         $client->followRedirects(true);
         $client->request('GET', '/inscription');
-
         $this->assertResponseIsSuccessful();
 
     }
