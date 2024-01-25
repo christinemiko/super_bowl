@@ -8,7 +8,7 @@
     <div class="container mb-2">
 
         <!--  PICTURE1 START -->
-        <div class="image-text-container mb-5">
+        <div class="image-text-container">
             <img src="{{ asset('img/img32.png') }}"  class=" img-fluid" alt="superbowl">
 
             <div class="text-button-container">
@@ -32,7 +32,7 @@
     <section>
 
         <!--MATCH TODAY START -->
-        <h2 class="text-center rectangle1 anton-regular2"> MATCHS DU JOUR</h2>
+        <h2 class="text-center anton-regular2 mt-5"> MATCHS DU JOUR </h2>
 
         <!--CARD MATCH TODAY  START -->
         <div class="container">
@@ -40,7 +40,7 @@
 
                 {% for footballMatch in footballMatches %}
 
-                <div class="card mt-5 h-100" style="width: 25rem;">
+                <div class="card  mt-5 mb-5 h-100" style="width: 25rem;">
                     <ul class="list-group list-group-flush">
                         <li class="text-center" style="list-style-type: none;">
 
@@ -53,29 +53,48 @@
                                Début {{footballMatch.hourStart|date('H:i')}}
                                Fin {{footballMatch.hourFinish|date('H:i')}}
                            </div>
-                             <div class="text-center text-danger mt-2 mb-2">{{footballMatch.statut}} </div>
                             <!-- HOUR MATCH END -->
+
+                            <!-- STATUS MATCH  -->
+                             <div class="match-status text-center text-danger mt-2 mb-2">{{footballMatch.statut}} </div>
+
                         </li>
 
                         <!-- TEAM 1 & TEAM 2 LOGO AND NAME START -->
-                            <div class="text-center mt-2 mb-2">
-                            <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam" alt="logo">
-                            {{ footballMatch.team1.teamName }}
-                            </div>
+                            <div class="row mt-2 mb-2 text-center">
 
-                            <div class=" text-center mt-2 mb-2">
-                                <img src="{{ asset('img/teams/vs.png') }}" class="imgteam" alt="logo">
-                            </div>
+                                <!-- Column Logo team 1 -->
+                                <div class="col">
+                                    <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam" alt="logo">
+                                </div>
 
-                            <div class="text-center  mt-2 mb-2">
-                            <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam" alt="logo">
-                            {{ footballMatch.team2.teamName }}
+                                <!-- Column team 1 Name -->
+                                <div class="col d-flex justify-content-center align-items-center">
+                                    {{ footballMatch.team1.teamName }}
+                                </div>
+
+                                <!--  VS LOGO START -->
+                                <div class=" text-center mt-2 mb-2">
+                                    <img src="{{ asset('img/teams/vs.png') }}" class="imgteam" alt="logo">
+                                </div>
+                                <!--  VS LOGO END -->
+
+                                <!-- Column Logo team 2 -->
+                                <div class="col">
+                                <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam" alt="logo">
+                                </div>
+
+                                <!-- Column team 2 Name -->
+                                <div class="col d-flex justify-content-center align-items-center">
+                                    {{ footballMatch.team2.teamName }}
+                                </div>
+
                             </div>
 
                         <!-- TEAM 1 & TEAM 2 LOGO AND NAME END -->
 
                         <!-- BUTTON WATCH ONE MATCH START -->
-                        <li class="text-center mt-2" style="list-style-type: none;">Score : {{ footballMatch.scoreTeam1 }}  _  {{ footballMatch.scoreTeam2 }}</li>
+                        <li class="team-score text-center mt-2" style="list-style-type: none;"> Score : {{ footballMatch.scoreTeam1 }}  -  {{ footballMatch.scoreTeam2 }}</li>
                         <a href="{{ path('visualiserunmatch', { 'id': footballMatch.id }) }}" class="btn btn-secondary mt-2 mb-2">Visualiser le Match</a>
                         <!-- BUTTON WATCH ONE MATCH END -->
 
