@@ -54,6 +54,15 @@ footer{
     background-color:red;
     height: 2px
 }
+.email-link {
+    color: white;
+}
+
+.email-link:hover {
+    color: red; /* Optionnel: Garde la couleur en blanc même au survol */
+    text-decoration: none; /* Optionnel: Supprime le soulignement au survol */
+}
+
 /* FOOTER */
 
 /* HOME PAGE START*/
@@ -102,6 +111,9 @@ title {
 }
 .white{
     background-color: white;
+}
+.grey{
+    background-color: lightgrey;
 }
 .imgteam{
     min-height: 80px; /* Ajustez cette valeur en fonction de la hauteur souhaitée */
