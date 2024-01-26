@@ -18,12 +18,12 @@ main {
 
 /* HEADER NAV BAR */
 header {
-    background-color: transparent; /* Fond transparent */
+    background-color: transparent;
 }
 
 /* FOOTER */
 footer {
-    background-color: transparent; /* Fond transparent */
+    background-color: transparent;
     position: relative;
     bottom: 0;
     width: 100%;
@@ -40,12 +40,7 @@ footer {
     font-style: normal;
     font-size: 100px;
 }
-.anton-regular3 {
-    font-family: "Anton", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 17px;
-}
+
 .no-padding-margin {
     margin: 0;
     padding: 0;
@@ -146,9 +141,9 @@ title {
     font-size: 30px;
     display: inline-block;
     min-width: 150px;
-    width: 400px;
-    height: 400px;
-    line-height: 380px;
+    width: 350px;
+    height: 350px;
+    line-height: 340px;
 }
 .btn-round:hover {
     background-color: white;
@@ -156,6 +151,10 @@ title {
 }
 .btn {
     display: inline-block;
+}
+.btn-size {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
 }
 .image-text-container {
     display: flex;
@@ -175,6 +174,10 @@ title {
     height: 70%;
     width: 70%;
 
+}
+.intro-home {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* HOME PAGE END*/
