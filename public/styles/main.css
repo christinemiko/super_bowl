@@ -271,7 +271,7 @@ title {
         max-width: 100%;
         height: auto;
         margin-top: 5px;
-    }
+    c
     .img-title-game {
         width: 70%;
         height: auto;
@@ -280,8 +280,22 @@ title {
         text-align: center;
         margin-top: 20px;
     }
+    .img-login {
+        width: 50vh;
+        height: auto;
+        margin-top: -20px;
+        margin-bottom: 30px;
+    }
 
 }
-
+/* FOR MOBILES *****************************************************************************************************************************/
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+    .img-login {
+        width: 30vh;
+        height: auto;
+        margin-top: -20px;
+        margin-bottom: 30px;
+    }
+}
 
 
