@@ -314,6 +314,11 @@ title {
         margin-top: -20px;
         margin-bottom: 30px;
     }
+    .regis-btn{
+        border-radius: 90px;
+        width: 50%;
+        height: 50px;
+    }
 }
 
 
