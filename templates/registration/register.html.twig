@@ -6,16 +6,14 @@
 
 <!--FORMULAIRE INSCRIPTION START -->
 
-<main class="container-fluid">
+<main>
 
     <div class=" block text-center">
-        <img src="{{ asset('img/logo4.png') }}" class="img-fluid" alt="Logo SuperBowl">
-        <h1 class="mt-3 text-center text-light">Inscription</h1>
-
+        <img src="{{ asset('img/img35.png') }}" class="img-login" alt="Logo SuperBowl">
     </div>
 
-    <section class="container">
-        <div class="row">
+    <div class="container-md ">
+        <div class="row justify-content-center">
 
             <!-- FLASH MESSAGE START -->
             {% for flashError in app.flashes('error') %}
@@ -24,44 +22,52 @@
                 </div>
             {% endfor %}
             <!-- FLASH MESSAGE END -->
-
-            <div >
+            <div class="col-md-6">
                 {{ form_start(registrationForm) }}
                 <fieldset>
 
-                    <div class="mt-5">
-                    {{ form_row(registrationForm.last_name) }}
+                    <div class="text-center form-field-label">
+                        {{ form_row(registrationForm.last_name, {
+                            'attr': {'placeholder': 'Nom'}
+                        }) }}
                     </div>
 
-                    <div class="mt-2">
-                    {{ form_row(registrationForm.first_name) }}
+                    <div class="form-field-label">
+                        {{ form_row(registrationForm.first_name, {
+                            'attr': {'placeholder': 'Prénom'}
+                        }) }}
                     </div>
 
-                    <div class="mt-2">
-                    {{ form_row(registrationForm.email) }}
+                    <div class="form-field-label">
+                       {{ form_row(registrationForm.email, {
+                            'attr': {'placeholder': 'Email'}
+                        }) }}
                     </div>
 
                 </fieldset>
 
-                <div class="mt-2">
-                    {{ form_row(registrationForm.password.first) }}
+                <div class="form-field-label">
+                    {{ form_row(registrationForm.password.first, {
+                        'attr': {'placeholder': 'Mot de passe'}
+                    }) }}
                 </div>
 
-                <div class="mt-2">
-                    {{ form_row(registrationForm.password.second) }}
+                <div class="form-field-label">
+                    {{ form_row(registrationForm.password.second, {
+                        'attr': {'placeholder': 'Confirmez le mot de passe'}
+                    }) }}
                 </div>
 
-                <div class="text-center mb-3">
-                    <button type="submit" class="btn btn-lg btn-danger mt-5 text-dark">Envoyer</button>
+                <div class="text-center mb-5">
+                    <button type="submit" class="btn btn-lg btn-danger mt-2 regis-btn">Envoyer</button>
                     {{ form_end(registrationForm) }}
                 </div>
 
             </div>
         </div>
-    </section>
+    </div>
 
 </main>
-
 <!--FORMULAIRE INSCRIPTION END -->
 
 {% endblock %}

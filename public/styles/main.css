@@ -257,6 +257,23 @@ title {
     margin-bottom: 30px;
 }
 
+/* REGISTRATION FORM */
+.form-registration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-field-label {
+    margin-bottom: 16px;
+}
+.regis-btn{
+    border-radius: 90px;
+    width: 20%;
+    height: 50px;
+}
+
+
+
 
 /* FOR TABLETTES **************************************************************************************************************************/
 @media only screen and (max-width: 900px) {
@@ -271,6 +288,7 @@ title {
         max-width: 100%;
         height: auto;
         margin-top: 5px;
+    }
 
     .img-title-game {
         width: 70%;
