@@ -16,19 +16,18 @@ main {
     flex-grow: 1;
 }
 
-/* Styles pour le Header */
+/* HEADER NAV BAR */
 header {
     background-color: transparent; /* Fond transparent */
 }
 
-/* Styles pour le Footer */
+/* FOOTER */
 footer {
     background-color: transparent; /* Fond transparent */
     position: relative;
     bottom: 0;
     width: 100%;
 }
-
 
 .anton-regular {
     font-family: "Anton", sans-serif;
@@ -41,7 +40,12 @@ footer {
     font-style: normal;
     font-size: 100px;
 }
-
+.anton-regular3 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 17px;
+}
 .no-padding-margin {
     margin: 0;
     padding: 0;
@@ -78,7 +82,7 @@ footer {
 }
 /* NAV BAR */
 
-/* FOOTER */
+/* SOCIAL LINKS */
 
 .footer-line{
     width: 60px;
@@ -94,7 +98,7 @@ footer {
     text-decoration: none; /* Optionnel: Supprime le soulignement au survol */
 }
 
-/* FOOTER */
+/* SOCIAL LINKS */
 
 /* HOME PAGE START*/
 title {
@@ -175,7 +179,7 @@ title {
 
 /* HOME PAGE END*/
 
-/*  WATCH ALL MATCHES PAGE START*/
+/* WATCH ALL MATCHES PAGE START*/
 
 .imgNLF{
     width: 40%;
@@ -224,13 +228,35 @@ title {
 .btn-primary{
     background-color: #2563EB;
 }
-/*  WATCH ONE MATCH PAGE END*/
+/* WATCH ONE MATCH PAGE END*/
 
 /* BET ALL MATCHES PAGE START*/
 .large-checkbox {
     transform: scale(2);
 }
 /* BET ALL MATCHES PAGE END*/
+
+/* LOGIN */
+.form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input-login {
+    width: 50%;
+}
+.login-btn{
+    border-radius: 90px;
+    width: 100%;
+    height: 50px;
+}
+.img-login {
+    width: 50vh;
+    height: auto;
+    margin-top: -20px;
+    margin-bottom: 30px;
+}
+
 
 /* FOR TABLETTES **************************************************************************************************************************/
 @media only screen and (max-width: 900px) {

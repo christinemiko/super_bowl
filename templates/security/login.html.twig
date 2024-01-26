@@ -5,15 +5,13 @@
 {% block body %}
 
     <!-- LOGIN FORM START -->
-    <form method="post" class="container">
+    <form method="post" class="container-md form-login">
 
           <!-- LOGO  START -->
-           <div class=" text-center">
-             <img src="{{ asset('img/logo4.png') }}" class="img-fluid" alt="logo superBowl">
+           <div class="text-center">
+             <img src="{{ asset('img/img34.png') }}" class="img-login" alt="logo superBowl">
            </div>
           <!-- LOGO  END -->
-
-        <h1 class="h3 mb-3 mt-5 text-center">Connexion</h1>
 
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -28,26 +26,26 @@
         <!-- ERROR MESSAGE FOR ENABLE USER FALSE END -->
 
         <!-- EMAIL  START -->
-       <label for="inputEmail">Email</label>
-          <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3" autocomplete="email" required autofocus>
+          <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3 input-login" placeholder="E-mail" autocomplete="email" required autofocus>
+
         <!-- EMAIL  END -->
 
         <!-- PASSWORD  START -->
-        <label for="inputPassword">Mot de passe</label>
-           <input type="password" name="password" id="inputPassword" class="form-control mb-3" autocomplete="current-password" required>
-         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+           <input type="password" name="password" id="inputPassword" class="form-control mb-3 input-login" placeholder="Mot de Passe" autocomplete="current-password" required>
+             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
         <!-- PASSWORD  END -->
 
             <!-- BUTTON  START -->
-           <div class=" mb-3 mt-5 text-center">
-                <button class="btn btn-lg btn-primary " type="submit">
+           <div class="text-center">
+                <button class="btn btn-lg btn-danger login-btn" type="submit">
                     Se Connecter
                 </button>
            </div>
             <!-- BUTTON  END -->
 
         <!-- FORGET PASSWORD START -->
-        <p class="text-center mt-2 text-light"><a class="text-light" href="{{ path('forgotpassword_request') }}" > Mot de passe oublié ? </a></p>
+        <p class="text-center mt-2 mb-5 text-light anton-regular3"><a class="text-light" href="{{ path('forgotpassword_request') }}" > Mot de passe oublié ? </a></p>
         <!-- FORGET PASSWORD END -->
 
     </form>
