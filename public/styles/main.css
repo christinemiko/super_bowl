@@ -323,7 +323,11 @@ title {
     margin-left: 5px; /* Espace entre la checkbox et le label */
     margin-top: 10px;
 }
-
+.img-bet {
+    width: 70%;
+    height: auto;
+    margin-top: -250px;
+}
 
 /* BET ALL MATCHES PAGE END*/
 
@@ -401,6 +405,10 @@ title {
         margin-top: -20px;
         margin-bottom: 30px;
     }
+    .img-bet {
+        margin-top: -70px; /* Ajustez cette valeur pour les tablettes */
+    }
+
 
 }
 /* FOR MOBILES *****************************************************************************************************************************/
@@ -419,6 +427,10 @@ title {
     .intro-allmatchs {
         font-size: 30px;
     }
+    .img-bet {
+        margin-top: -30px; /* Ajustez cette valeur pour les mobiles */
+    }
+
 }
 
 

@@ -7,40 +7,51 @@
 <!--  BET ALL MATCHES PAGE START -->
  <main class="mb-5">
 
-     <!-- INTRODUCTION  START   -->
-     <div class="text-center">
-         <img src="{{ asset('img/img38.png') }}" class="" alt="Parier image">
-     </div>
-     <!-- INTRODUCTION  END   -->
+         <!--   PICTURE START   -->
+     <div class="image-text-container">
+         <img src="{{ asset('img/img38.png') }}" class="img-home" alt="Parier image">
+         <!--PICTURE  END   -->
 
-     <!--CARD BET MATCH  START -->
+                 <!-- INTRODUCTION TEXT START   -->
+                 <div class="text-button-container">
+                         <!--  TITLE GAME ON START-->
+                         <img src="{{ asset('img/img39.png') }}"  class=" img-bet text-center" alt="start">
+                         <!--  TITLE GAME ON END -->
+
+                     <!-- TEXT INTRO  -->
+                     <div class="intro-home mt-5">
+                         <h4 class="anton-regular4 mt-5">Placer vos paris, Connectez vous</h4>
+                         <h4 class="anton-regular4">et faites partie des vainqueurs dès maintenant !</h4>
+                     </div>
+                     <!-- TEXT INTRO  -->
+                 </div>
+     </div>
+
 
              <!--TITLE BET MATCH  START -->
              <h2 class="text-center anton-regular2 mt-5 neon-text"> FAITES VOS JEUX </h2>
              <!--TITLE BET MATCH  END -->
 
-     <div class="container">
-         <form action="{{ path('roadselections') }}" method="post" class="text-center">
+                <!--CARD BET MATCH  START -->
+                 <div class="container">
+                     <form action="{{ path('roadselections') }}" method="post" class="text-center">
 
-             {% if app.user %}
-             <button type="submit" class=" col-6 btn btn-lg btn-danger">Parier sur les sélections</button>
-             {% endif %}
+                         {% if app.user %}
+                         <button type="submit" class=" col-6 btn btn-lg btn-danger">Parier sur les sélections</button>
+                         {% endif %}
 
-             <div class="row justify-content-center align-items-center">
+                         <div class="row justify-content-center align-items-center">
 
-                 {% for footballMatch in footballMatches %}
+                             {% for footballMatch in footballMatches %}
 
-                     {% include '_cardbet.html.twig' with {'footballMatch': footballMatch} %}
+                                 {% include '_cardbet.html.twig' with {'footballMatch': footballMatch} %}
 
-                 {% endfor %}
-             </div>
-         </form>
-     </div>
-
-
-     <!--CARD MATCH COMING END-->
-
+                             {% endfor %}
+                         </div>
+                     </form>
+                 </div>
+                 <!--CARD BET MATCH  END -->
  </main>
-    <!--  BET ALL MATCHES PAGE END -->
+
 
 {% endblock %}
