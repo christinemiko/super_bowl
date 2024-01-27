@@ -69,6 +69,9 @@
                 <!-- BUTTON MISER SUR LA SELECTION START -->
                 {% if app.user %}
                     <a href="{{ path('miser', { 'footballMatch' : footballMatch.id }) }}" class="card-link text-center btn btn-danger mt-2 mb-2">Miser sur la sélection</a>
+                {% else %}
+                    <!-- L'utilisateur n'est pas connecté, afficher le bouton PARIER qui redirige vers la page de connexion -->
+                    <a href="{{ path('app_login') }}" class="card-link text-center btn btn-danger mt-2 mb-2">Parier</a>
                 {% endif %}
                 <!-- BUTTON MISER SUR LA SELECTION END -->
             </ul>
