@@ -271,6 +271,60 @@ title {
 .large-checkbox {
     transform: scale(2);
 }
+
+/* Style de base pour votre checkbox */
+.large-checkbox {
+    position: relative;
+    -webkit-appearance: none; /* Désactiver l'apparence par défaut */
+    appearance: none;
+    background-color: #f6f6f6; /* Couleur de fond par défaut */
+    margin: 5px;
+    font-size: 15px; /* Taille personnalisée */
+    width: 1em; /* Largeur de la boîte */
+    height: 1em; /* Hauteur de la boîte */
+    border: 1px solid #d1d1d1; /* Bordure de la boîte */
+    border-radius: 50%; /* Rendre la boîte ronde */
+    cursor: pointer; /* Changer le curseur en main */
+    display: inline-block; /* Permettre le placement en ligne */
+    vertical-align: middle; /* Alignement vertical avec le texte */
+    transition: background-color 0.2s, border-color 0.2s; /* Animation douce pour le changement de couleur */
+}
+
+/* Style quand la checkbox est cochée */
+.large-checkbox:checked {
+    background-color: #ff0000; /* Couleur de fond quand cochée (rouge) */
+    border-color: #ff0000; /* Couleur de la bordure quand cochée (rouge) */
+}
+
+/* Style pour l'icône à l'intérieur de la checkbox */
+.large-checkbox:checked:after {
+    content: "✔"; /* Icône de vérification */
+    position: absolute; /* Positionnement absolu par rapport à la checkbox */
+    top: 50%; /* Positionner au milieu verticalement */
+    left: 50%; /* Positionner au milieu horizontalement */
+    transform: translate(-50%, -50%); /* Décaler de 50% de sa propre taille pour centrer parfaitement */
+    font-size: 0.5em; /* Taille de l'icône, ajustez selon vos besoins */
+    color: white; /* Couleur de l'icône */
+}
+
+/* Style du conteneur de la checkbox */
+.checkbox-container {
+    display: flex; /* Utilise Flexbox */
+    align-items: center; /* Centre les éléments verticalement */
+    font-size: 16px; /* Taille du texte, à ajuster selon vos besoins */
+}
+
+.large-checkbox {
+    margin-top: 3px; /* Ajustez la marge au besoin pour centrer la checkbox */
+    margin-right: 5px; /* Espace entre la checkbox et le label */
+}
+
+.large-checkbox + label {
+    margin-left: 5px; /* Espace entre la checkbox et le label */
+    margin-top: 10px;
+}
+
+
 /* BET ALL MATCHES PAGE END*/
 
 /* LOGIN */

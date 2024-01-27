@@ -5,15 +5,16 @@
                 <li class="text-center" style="list-style-type: none;">
 
                     <!-- CHECK BOX SELECTION MATCH START -->
-                        <li class="list-group-item">
-                            {% if app.user %}
-                                <input type="checkbox" id="{{ footballMatch.id }}" class="large-checkbox mx-2" name="selectedMatches[]" value="{{ footballMatch.id }}">
-                                <label for="{{ footballMatch.id }}">
-                                    Sélectionner Le Match
-                                </label>
-                            {% endif %}
-                        </li>
+                    {% if app.user %}
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="{{ footballMatch.id }}" class="large-checkbox mt-3 mx-2" name="selectedMatches[]" value="{{ footballMatch.id }}">
+                            <label for="{{ footballMatch.id }}">
+                                Sélectionner Le Match
+                            </label>
+                        </div>
+                    {% endif %}
                     <!-- CHECK BOX SELECTION MATCH END -->
+
 
                     <!-- DATE MATCH START -->
                          <div class="text-center mt-2"> Le {{footballMatch.matchDate|date('d/m/Y')}} </div>
