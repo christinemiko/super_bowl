@@ -171,6 +171,7 @@ title {
     display: flex;
     align-items: center;
 }
+
 .img-home {
     width: 90%;
     height: auto;
@@ -373,8 +374,30 @@ title {
     height: 50px;
 }
 
+/* ONE MATCH DETAILS*/
 
+.img-match-detail {
+    width: 100%;
+    height: auto;
+}
+.img-match-nlf {
+    width: 50%;
+    height: auto;
+    margin-top: -250px;
+}
+.img-match-nlf2 {
+    width: 50%;
+    height: auto;
 
+}
+.img-match-nlf3 {
+    width: 30%;
+    height: auto;
+
+}
+.detail-match-name {
+    font-size: 30px;
+}
 
 /* FOR TABLETTES **************************************************************************************************************************/
 @media only screen and (max-width: 900px) {
@@ -408,6 +431,16 @@ title {
     .img-bet {
         margin-top: -70px; /* Ajustez cette valeur pour les tablettes */
     }
+    .img-match-nlf {
+        width: 50%;
+        height: auto;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+    .img-match-nlf2 {
+        width: 80%;
+        height: auto;
+    }
 
 
 }
@@ -429,6 +462,16 @@ title {
     }
     .img-bet {
         margin-top: -30px; /* Ajustez cette valeur pour les mobiles */
+    }
+    .img-match-nlf {
+        width: 80%;
+        height: auto;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+    .img-match-nlf2 {
+        width: 80%;
+        height: auto;
     }
 
 }
