@@ -11,34 +11,40 @@
         <div class="image-text-container">
                 <img src="{{ asset('img/img32.png') }}"  class=" img-home" alt="superbowl">
 
+                     <!--  TITLE GAME ON START-->
             <div class="text-button-container">
-                <img src="{{ asset('img/img33.png') }}"  class="img-title-game text-center" alt="gameon">
-                <p class="text-center anton-regular2 mb-5"> 2024 </p>
+                    <img src="{{ asset('img/img33.png') }}"  class="img-title-game text-center" alt="gameon">
+                    <p class="text-center anton-regular2 mb-5"> 2024 </p>
+                    <!--  TITLE GAME ON END -->
 
-               <a href="{{ path('visualiserlesmatchs') }}" class="btn btn-danger btn-ml btn-round">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                </svg>
-                VISUALISER TOUS LES MATCHS
-               </a>
-                 <div class="intro-home">
-                   <h4 class="anton-regular mt-5 mb-5"><i>"Cet évènement planétaire s'est fait une place de choix en France,</i></h4>
-                   <h4 class="anton-regular"><i>Suivez l'intégralité des matchs, retransmis en Live depuis les USA, au State Farm Center de Glendale."</i></h4>
-                 </div>
+                    <!-- BUTTON MATCHS -->
+                   <a href="{{ path('visualiserlesmatchs') }}" class="btn btn-danger btn-ml btn-round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                    VISUALISER TOUS LES MATCHS
+                   </a>
+                    <!-- BUTTON MATCHS -->
+
+                    <!-- TEXT INTRO  -->
+                     <div class="intro-home">
+                       <h4 class="anton-regular mt-5 mb-5"><i>"Cet évènement planétaire s'est fait une place de choix en France,</i></h4>
+                       <h4 class="anton-regular"><i>Suivez l'intégralité des matchs, retransmis en Live depuis les USA, au State Farm Center de Glendale."</i></h4>
+                     </div>
+                    <!-- TEXT INTRO  -->
             </div>
-
         </div>
-        <!--  PICTURE1 END -->
-
     </div>
+    <!--  PICTURE1 END -->
+
     <section>
 
         <!--MATCH TODAY START -->
-        <h2 class="text-center anton-regular2 mt-5"> MATCHS DU JOUR </h2>
+        <h2 class="text-center anton-regular2 mt-5 neon-text"> MATCHS DU JOUR </h2>
 
         <!--CARD MATCH TODAY  START -->
         <div class="container">
-            <div class="row justify-content-around align-items-center">
+            <div class="row justify-content-center align-items-center">
 
                 {% for footballMatch in footballMatches %}
 

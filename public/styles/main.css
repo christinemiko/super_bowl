@@ -40,6 +40,17 @@ footer {
     font-style: normal;
     font-size: 100px;
 }
+.anton-regular3 {
+    font-family: "Anton", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 80px;
+}
+.anton-regular4 {
+    font-family: "Anton", sans-serif;
+    font-size: 40px;
+
+}
 
 .no-padding-margin {
     margin: 0;
@@ -183,7 +194,10 @@ title {
 /* HOME PAGE END*/
 
 /* WATCH ALL MATCHES PAGE START*/
-
+.img-online{
+    width: 50%;
+    height: auto;
+}
 .imgNLF{
     width: 40%;
 }
@@ -197,6 +211,26 @@ title {
 .match-status{
     font-size: 20px;
 }
+/* Appliquez un style de base à votre texte */
+.neon-text {
+    font-size: 100px; /* Taille de police */
+    font-weight: bold; /* Gras pour le texte */
+    color: #fff; /* Couleur du texte */
+    text-shadow: 0 0 10px black, 0 0 20px black, 0 0 30px black; /* Ombre textuelle rouge */
+    animation: neon 1.5s ease-in-out infinite alternate; /* Animation néon */
+}
+
+/* Animation néon */
+@keyframes neon {
+    0% {
+        text-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red; /* Ombre textuelle rouge initiale */
+    }
+    100% {
+        text-shadow:0 0 10px orange, 0 0 20px orange, 0 0 30px orange;  /* Ombre textuelle blanche pour l'effet néon */
+    }
+}
+
+
 /*  WATCH ALL MATCHES PAGE END*/
 
 /*  WATCH ONE MATCH PAGE START*/
@@ -258,6 +292,12 @@ title {
     height: auto;
     margin-top: -20px;
     margin-bottom: 30px;
+}
+.anton-regular5 {
+    font-family: "Anton", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 15px;
 }
 
 /* REGISTRATION FORM */
@@ -321,6 +361,9 @@ title {
         border-radius: 90px;
         width: 50%;
         height: 50px;
+    }
+    .intro-allmatchs {
+        font-size: 30px;
     }
 }
 

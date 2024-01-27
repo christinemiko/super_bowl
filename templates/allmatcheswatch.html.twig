@@ -5,163 +5,82 @@
 {% block body %}
 
 <!--  WATCH ALL MATCHES PAGE START -->
-    <main>
+    <main class="mb-5">
+        <div class="container mb-2">
 
         <!-- INTRODUCTION  START   -->
-      <div class="text-center"><img src="{{ asset('img/logo3NLF.png') }}" class="img-fluid imgNLF" alt="NLF logo"></div>
-    <h1 class="text-center">Les Matchs</h1>
-    <div class=" text-center"><img src="{{ asset('img/img28.png') }}" class=" img-fluid d-block w-100" alt="image joueur"></div>
+              <div class="image-text-container" >
+                  <img src="{{ asset('img/img37.png') }}" class="img-home" alt="Game day image">
+
+                      <!--  TITLE GAME ONLINE START-->
+                  <div class="text-button-container">
+                      <h1 class="text-center anton-regular2 text-danger"><i> FOOTBALL </i></h1>
+                      <h2 class="text-center anton-regular3">MATCH</h2>
+                      <img src="{{ asset('img/online.png') }}"  class="img-title-game text-center img-online" alt="online">
+
+                      <p class="text-center anton-regular4 intro-allmatchs mt-5 mb-5">
+                          Suivez tous les matchs en direct  passés ou à venir </p>
+                      <!--  TITLE GAME ONLINE END -->
+
+
+
+                  </div>
+              </div>
+        </div>
         <!-- INTRODUCTION  END   -->
 
-        <!--CARD MATCH TODAY  START -->
+        <!-- TITLE MATCH TODAY START -->
+        <h2 class="text-center anton-regular2 mt-5 neon-text"> MATCHS DU JOUR </h2>
 
-    <div class="mb-5 red"><h2 class="text-center rectangle1"> Les Matchs En cours </h2></div>
-    <div class="container">
-        <div class="row justify-content-around align-items-center">
+            <!--CARD MATCH TODAY  START -->
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
 
-            {% for footballMatch in footballMatches %}
+                        {% for footballMatch in footballMatches %}
 
-            <div class="card mt-5" style="width: 25rem;">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
+                            {% include '_card.html.twig' with {'footballMatch': footballMatch} %}
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                        </svg> {{footballMatch.matchDate|date('d/m/Y')}}
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                        </svg>Début:{{footballMatch.hourStart|date('H:i')}}_
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                        </svg>Fin:{{footballMatch.hourFinish|date('H:i')}}
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill text-danger" viewBox="0 0 16 16">
-                            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-                        </svg>
-                    </li>
-
-                    <li class="list-group-item team-name">
-                        <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam" alt="logo">
-                        {{ footballMatch.team1.teamName }}
-
-                    <li class="list-group-item team-name">
-                        <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam" alt="logo">
-                        {{ footballMatch.team2.teamName }}
-
-                    <li class="list-group-item text-center">
-                        Score : {{ footballMatch.scoreTeam1 }}  _  {{ footballMatch.scoreTeam2 }}</li>
-                    <a href="{{ path('visualiserunmatch', { 'id': footballMatch.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
-                </ul>
-
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!--CARD MATCH TODAY END-->
-
-    <div class="mt-5 mb-5 blue"><h2 class="text-center rectangle1"> Les Matchs A venir </h2></div>
-    <!--CARD MATCH COMING  START -->
-        <div class="container">
-            <div class="row justify-content-around align-items-center">
-
-                {% for footballMatch2 in footballMatches2 %}
-
-                    <div class="card mt-5" style="width: 25rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                                </svg> {{footballMatch2.matchDate|date('d/m/Y')}}
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                                </svg>Début:{{footballMatch2.hourStart|date('H:i')}}_
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                                </svg>Fin:{{footballMatch2.hourFinish|date('H:i')}}
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill text-primary" viewBox="0 0 16 16">
-                                    <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-                                </svg>
-                            </li>
-
-                            <li class="list-group-item team-name">
-                                <img src="{{ asset('img/teams/' ~ footballMatch2.team1.link) }}" class="imgteam" alt="logo">
-                                {{ footballMatch2.team1.teamName }}
-
-                            <li class="list-group-item team-name">
-                                <img src="{{ asset('img/teams/' ~ footballMatch2.team2.link) }}" class="imgteam" alt="logo">
-                                {{ footballMatch2.team2.teamName }}
-
-                            <li class="list-group-item text-center">
-                            <a href="{{ path('visualiserunmatch', { 'id': footballMatch2.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
-                        </ul>
-
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </div>
-        </div>
+                </div>
+            <!--CARD MATCH TODAY END-->
 
-    <!--CARD MATCH COMING END-->
+        <!--TITLE MATCH COMING  START -->
+        <h2 class="text-center anton-regular2 mt-5 neon-text">MATCHS A VENIR</h2>
 
-    <div class=" mt-5 mb-5 orange "><h2 class="text-center rectangle1"> Les Matchs Terminés </h2></div>
-    <!--CARD MATCH FINISHED  START -->
-        <div class="container">
-            <div class="row justify-content-around align-items-center">
+                <!--CARD MATCH COMING START -->
+                    <div class="container">
+                        <div class="row justify-content-center align-items-center ">
 
-                {% for footballMatch3 in footballMatches3 %}
+                            {% for footballMatch2 in footballMatches2 %}
 
-                    <div class="card mt-5" style="width: 25rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
-                                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                                </svg> {{footballMatch3.matchDate|date('d/m/Y')}}
+                            {% include '_card.html.twig' with {'footballMatch': footballMatch2} %}
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                                </svg>Début:{{footballMatch3.hourStart|date('H:i')}}_
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stopwatch" viewBox="0 0 16 16">
-                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                                </svg>Fin:{{footballMatch3.hourFinish|date('H:i')}}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag-fill text-warning" viewBox="0 0 16 16">
-                                    <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-                                </svg>
-                            </li>
-
-                            <li class="list-group-item team-name">
-                                <img src="{{ asset('img/teams/' ~ footballMatch3.team1.link) }}" class="imgteam" alt="logo">
-                                {{ footballMatch3.team1.teamName }}
-
-                            <li class="list-group-item team-name">
-                                <img src="{{ asset('img/teams/' ~ footballMatch3.team2.link) }}" class="imgteam" alt="logo">
-                                {{ footballMatch3.team2.teamName }}
-
-                            <li class="list-group-item text-center">
-                                Score : {{ footballMatch3.scoreTeam1 }}  _  {{ footballMatch3.scoreTeam2 }}</li>
-                            <a href="{{ path('visualiserunmatch', { 'id': footballMatch3.id }) }}"  class="card-link text-center btn btn-warning mt-2 mb-2">Visualiser le Match</a>
-                        </ul>
-
+                            {% endfor %}
+                        </div>
                     </div>
-                {% endfor %}
-            </div>
+
+                <!--CARD MATCH COMING END-->
+
+        <!--TITLE MATCH FINISH START -->
+        <h2 class="text-center anton-regular2 mt-5 neon-text"> MATCHS TERMINES</h2>
+
+                <!--CARD MATCH FINISHED  START -->
+                    <div class="container">
+                        <div class="row justify-content-center align-items-center">
+
+                            {% for footballMatch3 in footballMatches3 %}
+
+                                {% include '_card.html.twig' with {'footballMatch': footballMatch3} %}
+
+                            {% endfor %}
+                        </div>
+                    </div>
+              <!--CARD MATCH FINISHED  END-->
+
         </div>
     </main>
-    <!--CARD MATCH FINISHED  END-->
+
 {% endblock %}
