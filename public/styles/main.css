@@ -382,6 +382,11 @@ title {
     width: 100%;
     height: auto;
 }
+.img-match-detail2 {
+    width: 80%;
+    height: auto;
+}
+
 .img-match-nlf {
     width: 50%;
     height: auto;
@@ -413,7 +418,28 @@ title {
     font-size: 50px;
     margin-top: 50px;
 }
+.comment-size3{
+    font-size: 30px;
+    margin-top: 30px;
+}
+.comment-size4{
+    font-size: 70px;
 
+}
+.players-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 2px;
+    max-width: 600px; /* Ajoutez une largeur maximale */
+    margin: auto;
+}
+
+.player-name {
+    width: calc(100% / 5 - 10px); /* Pour 2 colonnes */
+    text-align: center;
+    margin-bottom: 5px;
+}
 /* FOR TABLETTES **************************************************************************************************************************/
 @media only screen and (max-width: 900px) {
 
@@ -487,6 +513,9 @@ title {
     .img-match-nlf2 {
         width: 80%;
         height: auto;
+    }
+    .player-name {
+        width: calc(50% - 10px);
     }
 
 }
