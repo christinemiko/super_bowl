@@ -193,7 +193,10 @@ title {
     padding-left: 20px;
     padding-right: 20px;
 }
-
+.social-icon{
+    margin-right: 10px;
+    display: inline-block;
+}
 /* HOME PAGE END*/
 
 /* WATCH ALL MATCHES PAGE START*/
@@ -533,6 +536,16 @@ title {
         border-radius: 90px;
         width: 60%;
         height: auto;
+    }
+    .social-icon{
+        margin-right: 4px;
+        margin-top: 10px;/* Espace réduit entre les icônes pour les écrans plus petits */
+        width: 24px; /* Taille réduite des icônes */
+        height: 24px;
+    }
+    svg {
+        width: 24px; /* Taille réduite des icônes SVG */
+        height: 24px;
     }
 
 }
