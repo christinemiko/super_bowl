@@ -131,6 +131,8 @@ title {
     min-height: 80px;
     max-height: 80px;
     width: auto;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .card .list-group-item {
     height: 110px;
@@ -391,12 +393,25 @@ title {
 
 }
 .img-match-nlf3 {
-    width: 30%;
+    width: 100%;
     height: auto;
+    margin-top: -50px;
 
 }
 .detail-match-name {
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Centre verticalement les éléments enfants */
+    justify-content: center; /* Centre horizontalement les éléments enfants */
+    text-align: center;
     font-size: 30px;
+}
+.comment-size{
+    font-size: 20px;
+    margin-top: 50px;
+}
+.comment-size2{
+    font-size: 50px;
+    margin-top: 50px;
 }
 
 /* FOR TABLETTES **************************************************************************************************************************/

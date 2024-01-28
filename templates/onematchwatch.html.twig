@@ -37,35 +37,53 @@
 
             <div class="image-text-container">
                     <div class="text-button-container">
-                        <!-- PICTURE MATCH STADE START -->
-                        <img src="{{ asset('img/img41.png') }}" class="img-match-detail" alt="Match stade image">
 
-                        <p class="detail-match-name">
-                            <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam mb-2 text-center " alt="logo">
+                        <!-- BLOC MATCH DAY START -->
+                        <img src="{{ asset('img/img41.png') }}" class="img-match-detail" alt="Match-day picture">
+
+                        <!-- TEAM1 LOGO & NAME -->
+                        <p class="detail-match-name mt-5">
+                            <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam mb-2 text-center " alt="logo team1 & name">
                             {{ footballMatch.team1.teamName }}
-                        </p>
-                        <img src="{{ asset('img/vs2.png') }}" class="imgteam" alt="Match stade image">
 
+                        </p>
+
+                        <!-- VS LOGO -->
+                        <img src="{{ asset('img/vs2.png') }}" class="imgteam" alt="Match-stade picture">
+
+                        <!-- TEAM2 LOGO & NAME -->
                         <p class="detail-match-name">
-                            <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 text-center " alt="logo">
-                            {{ footballMatch.team2.teamName }}
+                            <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 mt-5 text-center " alt="logo team2 & name">
+                          {{ footballMatch.team2.teamName }}
                         </p>
-                        <!-- PICTURE MATCH STADE END -->
-                    </div>
 
-                        <div class="text-button-container ">
-                            <!--  TITLE MATCH START-->
-                            <img src="{{ asset('img/logo4.png') }}"  class="img-match-nlf3" alt="logo super bowl">
-                            <img src="{{ asset('img/vs.png') }}"  class="img-match-nlf3" alt="logo VS">
-                            <!--  TITLE MATCH END -->
+                        <!-- SCORE & COMMENT MATCH -->
+                        <h5 class="comment-size2 neon-text">Score : {{footballMatch.scoreTeam1 }} - {{footballMatch.scoreTeam2 }}</h5>
+                        <p class="comment-size mb-5"> {{footballMatch.comments}} </p>
+
+                    </div>
+                <!-- BLOC MATCH DAY END -->
+
+                <!-- BLOC DETAILS MATCH START -->
+                        <div class="text-button-container">
+
+                            <!--  NEON TOP-->
+                            <img src="{{ asset('img/neontop.png') }}"  class="img-match-nlf3" alt="neon top">
 
                             <!-- TEXT MATCH DETAIL START  -->
-                            <div class="intro-home mt-5">
-                                <h4 class="anton-regular4 mt-5">Plongez au coeur de l'action</h4>
-                                <h4 class="anton-regular4">et ne manquez aucun détail</h4>
-                                <h4 class="anton-regular4">de votre match</h4>
-                            </div>
-                            <!-- TEXT MATCH DETAIL END  -->
+
+                                <h4 class="anton-regular4 "> Date {{footballMatch.matchDate|date('d/m/Y')}}</h4>
+                                <h4 class=" text-danger anton-regular4 mt-3">{{footballMatch.statut }}</h4>
+                                <h4 class="anton-regular4 mt-3">Début {{footballMatch.hourStart|date('H:i')}}</h4>
+                                <h4 class="anton-regular4 mt-3">Fin {{footballMatch.hourFinish|date('H:i')}}</h4>
+                                <h4 class="anton-regular4 mt-3">Météo {{footballMatch.weather}}</h4>
+
+
+                            <!-- NEON BOTTOM  -->
+                            <img src="{{ asset('img/neonbottom.png') }}"  class="img-match-nlf3" alt="neon bottom">
+
+
+
                         </div>
             </div>
         </div>
