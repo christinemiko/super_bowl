@@ -7,13 +7,9 @@
     <main>
         <!-- LOGO  START -->
         <div class=" text-center">
-            <img src="{{ asset('img/logo4.png') }}" class="img-fluid" alt="logo superBowl">
+            <img src="{{ asset('img/img44.png') }}" class="img-login" alt="logo superBowl">
         </div>
         <!-- LOGO  END -->
-
-        <!-- TITTLE START -->
-        <div class=" red mt-5"><h2 class="text-center text-light rectangle2">Historique des Mises</h2></div>
-        <!-- TITTLE END -->
 
     <!-- SPORT BET  HISTORY START -->
     <div class="container-fluid">
@@ -54,11 +50,13 @@
                         {% if sportbet.footballMatch.statut == 'Prochainement' and sportbet.isDeleted == false %}
 
                             <!-- BUTTON UPDATE START -->
-                            <a href="{{ path('actualiser', { 'id': sportbet.footballMatch.id,'footballMatch': sportbet.footballMatch.id }) }}" class=" col btn btn-ml btn-primary mt-2 text-light">Mise à jour</a>
+                            <a href="{{ path('actualiser', { 'id': sportbet.footballMatch.id,'footballMatch': sportbet.footballMatch.id }) }}" class=" btn btn-ml btn-secondary mt-2 text-light login-btn2">
+                                Mise à jour
+                            </a>
                             <!-- BUTTON UPDATE END -->
 
                             <!-- BUTTON TRIGGER MODAL DELETE START -->
-                            <button type="button" class="btn btn-ml btn-danger mt-2 text-light" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <button type="button" class="btn btn-ml btn-danger mt-2 text-light login-btn2" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                 Supprimer
                             </button>
                             <!-- BUTTON DELETE  END -->
