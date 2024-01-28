@@ -465,6 +465,19 @@ title {
     height: 50px;
 }
 
+/* USER INFORMATIONS*/
+.info-size{
+    font-size: 25px;
+}
+.regis-btn2{
+    border-radius: 90px;
+    width: 20%;
+    height: 50px;
+    margin-right: 10px;
+    line-height: 40px; /* Ajouté pour centrer le texte verticalement */
+    text-align: center; /* Centrer le texte horizontalement */
+}
+}
 /* FOR TABLETTES **************************************************************************************************************************/
 @media only screen and (max-width: 900px) {
 
@@ -565,6 +578,11 @@ title {
     svg {
         width: 24px; /* Taille réduite des icônes SVG */
         height: 24px;
+    }
+    .regis-btn2 {
+        width: 40%; /* Ajustez la largeur pour prendre tout l'espace disponible */
+        margin-right: 10px; /* Supprimez la marge droite si nécessaire */
+        margin-bottom: 10px; /* Ajoutez une marge en bas pour séparer les boutons */
     }
 
 }

@@ -8,21 +8,17 @@
         <div class="container"></div>
         <!-- LOGO  START -->
         <div class=" text-center">
-            <img src="{{ asset('img/logo4.png') }}" class="img-fluid" alt="logo superBowl">
+            <img src="{{ asset('img/img45.png') }}" class="img-login" alt="logo superBowl">
         </div>
         <!-- LOGO  END -->
 
-        <!-- TITTLE START -->
-        <div class="blue mt-5"><h2 class="text-center text-light rectangle2">Informations Personnelles</h2></div>
-        <!-- TITTLE END -->
-
     <!--  USER INFORMATIONS  END -->
     {% if app.user %}
-        <div class=" text-center block white">
+        <div class=" text-center text-light ">
             <!-- LASTNAME  START -->
             <div class="row justify-content-center mb-4">
                 <div class="col col-md-6 text-dark mt-4">
-                    <label for="lastName">Nom: {{ app.user.lastName }}</label>
+                    <label for="lastName" class="text-light info-size">Nom {{ app.user.lastName }}</label>
                 </div>
             </div>
             <!-- LASTNAME  END -->
@@ -30,7 +26,7 @@
             <!-- FIRSTNAME  START -->
             <div class="row justify-content-center mb-4">
                 <div class="col col-md-6 text-dark">
-                    <label for="firstName">Prénom: {{ app.user.firstName }}</label>
+                    <label for="firstName" class="text-light info-size">Prénom {{ app.user.firstName }}</label>
                 </div>
             </div>
             <!-- FIRSTNAME  END -->
@@ -38,7 +34,7 @@
             <!-- EMAIL  START -->
             <div class="row justify-content-center mb-4">
                 <div class="col col-md-6 text-dark mb-4">
-                    <label for="email">Email: {{ app.user.userIdentifier }}</label>
+                    <label for="email" class="text-light info-size">Email {{ app.user.userIdentifier }}</label>
                 </div>
             </div>
             <!-- EMAIL  END -->
@@ -47,13 +43,13 @@
 
         <!-- BUTTON UPDATE  START -->
         <div class=" mb-3 mt-5 text-center">
-            <a  class=" col btn btn-ml btn-primary mt-2 text-light" href="{{ path('edituser') }}">
+            <a class=" col btn btn-ml btn-secondary mt-2 text-light regis-btn2" href="{{ path('edituser') }}">
                 Modifier
             </a>
             <!-- BUTTON UPDATE  END -->
 
             <!-- BUTTON TRIGGER MODAL DELETE START -->
-            <button type="button" class="btn btn-ml btn-danger mt-2 text-light" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <button type="button" class="btn btn-ml btn-danger mt-2 text-light regis-btn2" data-bs-toggle="modal" data-bs-target="#deleteModal">
                 Supprimer
             </button>
             <!-- BUTTON DELETE  END -->
