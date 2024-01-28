@@ -134,51 +134,66 @@
         </div>
         <!--TEAM 1  DETAILS END-->
 
+        <!--TEAM 2 DETAILS START-->
+        <div class="container mt-5 mb-2">
 
+            <div class="image-text-container">
+                <div class="text-button-container">
 
-<!-- BEFORE  ------------------------------------------------------------------------------------------------------------------------------>
+                    <!-- BLOC MATCH DAY START -->
+                    <img src="{{ asset('img/teamtitle.png') }}" class="img-match-detail2" alt="team-detail picture">
 
+                    <!-- TEAM2 LOGO & NAME -->
+                    <p class="detail-match-name mt-5">
+                    <h4 class="comment-size4 neon-text"> {{ footballMatch.team2.teamName }} </h4>
+                    <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 text-center " alt="logo team1 & name">
+                    </p>
 
-            <!-- BLOCK TEAM 2 DESCRIPTION  START-->
-            <div class="row justify-content-center">
-                <div class="rectangle3 white text-center text-dark mt-2">
-                    <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 text-center" alt="logo">
-                    <h4 class="mt-2 mb-3"> Equipe:{{ footballMatch.team2.teamName }} </h4>
+                    <!-- SCORE & COMMENT MATCH -->
+                    <p class="comment-size3"> Cote de l'équipe: {{ footballMatch.team2.oddsteam }}</p>
+                    <p class="comment-size3 mb-5"> Nombre de joueurs: {{ footballPlayers2|length }} </p>
 
-                    <!-- ODDSTEAM TEAM START -->
-                    <p><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-bar-chart-line-fill text-warning" viewBox="0 0 16 16">
-                            <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
-                        </svg>Cote de l'équipe: {{ footballMatch.team2.oddsteam }}</p>
-                    <!-- ODDSTEAM TEAM END -->
-
-                    <!-- FOOTBALL TEAM TOTAL NUMBER START -->
-                    <p> <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-people-fill text-danger" viewBox="0 0 16 16">
-                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                        </svg> Nombre de joueurs: {{ footballPlayers2|length }}</p>
-
-
-                    {% for player in footballPlayers2 %}
-
-                        <!-- FOOTBALL PLAYER NAME START -->
-                        <p> <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-person-circle text-primary" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                            </svg> Nom du Joueur: {{ player.lastName }} {{ player.firstName }} _ </p>
-                        <!-- FOOTBALL PLAYER NAME END -->
-
-                    {% endfor %}
                 </div>
+                <!-- BLOC MATCH DAY END -->
 
+                <!-- BLOC DETAILS TEAM START -->
+                <div class="text-button-container">
+
+                    <!--  NEON TOP-->
+                    <img src="{{ asset('img/neontop.png') }}"  class="img-match-nlf3" alt="neon top">
+
+                    <!-- TEAM 2  PLAYER START  -->
+                    <div class="players-container">
+                        {% for player in footballPlayers2 %}
+                            <div class="player-name">{{ player.firstName }} {{ player.lastName }}</div>
+                        {% endfor %}
+                    </div>
+                    <!-- TEAM 2  PLAYER END -->
+
+                    <!-- NEON BOTTOM  -->
+                    <img src="{{ asset('img/neonbottom.png') }}"  class="img-match-nlf3" alt="neon bottom">
+
+                </div>
+                <!-- BLOC DETAILS MATCH END-->
             </div>
-            <!-- BLOCK TEAM 2 DESCRIPTION  END-->
+        </div>
+        <!--TEAM 2  DETAILS END-->
 
             <!-- BUTTON BET START-->
             {% if footballMatch.statut == 'Prochainement' %}
-            <div class="text-center mb-5"><a href="{{ path('miser', { 'footballMatch' : footballMatch.id }) }}"  class="btn btn-danger btn-lg mt-5">Miser sur le Match</a></div>
+
+                <!--TITLE BET MATCH  START -->
+                <h2 class="text-center comment-size4 neon-text mt-5"> FAITES VOS JEUX </h2>
+                <!--TITLE BET MATCH  END -->
+
+            <div class="text-center mt-5 mb-5">
+                <a href="{{ path('miser', { 'footballMatch' : footballMatch.id }) }}"  class="btn btn-lg btn-danger login-btn2">
+                    Miser sur le Match</a>
+            </div>
             {% endif %}
             <!-- BUTTON BET END-->
 
-        </div>
+
     </main>
     <!--  WATCH ONE MATCH PAGE END -->
 {% endblock %}

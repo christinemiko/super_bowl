@@ -424,7 +424,6 @@ title {
 }
 .comment-size4{
     font-size: 70px;
-
 }
 .players-container {
     display: flex;
@@ -440,6 +439,14 @@ title {
     text-align: center;
     margin-bottom: 5px;
 }
+.login-btn2{
+    border-radius: 90px;
+    width: 20%;
+    height: 50px;
+}
+
+/* ONE MATCH DETAILS END*/
+
 /* FOR TABLETTES **************************************************************************************************************************/
 @media only screen and (max-width: 900px) {
 
@@ -482,7 +489,11 @@ title {
         width: 80%;
         height: auto;
     }
-
+    .login-btn2{
+        border-radius: 90px;
+        width: 60%;
+        height: auto;
+    }
 
 }
 /* FOR MOBILES *****************************************************************************************************************************/
@@ -516,6 +527,12 @@ title {
     }
     .player-name {
         width: calc(50% - 10px);
+    }
+
+    .login-btn2{
+        border-radius: 90px;
+        width: 60%;
+        height: auto;
     }
 
 }
