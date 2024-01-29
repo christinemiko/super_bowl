@@ -127,7 +127,10 @@ title {
 .grey{
     background-color: lightgrey;
 }
-.imgteam{
+.black{
+    background-color: black;
+}
+.imgteam {
     min-height: 80px;
     max-height: 80px;
     width: auto;

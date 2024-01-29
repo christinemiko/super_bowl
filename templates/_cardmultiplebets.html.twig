@@ -1,0 +1,95 @@
+<!-- CARD MATCH START -->
+
+<div class="card h-100 mt-3 mx-2" style="width: 25rem;">
+    <ul class="list-group list-group-flush">
+                <li class="text-center" style="list-style-type: none;">
+
+                    <!-- DATE MATCH START -->
+                    <div class="text-center mt-2"> Le {{footballMatch.matchDate|date('d/m/Y')}} </div>
+                    <!-- DATE MATCH END -->
+
+                    <!-- HOUR MATCH START -->
+                    <div class="text-center mt-2">
+                        Début {{footballMatch.hourStart|date('H:i')}}
+                        Fin {{footballMatch.hourFinish|date('H:i')}}
+                    </div>
+                    <!-- HOUR MATCH END -->
+
+                    <!-- STATUS MATCH  -->
+                    <div class="match-status text-center text-danger mt-2 mb-2">{{footballMatch.statut}} </div>
+                    <!-- Black Line -->
+                    <hr style="background-color: black; height: 1px; border: none; margin-top: 0;">
+                </li>
+
+                <!-- TEAM 1 & TEAM 2 LOGO AND NAME START -->
+                <div class="row mt-2 mb-2 text-center">
+
+                    <!-- Column Logo team 1 -->
+                    <div class="col">
+                        <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam" alt="logo">
+                    </div>
+
+                    <!-- Column team 1 Name -->
+                    <div class="col d-flex justify-content-center align-items-center">
+                        {{ footballMatch.team1.teamName }}
+                    </div>
+
+                    <!--  VS LOGO START -->
+                    <div class=" text-center mt-2 mb-2">
+                        <img src="{{ asset('img/teams/vs.png') }}" class="imgteam" alt="logo">
+                    </div>
+                    <!--  VS LOGO END -->
+
+                    <!-- Column Logo team 2 -->
+                    <div class="col">
+                        <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam" alt="logo">
+                    </div>
+
+                    <!-- Column team 2 Name -->
+                    <div class="col d-flex justify-content-center align-items-center">
+                        {{ footballMatch.team2.teamName }}
+                    </div>
+
+                </div>
+
+                <!-- TEAM 1 & TEAM 2 LOGO AND NAME END -->
+
+                <!--FORM MONEY START -->
+                <div class="row justify-content-center">
+                    <div class="col-sm mt-2 text-center black">
+                        {{ form_start(forms[footballMatch.id]) }}
+
+                        <!-- SELECT TEAM BET START -->
+                        <hr style="background-color: white; height: 1px; border: none; margin-top: 0;">
+                        <p class=" game-text-play text-center mt-5 mb-5 text-light"> Sélectionnez l'équipe sur laquelle vous souhaitez miser</p>
+                        <div class=" game-text-play text-center mb-2"> {{ form_row(forms[footballMatch.id].team) }}</div>
+                        <!-- SELECT TEAM BET END -->
+
+                        <!-- MONEY BET START -->
+                        <div class="text-center col-4 mx-auto mt-5 mb-5" >
+                            {{ form_row(forms[footballMatch.id].wagerMade) }}
+                        </div>
+                        <!-- MONEY BET END -->
+
+                        <!-- DATE BET START -->
+                        <div class="text-center col-4 mx-auto mb-2 mb-5">
+                            {{ form_row(forms[footballMatch.id].dateWagerMade) }}
+                        </div>
+                        <!-- DATE BET END -->
+
+                    </div>
+                </div>
+                <!--FORM MONEY END -->
+
+                        <!-- BUTTON CONFIRM START-->
+                        <div class="text-center mt-3">
+                            <button type="submit" class="card-link text-center btn btn-danger mt-2 mb-2">Validation</button>
+                        </div>
+                        <!-- BUTTON CONFIRM END-->
+
+                {{ form_end(forms[footballMatch.id]) }}
+                <!--FORM MONEY END -->
+    </ul>
+
+</div>
+<!-- CARD MATCH END-->
