@@ -478,15 +478,15 @@ title {
     text-align: center; /* Centrer le texte horizontalement */
 }
 
-/* CREATE SPORT BET*/
+/* CREATE SPORT BET START*/
 
 .img-match-detail {
     width: 50%;
     height: auto;
 }
 .img-title-game2 {
-    height: 45%;
-    width: 45%;
+    height: auto;
+    width: 60%;
 
 }
 .game-title-play{
@@ -505,6 +505,10 @@ select.form-control, select.form-control option {
     font-family: "Anton", sans-serif;
     font-size: 16px;
 }
+/* CREATE SPORT BET END*/
+
+/* MODIFY SPORT BET START*/
+
 
 
 /* FOR TABLETTES **************************************************************************************************************************/
@@ -555,6 +559,11 @@ select.form-control, select.form-control option {
         height: auto;
         font-size: 14px; /* Taille de texte plus petite pour tablette */
         padding: 10px 20px; /* Ajustez le padding si nécessaire */
+    }
+    .img-title-game2 {
+        height: auto;
+        width: 50%;
+
     }
 
 }
@@ -612,6 +621,11 @@ select.form-control, select.form-control option {
         width: 40%; /* Ajustez la largeur pour prendre tout l'espace disponible */
         margin-right: 10px; /* Supprimez la marge droite si nécessaire */
         margin-bottom: 10px; /* Ajoutez une marge en bas pour séparer les boutons */
+    }
+    .img-title-game2 {
+        height: auto;
+        width: 100%;
+
     }
 
 }
