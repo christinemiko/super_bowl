@@ -645,6 +645,11 @@ select.form-control, select.form-control option {
         width: 100%;
 
     }
+    .login-btn3{
+        border-radius: 90px;
+        width: 50%;
+        height: 50px;
+    }
 
 }
 
