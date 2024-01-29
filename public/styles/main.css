@@ -507,7 +507,14 @@ select.form-control, select.form-control option {
 }
 /* CREATE SPORT BET END*/
 
-/* MODIFY SPORT BET START*/
+/* MUTILPLES SPORTBET START*/
+
+.img-bet2 {
+    width: 60%;
+    height: auto;
+    margin-top: -50px;
+}
+
 
 
 
