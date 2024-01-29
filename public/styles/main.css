@@ -392,6 +392,10 @@ title {
     width: 80%;
     height: auto;
 }
+.img-match-detail3 {
+    width: 110%;
+    height: auto;
+}
 
 .img-match-nlf {
     width: 50%;
@@ -574,6 +578,11 @@ select.form-control, select.form-control option {
         width: 50%;
 
     }
+    .regis-btn{
+        border-radius: 90px;
+        width: 30%;
+        height: 50px;
+    }
 
 }
 /* FOR MOBILES *****************************************************************************************************************************/
@@ -586,7 +595,7 @@ select.form-control, select.form-control option {
     }
     .regis-btn{
         border-radius: 90px;
-        width: 50%;
+        width: 40%;
         height: 50px;
     }
     .intro-allmatchs {

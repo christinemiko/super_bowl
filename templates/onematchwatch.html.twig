@@ -11,7 +11,7 @@
 
                 <div class="image-text-container">
                             <!-- PICTURE MATCH STADE START -->
-                            <img src="{{ asset('img/img40.png') }}" class="img-match-detail" alt="Match stade image">
+                            <img src="{{ asset('img/img40.png') }}" class="img-match-detail3" alt="Match stade image">
                             <!-- PICTURE MATCH STADE END -->
 
                         <div class="text-button-container">
@@ -39,7 +39,7 @@
                     <div class="text-button-container">
 
                         <!-- BLOC MATCH DAY START -->
-                        <img src="{{ asset('img/img41.png') }}" class="img-match-detail" alt="Match-day title">
+                        <img src="{{ asset('img/img41.png') }}" class="img-match-nlf3 mt-2" alt="Match-day title">
 
                         <!-- TEAM1 LOGO & NAME -->
                         <p class="detail-match-name mt-5">
@@ -76,7 +76,7 @@
                                 <h4 class=" text-danger anton-regular4 mt-3">{{footballMatch.statut }}</h4>
                                 <h4 class="anton-regular4 mt-3">Début {{footballMatch.hourStart|date('H:i')}}</h4>
                                 <h4 class="anton-regular4 mt-3">Fin {{footballMatch.hourFinish|date('H:i')}}</h4>
-                                <h4 class="anton-regular4 mt-3">Météo {{footballMatch.weather}}</h4>
+                                <h4 class="anton-regular4 mt-3">{{footballMatch.weather}}</h4>
 
 
                             <!-- NEON BOTTOM  -->
