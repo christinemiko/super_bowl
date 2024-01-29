@@ -31,22 +31,23 @@ class BetMatchFormType extends AbstractType
                     ->orderBy('t.teamName');
             },
             'choice_label' => 'teamName',
-            'label' => 'Equipe :',
+            'label' => false,
         ])
 
             ->add('wagerMade', NumberType::class, [ 'attr' => [
                 'class' => 'form-control',
-                'placeholder' => 'Montant en €',
+                'placeholder' => 'Indiquez votre mise €',
                 ],
-                'label' => 'Veuillez indiquer le montant de la Mise: '])
+                'label' => false ])
 
             ->add('dateWagerMade',DateType::class, [
 
                 'widget' => 'single_text',
                 'html5' => false,
-                'label' => ' Date de la Mise: ' ,
+                'label' => false ,
                 'attr' => [
                     'class' => 'flatpickr-date',
+                    'placeholder' => 'Choisissez la date de votre pari',
                 ],
                 'format' => 'yyyy-MM-dd',
             ])

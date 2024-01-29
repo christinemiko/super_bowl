@@ -6,59 +6,80 @@
 
    <!--  BET MATCH PAGE START -->
   <main>
-    <!-- INTRODUCTION  START   -->
-    <div class="text-center"><img src="{{ asset('img/logo3NLF.png') }}" class="img-fluid imgNLF" alt="NLF logo"></div>
-    <h1 class="text-center">Création Pari-Sportif</h1>
-    <div class="d-flex justify-content-center"><img src="{{ asset('img/img31.png') }}" class=" img-fluid d-block w-90" alt="image miser"></div>
-    <!-- INTRODUCTION  END   -->
 
-    <div class="mb-2 red"><h2 class="text-center rectangle1"> Les équipes</h2></div>
-    <div class="container">
+      <!-- INTRODUCTION  START   -->
+          <div class="container mb-2">
+              <div class="image-text-container">
+                  <!-- PICTURE MATCH WIN  START -->
+                  <img src="{{ asset('img/img46.png') }}" class="img-home" alt="Match win image">
+                  <!-- PICTURE MATCH WIN END -->
 
-    <!--TEAMS INFORMATIONS START -->
-      <!-- BLOCK TEAM 1 DESCRIPTION  START-->
-      <div class="row justify-content-center">
-        <div class="rectangle2 white text-center text-dark mt-2">
-          <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam mb-2 text-center " alt="logo">
-          <h4 class="mt-2 mb-3"> Equipe: {{ footballMatch.team1.teamName }} </h4>
-          <p> Cote de l'équipe: {{ footballMatch.team1.oddsteam }}</p>
-        </div>
-      </div>
-      <!-- BLOCK TEAM 1 DESCRIPTION  END-->
+                  <div class=" row justify-content-center">
 
-      <!-- BLOCK TEAM 2 DESCRIPTION  START-->
-      <div class="row justify-content-center">
-        <div class="rectangle2 white text-center text-dark mt-2">
-          <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 text-center " alt="logo">
-          <h4 class="mt-2 mb-3"> Equipe: {{ footballMatch.team2.teamName }} </h4>
-          <p> Cote de l'équipe: {{ footballMatch.team2.oddsteam }}</p>
-        </div>
-      </div>
-      <!-- BLOCK TEAM 2 DESCRIPTION  END-->
-      <!--TEAMS INFORMATIONS END -->
+                          <div class="text-button-container">
 
-      {{ form_start(form) }}
-      <!-- MONEY BET START -->
+                              <!--  TITLE  CREATE MATCH START-->
+                              <img src="{{ asset('img/img47.png') }}"  class="img-title-game2 text-center" alt="logo super bowl">
+                              <!--  TITLE  CREATE MATCH END -->
+
+                                  <!-- TEAM1 LOGO & NAME -->
+                                  <p class="detail-match-name mt-5">
+                                      <img src="{{ asset('img/teams/' ~ footballMatch.team1.link) }}" class="imgteam mb-2 text-center " alt="logo team1 & name">
+                                      {{ footballMatch.team1.teamName }}<br> Cote de l'équipe: {{ footballMatch.team1.oddsteam }}
+                                  </p>
+                                  <!-- VS LOGO -->
+                                  <img src="{{ asset('img/vs2.png') }}" class="imgteam" alt="Match-stade picture">
+
+                                  <!-- TEAM2 LOGO & NAME -->
+                                  <p class="detail-match-name">
+                                      <img src="{{ asset('img/teams/' ~ footballMatch.team2.link) }}" class="imgteam mb-2 mt-5 text-center mx-3 " alt="logo team2 & name">
+                                      {{ footballMatch.team2.teamName }} <br> Cote de l'équipe: {{ footballMatch.team1.oddsteam }}
+                                  </p>
+
+                          </div>
+                  </div>
+              </div>
+          </div>
+      <!-- INTRODUCTION  END   -->
+
+      <!--SPORTBET TITLE START -->
+      <h2 class="text-center anton-regular2 mt-5 neon-text"> PARI SPORTIF </h2>
+      <h2 class="text-center game-title-play mt-5 neon-text"> FAITES VOS JEUX </h2>
+      <!--SPORTBET TITLE END -->
+
+
+      <!--FORM  CREATE BET START -->
      <div class="row justify-content-center">
-       <div class=" rectangle2 blue text-center col-sm mt-2">
-         <h4 class="text-center">Mise</h4>
+           <div class="col-sm mt-2 text-center">
+               {{ form_start(form) }}
 
-         <p class="text-center mt-5 mb-5"> Sélectionner l'équipe sur laquelle vous souhaitez miser :</p>
-         <div class="text-center mb-2">{{ form_row(form.team) }}</div>
+               <!-- SELECT TEAM BET START -->
+                 <p class=" game-text-play text-center mt-5 mb-5"> Sélectionnez l'équipe sur laquelle vous souhaitez miser</p>
+                 <div class=" game-text-play text-center mb-2"> {{ form_row(form.team) }}</div>
+               <!-- SELECT TEAM BET END -->
 
-         <div class="text-center col-6 mx-auto mt-5 mb-5" >{{ form_row(form.wagerMade) }}</div>
+               <!-- MONEY BET START -->
+                 <div class="text-center col-4 mx-auto mt-5 mb-5" >
+                     {{ form_row(form.wagerMade) }}
+                 </div>
+               <!-- MONEY BET END -->
 
-         <div class="text-center col-6 mx-auto mb-2 mb-5">{{ form_row(form.dateWagerMade) }}</div>
+               <!-- DATE BET START -->
+                 <div class="text-center col-4 mx-auto mb-2 mb-5">
+                     {{ form_row(form.dateWagerMade) }}
+                 </div>
+               <!-- DATE BET END -->
 
-       </div>
+           </div>
      </div>
-      <!-- MONEY BET END -->
+
 
       <!-- BUTTON CONFIRM START-->
-        <div class="text-center mt-3">
-                <button type="submit" class="btn btn-lg btn-danger">Validation</button>
+        <div class="text-center mt-4 mb-5">
+                <button type="submit" class="btn btn-lg btn-danger mt-2 regis-btn">
+                    Validation
+                </button>
         </div>
-
         <!-- BUTTON CONFIRM END-->
       {{ form_end(form) }}
 
@@ -88,4 +109,5 @@
                   });
 
             </script>
+
 {% endblock %}

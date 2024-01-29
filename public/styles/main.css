@@ -442,7 +442,7 @@ title {
     text-align: center;
     margin-bottom: 5px;
 }
-.login-btn2{
+.login-btn3{
     border-radius: 90px;
     width: 20%;
     height: 50px;
@@ -477,7 +477,36 @@ title {
     line-height: 40px; /* Ajouté pour centrer le texte verticalement */
     text-align: center; /* Centrer le texte horizontalement */
 }
+
+/* CREATE SPORT BET*/
+
+.img-match-detail {
+    width: 50%;
+    height: auto;
 }
+.img-title-game2 {
+    height: 45%;
+    width: 45%;
+
+}
+.game-title-play{
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+.game-text-play{
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+}
+select.form-control, select.form-control option {
+    font-family: "Anton", sans-serif;
+    font-size: 16px;
+}
+
+
 /* FOR TABLETTES **************************************************************************************************************************/
 @media only screen and (max-width: 900px) {
 
