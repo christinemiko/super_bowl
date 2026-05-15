@@ -23,6 +23,28 @@ Administrators can manage:
 - sports comments
 - match schedules
 
+  ---
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/images/sb-carousel1.png" width="900" alt="Super Bowl ecosystem preview 1">
+</p>
+
+<p align="center">
+  <img src="docs/images/sb-carousel2.png" width="900" alt="Super Bowl ecosystem preview 2">
+</p>
+
+<p align="center">
+  <img src="docs/images/sb-carousel3.png" width="900" alt="Super Bowl ecosystem preview 3">
+</p>
+
+<p align="center">
+  <img src="docs/images/sb-carousel7.png" width="900" alt="Super Bowl ecosystem preview 4">
+</p>
+
+---
+
 ---
 
 ## Applications
