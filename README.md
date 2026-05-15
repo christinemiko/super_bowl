@@ -42,7 +42,7 @@ Repository:
 👉 https://github.com/christinemiko/super_bowl
 
 Live demo:
-👉 https://super-bowl.christine-chau-projets.com/
+👉 https://super-bowl.christinechau.fr/
 
 ---
 
