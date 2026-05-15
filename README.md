@@ -4,6 +4,9 @@ Multi-platform digital product ecosystem built across web, mobile and desktop en
 
 Designed for sports event management and betting experiences with a strong focus on usability, accessibility and scalable product architecture.
 
+<p align="center">
+  <img src="docs/images/sb-carousel1.png" width="900" alt="Super Bowl ecosystem preview 1">
+</p>
 ---
 
 ## Product Overview
@@ -23,29 +26,10 @@ Administrators can manage:
 - sports comments
 - match schedules
 
-  ---
-
-## Screenshots
-
-<p align="center">
-  <img src="docs/images/sb-carousel1.png" width="900" alt="Super Bowl ecosystem preview 1">
-</p>
-
 <p align="center">
   <img src="docs/images/sb-carousel2.png" width="900" alt="Super Bowl ecosystem preview 2">
 </p>
-
-<p align="center">
-  <img src="docs/images/sb-carousel3.png" width="900" alt="Super Bowl ecosystem preview 3">
-</p>
-
-<p align="center">
-  <img src="docs/images/sb-carousel7.png" width="900" alt="Super Bowl ecosystem preview 4">
-</p>
-
----
-
----
+  ---
 
 ## Applications
 
@@ -66,6 +50,9 @@ Repository:
 Live demo:
 👉 https://super-bowl.christinechau.fr/
 
+<p align="center">
+  <img src="docs/images/sb-carousel3.png" width="900" alt="Super Bowl ecosystem preview 3">
+</p>
 ---
 
 ### Mobile Application
@@ -127,6 +114,9 @@ The project was designed as a multi-platform ecosystem sharing:
 - scalable product structure
 - cross-platform logic
 
+<p align="center">
+  <img src="docs/images/sb-carousel7.png" width="900" alt="Super Bowl ecosystem preview 4">
+</p>
 ---
 
 ## Documentation
